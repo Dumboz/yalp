@@ -7,15 +7,16 @@ const SVG = styled.svg`
   flex: none;
 `;
 
-export function Icon({ type, size }) {
+export function Icon({ type, size, color }) {
   return (
     <SVG size={size}>
-      <use href={`#${type}`} />
+      <use href={`#${type}`} fill={color} />
     </SVG>
   );
 }
 Icon.defaultProps = {
   type: 'fire',
+  color: 'black',
 };
 
 Icon.propTypes = {
