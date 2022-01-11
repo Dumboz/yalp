@@ -17,14 +17,13 @@ const ButtonGroup = styled.div`
   }
 `;
 
-export function PriceFilterButton() {
+export function PriceFilterButtonGroup() {
   const newArr = Array(4).fill(false);
   const newColor = Array(4).fill('white');
   const [color, setColor] = useState([]);
   const [isButtonSelected, setButtonSelect] = useState([]);
 
   const onClickEvent = index => {
-    console.log('a', isButtonSelected, 'b', index, 'c', newArr, color, 'a');
     if (newArr[index] === true) {
       newArr[index] = false;
       newColor[index] = 'white';
@@ -55,43 +54,6 @@ export function PriceFilterButton() {
             </button>
           );
         })}
-        {/* <button
-          key={index}
-          type='button'
-          role='switch'
-          style={{ backgroundColor: color }}
-          aria-checked={active}
-          onClick={onClickEvent}
-        >
-          $
-        </button> */}
-        {/* <button
-          type='button'
-          role='switch'
-          style={{ backgroundColor: color }}
-          aria-checked={active}
-          onClick={onClickEvent}
-        >
-          $$
-        </button>
-        <button
-          type='button'
-          role='switch'
-          style={{ backgroundColor: color }}
-          aria-checked={active}
-          onClick={onClickEvent}
-        >
-          $$$
-        </button>
-        <button
-          type='button'
-          role='switch'
-          style={{ backgroundColor: color }}
-          aria-checked={active}
-          onClick={onClickEvent}
-        >
-          $$$$
-        </button> */}
       </ButtonGroup>
     </>
   );
