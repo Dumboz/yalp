@@ -1,14 +1,17 @@
-const HEXA_COLOR = {
-  ORANGE: '#FF8B4A',
-  RED: '#FA5239',
-  YELLOW: '#ffffff',
-  GRAY: '#C4C4C4',
-};
+import { color } from './theme';
 
-export const getHexaColor = color => {
-  const hexaColor = HEXA_COLOR[color.toUpperCase()];
-  if (!hexaColor) {
-    throw new Error('해당 색상은 존재하지 않습니다.');
+export const getHexaColor = (type, step) => {
+  const colorType = color[type];
+  if (!colorType) {
+    throw new Error(`${colorType}: 해당 색상은 존재하지 않습니다.`);
   }
+
+  const hexaColor = colorType[step.toString()];
+  if (!hexaColor) {
+    throw new Error(
+      `${hexaColor}: ${colorType}에서 해당 step은 존재하지 않습니다.`,
+    );
+  }
+
   return hexaColor;
 };
