@@ -1,8 +1,13 @@
 import { oneOf } from 'prop-types';
 
-export const Icon = ({ type }) => {
-  return <img src={require(`assets/icon/Icon=${type}.svg`)} alt={type} />;
-};
+export function Icon({ type }) {
+  return (
+    <svg>
+      <use href={`#${type}`} />
+    </svg>
+  );
+  // return <img src={require(`assets/icon/Icon=${type}.svg`)} alt={type} />;
+}
 Icon.defaultProps = {
   type: 'fire',
 };
