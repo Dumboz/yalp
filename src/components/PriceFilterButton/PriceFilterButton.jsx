@@ -17,7 +17,7 @@ const ButtonGroup = styled.div`
   }
 `;
 
-export function PriceFilterButtonGroup() {
+export function PriceFilterButton() {
   const newArr = Array(4).fill(false);
   const newColor = Array(4).fill('white');
   const [color, setColor] = useState([]);
