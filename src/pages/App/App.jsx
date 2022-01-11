@@ -5,7 +5,7 @@ export function App() {
   return (
     <>
       <div className="App">Yalp!</div>
-      <Icon />
+      <Icon type="calendar" />
       {/* 한 번이상 렌더링 되지 않는 로직 작성하기 */}
       <InitSVG />
     </>
