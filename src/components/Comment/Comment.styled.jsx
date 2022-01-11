@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-const getSize = ({ size }) => size;
-const setMargin =
-  (ratio) =>
-  ({ size }) =>
-    Math.floor(size * ratio);
+import { getSize, setMargin } from 'utils';
 
 export const Description = styled.div`
   display: flex;
