@@ -1,12 +1,17 @@
+import styled from 'styled-components';
 import { oneOf } from 'prop-types';
 
-export function Icon({ type }) {
+const SVG = styled.svg`
+  width: ${({ size }) => size || 16}px;
+  height: ${({ size }) => size || 16}px;
+`;
+
+export function Icon({ type, size }) {
   return (
-    <svg>
+    <SVG size={size}>
       <use href={`#${type}`} />
-    </svg>
+    </SVG>
   );
-  // return <img src={require(`assets/icon/Icon=${type}.svg`)} alt={type} />;
 }
 Icon.defaultProps = {
   type: 'fire',
