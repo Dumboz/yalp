@@ -4,6 +4,7 @@ import { oneOf } from 'prop-types';
 const SVG = styled.svg`
   width: ${({ size }) => size || 16}px;
   height: ${({ size }) => size || 16}px;
+  flex: none;
 `;
 
 export function Icon({ type, size }) {
