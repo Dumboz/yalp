@@ -7,13 +7,13 @@ const buttonTypes = {
   default: {
     color: getHexaColor('gray', 500),
     background: getHexaColor('white', 100),
-    hover: getHexaColor('gray', 200),
+    hover: getHexaColor('gray', 100),
     border: '1px solid' + getHexaColor('gray', 200),
   },
   outline: {
     color: getHexaColor('gray', 300),
     background: getHexaColor('white', 100),
-    hover: getHexaColor('white', 100),
+    hover: getHexaColor('gray', 100),
     border: '1px solid' + getHexaColor('gray', 200),
   },
   highlight: {
@@ -51,6 +51,12 @@ const ButtonItem = styled.button`
   justify-content: center;
   align-items: center;
   padding: ${({ contents }) => paddingValue[contents]};
+
+  transition: background 0.4s ease;
+
+  &:hover {
+    background: ${({ prop }) => buttonTypes[prop].hover};
+  }
 `;
 
 /*
