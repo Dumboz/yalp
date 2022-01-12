@@ -7,7 +7,6 @@ export function InitSVG() {
         <path
           fill="#ffffff"
           d="M8 .8l2.6 4.4 5 1.1-3.4 3.8.5 5.1-4.7-2-4.7 2.1.5-5.1L.4 6.3l5-1.1L8 .8z"
-          class="st0"
         />
       </symbol>
       <symbol id="calendar" viewBox="0 0 16 16">
