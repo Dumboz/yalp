@@ -4,30 +4,21 @@ export default {
   title: 'Tags',
   component: Tags,
   argTypes: {
-    type: {
-      control: {
-        type: 'select',
-        options: [
-          'calendar',
-          'fire',
-          'follower',
-          'gallery',
-          'pencil',
-          'photo',
-          'reviews',
-          'save',
-          'search',
-          'share',
-          'star',
-          'talk',
-        ],
-      },
-    },
-    size: {
+    width: {
       control: {
         type: 'number',
         options: {
-          min: 16,
+          min: 15,
+          max: 150,
+          step: 1,
+        },
+      },
+    },
+    height: {
+      control: {
+        type: 'number',
+        options: {
+          min: 15,
           max: 100,
           step: 1,
         },
@@ -38,8 +29,7 @@ export default {
 
 const Template = args => (
   <>
-    <Icon {...args} />
-    <InitSVG />
+    <Tags {...args} />
   </>
 );
 
