@@ -8,6 +8,20 @@ export default {
     type: {
       control: {
         type: 'select',
+        options: [
+          'calendar',
+          'fire',
+          'follower',
+          'gallery',
+          'pencil',
+          'photo',
+          'reviews',
+          'save',
+          'search',
+          'share',
+          'star',
+          'talk',
+        ],
       },
     },
     size: {
