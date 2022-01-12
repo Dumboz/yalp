@@ -10,11 +10,16 @@ export const Description = styled.div`
     margin-bottom: ${setMargin(0.2)}px;
   }
 
-  & > p {
+  & > p,
+  & > span {
     margin: 0;
     margin-left: ${setMargin(0.25)}px;
     display: inline-block;
     font-size: ${getSize}px;
     line-height: 1.4;
+  }
+
+  & > span {
+    margin-left: 0;
   }
 `;
