@@ -1,4 +1,5 @@
 import { Icon } from './Icon';
+import { InitSVG } from 'components/InitSVG/InitSVG';
 
 export default {
   title: 'Icon',
@@ -23,10 +24,25 @@ export default {
         ],
       },
     },
+    size: {
+      control: {
+        type: 'number',
+        options: {
+          min: 16,
+          max: 100,
+          step: 1,
+        },
+      },
+    },
   },
 };
 
-const Template = (args) => <Icon {...args} />;
+const Template = (args) => (
+  <>
+    <Icon {...args} />
+    <InitSVG />
+  </>
+);
 
 export const Calendar = Template.bind({});
 Calendar.args = {
