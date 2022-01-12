@@ -15,13 +15,17 @@ export const Label = styled.label`
   display: inline-block;
   position: relative;
 
+  &.active {
+    border: 1px solid #357894;
+  }
+
   &.active[type='checkbox']:before {
     content: '';
     display: inline-block;
     height: 22px;
     width: 22px;
     background: url(${path}) no-repeat center center;
-    postion: absolute;
+    position: absolute;
   }
 
   &.active[type='radio']:before {
@@ -31,7 +35,7 @@ export const Label = styled.label`
     width: 15px;
     border-radius: 50%;
     background-color: #357894;
-    postion: absolute;
+    position: absolute;
     transform: translate(24%, 23%);
   }
 `;
