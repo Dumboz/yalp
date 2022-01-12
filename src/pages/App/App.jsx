@@ -1,6 +1,8 @@
+import { DetailMenuCard } from 'components/DetailMenuCard/DetailMenuCard';
 import './App.css';
 import { InitSVG, Icon, Comment } from 'components';
 import { CommentList } from 'components/CommentList/CommentList';
+import { PriceFilterButton } from 'components/PriceFilterButton/PriceFilterButton';
 
 export function App() {
   return (
@@ -27,6 +29,8 @@ export function App() {
 
       {/* 한 번이상 렌더링 되지 않는 로직 작성하기 */}
       <InitSVG />
+      <PriceFilterButton />
+      <DetailMenuCard />
     </>
   );
 }
