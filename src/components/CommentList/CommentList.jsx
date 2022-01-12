@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { getSize, setMargin } from 'utils';
+import { Fragment } from 'react';
 
 const InlineList = styled.ul`
   display: flex;
@@ -18,19 +19,29 @@ const CommaLi = styled.li`
   line-height: '1.4';
 `;
 
-export function CommentList({ children }) {
+export function CommentList({ size, children }) {
+  if (!Array.isArray(children)) {
+    throw new Error(
+      'CommentList 컴포넌트에는 2개이상의 Comment가 작성되어야 합니다.'
+    );
+  }
+
   return (
     <InlineList>
-      {children.map((e, i) => (
-        <>
-          {i > 0 && (
-            <CommaLi size={e.props.size} aria-hidden>
-              •
-            </CommaLi>
-          )}
-          <li key={e.props.title}>{e}</li>
-        </>
-      ))}
+      {children.map(({ props, type: Item }, i) => {
+        if (!props) throw new Error('Comment 컴포넌트를 사용하세요');
+
+        return (
+          <Fragment key={props.title}>
+            {i > 0 && (
+              <CommaLi size={size} aria-hidden>
+                •
+              </CommaLi>
+            )}
+            <li>{<Item {...props} size={size} />}</li>
+          </Fragment>
+        );
+      })}
     </InlineList>
   );
 }
