@@ -1,11 +1,11 @@
-import { Icon } from './Icon';
+import { Comment } from './Comment';
 import { InitSVG } from 'components/InitSVG/InitSVG';
 
 export default {
-  title: 'Icon',
-  component: Icon,
+  title: 'Comment',
+  component: Comment,
   argTypes: {
-    type: {
+    iconType: {
       control: {
         type: 'select',
         options: [
@@ -40,14 +40,19 @@ export default {
   },
 };
 
-const Template = args => (
+const Template = (args) => (
   <>
-    <Icon {...args} />
+    <Comment {...args} />
+    <InitSVG />
   </>
 );
 
-export const Calendar = Template.bind({});
-Calendar.args = {
-  type: 'calendar',
-  color: 'black',
+export const Default = Template.bind({});
+Default.args = {
+  iconType: 'fire',
+  title: '캘린더',
+  size: 32,
+  children: `I dream about this place. And I'm a very picky pizza eater. Super saucy,
+  fresh, thick, perfectly greasy, hot, yum, yum. Plus the employees are
+  totally great and looking out for the hihihihihihihihihihihihi`,
 };
