@@ -1,6 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
-import { size } from 'lodash';
 
 const Wrap = styled.div`
   border: 1px solid black;
@@ -14,7 +13,7 @@ const Wrap = styled.div`
   line-height: 0;
   margin: 0;
   padding: 0;
-  padding-top: 3px;
+  padding-top: 5px;
 `;
 
 const Image = styled.img`
@@ -24,7 +23,6 @@ const Image = styled.img`
   border-radius: 7px;
   background-color: black;
   position: relative;
-  padding-bottom: 5px;
 `;
 
 const Price = styled.p`
@@ -48,7 +46,7 @@ const Preview = styled.h2`
   font-weight: 400;
 `;
 
-export function DetailMenuCard({ src, alt, price, title, photoNum, reviewNum, sizze }) {
+export function DetailMenuCard({ src, alt, price, title, photoNum, reviewNum, size }) {
   return (
     <>
       <Wrap>
