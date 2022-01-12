@@ -47,8 +47,8 @@ const Template = (args) => (
   </>
 );
 
-export const Defualt = Template.bind({});
-Defualt.args = {
+export const Default = Template.bind({});
+Default.args = {
   iconType: 'fire',
   title: '캘린더',
   size: 32,
