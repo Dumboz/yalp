@@ -21,7 +21,7 @@ export function PriceFilterButton() {
   const newArr = Array(4).fill(false);
   const newColor = Array(4).fill('white');
   const [color, setColor] = useState([]);
-  const [isButtonSelected, setButtonSelect] = useState([]);
+  const [isButtonSelected, setButtonSelect] = useState([false, false, false, false]);
 
   const onClickEvent = index => {
     if (newArr[index] === true) {
@@ -40,14 +40,15 @@ export function PriceFilterButton() {
   return (
     <>
       <ButtonGroup aria-multiselectable='true' aria-required>
-        {newArr.map((v, i) => {
+        {isButtonSelected.map((v, i) => {
           return (
             <button
               key={i + 1}
+              isSelect={v}
               type='button'
               role='switch'
+              aria-checked={v[i]}
               style={{ backgroundColor: color[i] }}
-              aria-checked={isButtonSelected[i]}
               onClick={() => onClickEvent(i)}
             >
               {'$'.repeat(i + 1)}
