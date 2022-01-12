@@ -32,7 +32,7 @@ CheckBox.args = {
 
 export const RadioBox = Template.bind({});
 RadioBox.args = {
-  key: '0',
+  key: '1',
   type: 'radio',
   name: 'group1',
   children: 'Has TV',
