@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 import { Input, Label as StyledLabel, List } from './Selection.styled';
 
-export function Selection({ key, type, group, children, checked, fontSize }) {
+export function Selection({
+  key,
+  type,
+  group,
+  children,
+  checked,
+  fontSize,
+  boxSize,
+}) {
   const id = group + key;
   return (
     <List key={key}>
@@ -19,9 +27,9 @@ export function Selection({ key, type, group, children, checked, fontSize }) {
         checked={checked}
         className={checked ? 'active' : 'deactive'}
         aria-labelledby={'contents'}
-        fontSize={fontSize}
+        boxSize={boxSize}
       />
-      <span id="contents" tabIndex="0">
+      <span id="contents" tabIndex="0" style={{ fontSize }}>
         {children}
       </span>
     </List>
