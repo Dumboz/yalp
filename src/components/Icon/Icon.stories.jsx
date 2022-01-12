@@ -43,12 +43,14 @@ export default {
 const Template = args => (
   <>
     <Icon {...args} />
+    <InitSVG />
   </>
 );
 
 export const Calendar = Template.bind({});
 Calendar.args = {
   type: 'calendar',
+  color: 'black',
 };
 
 export const Fire = Template.bind({});
