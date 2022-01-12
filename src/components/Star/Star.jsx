@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getHexaColor } from 'styles/color';
 
-const starImg = (state = 'empty', step = 500) => {
+const StarImg = (state = 'empty', step = 500, width = 23) => {
   return (
     <svg
-      width="23"
-      height="24"
+      width={width}
+      height={(24 / 23) * width}
       viewBox="0 0 23 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -37,13 +37,14 @@ const starImg = (state = 'empty', step = 500) => {
   );
 };
 
-function Star({ state, step }) {
-  return starImg(state, step);
+function Star({ state, step, width }) {
+  return StarImg(state, step, width);
 }
 
 Star.propTypes = {
-  state: PropTypes.string,
-  color: PropTypes.number || PropTypes.string,
+  state: PropTypes.oneOf(['empty', 'full', 'half']).isRequired,
+  step: PropTypes.number || PropTypes.string,
+  width: PropTypes.number,
 };
 
 export default Star;
