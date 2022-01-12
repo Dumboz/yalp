@@ -5,6 +5,7 @@ import { CommentList } from 'components/CommentList/CommentList';
 import { PriceFilterButton } from 'components/PriceFilterButton/PriceFilterButton';
 import { UserInfo } from 'components/UserInfo/UserInfo';
 import { Tags } from 'components/Tags/Tags';
+
 export function App() {
   return (
     <>
@@ -13,6 +14,7 @@ export function App() {
       <DetailMenuCard /> */}
       <UserInfo />
       <Tags width={70} height={20} content={'Japanese'} />
+      <UserInfo />
 
       {/* <Icon type="calendar" size={100} /> */}
       {/* <Comment title="안녕" iconType="calendar" size={32}>
