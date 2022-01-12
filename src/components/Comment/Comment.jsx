@@ -10,7 +10,9 @@ export function Comment({ iconType, title, limit, size, children }) {
     <Description size={size}>
       {iconType && <Icon type={iconType} size={size} />}
       {title && <A11yHidden as="h3">{title}</A11yHidden>}
-      <p>{children.length > limit ? cutText(children, limit) : children}</p>
+      <p>
+        {children.length > limit ? `"${cutText(children, limit)}"` : children}
+      </p>
     </Description>
   );
 }
