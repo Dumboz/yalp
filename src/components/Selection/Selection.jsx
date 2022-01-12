@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import { Input, Label as StyledLabel, List } from './Selection.styled';
 
-export function Selection({ key, type, name, children, checked }) {
-  const id = name + key;
+export function Selection({ key, type, group, children, checked, fontSize }) {
+  const id = group + key;
   return (
     <List key={key}>
       <Input
         type={type}
-        name={name}
+        name={group}
         id={id}
         role="switch"
         aria-checked={checked}
@@ -18,6 +19,7 @@ export function Selection({ key, type, name, children, checked }) {
         checked={checked}
         className={checked ? 'active' : 'deactive'}
         aria-labelledby={'contents'}
+        fontSize={fontSize}
       />
       <span id="contents" tabIndex="0">
         {children}
@@ -25,3 +27,10 @@ export function Selection({ key, type, name, children, checked }) {
     </List>
   );
 }
+
+Selection.propTypes = {
+  type: PropTypes.string.isRequired,
+  group: PropTypes.string.isRequired,
+  children: PropTypes.string,
+  checked: PropTypes.bool,
+};

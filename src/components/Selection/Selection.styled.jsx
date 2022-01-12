@@ -14,6 +14,7 @@ export const Label = styled.label`
     type === 'checkbox' ? (checked ? '#357894' : '#FFFFFF') : '#FFFFFF'};
   display: inline-block;
   position: relative;
+  font-size: ${({ fontSize }) => fontSize};
 
   &.active {
     border: 1px solid #357894;
@@ -44,7 +45,7 @@ export const List = styled.li`
   list-style: none;
   display: flex;
   flex-flow: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   gap: 5px;
