@@ -20,21 +20,19 @@ const ButtonGroup = styled.ul`
     background-color: #c7c5c5;
   }
 `;
+const repeatWord = (word, n) => word.repeat(n);
 
 export function PriceFilterButtonGroup() {
   const [$, set$] = useState(false);
   const [$$, set$$] = useState(false);
   const [$$$, set$$$] = useState(false);
   const [$$$$, set$$$$] = useState(false);
-  const buttonArr = new Array(4).fill([$, $$, $$$, $$$$]);
 
   const toggle$ = () => set$(!$);
   const toggle$$ = () => set$$(!$$);
   const toggle$$$ = () => set$$$(!$$$);
   const toggle$$$$ = () => set$$$$(!$$$$);
 
-  const toggleState = () => {};
-  console.log(buttonArr, toggle$);
   return (
     <ButtonGroup>
       <PriceFilterButton onClick={toggle$} isSelect={$} aria-checked={$}>

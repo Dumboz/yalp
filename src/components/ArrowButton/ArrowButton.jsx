@@ -12,7 +12,6 @@ const Arrow = styled.div`
   &:hover {
     opacity: 0.7;
     cursor: pointer;
-    background-color: #e7e1e1;
   }
 `;
 
