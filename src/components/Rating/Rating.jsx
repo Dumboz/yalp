@@ -1,27 +1,27 @@
 import Star from 'components/Star/Star';
-import React, { useRef, useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
 
-const StarWrapper = styled.ul`
+const StarWrapper = React.memo(styled.ul`
   display: flex;
   & li {
     margin-right: 2px;
   }
-`;
+`);
 
-const Text = styled.p`
+const Text = React.memo(styled.p`
   font-size: ${({ fontSize }) => fontSize + 'px'};
   color: ${({ color }) => color};
   font-weight: ${({ fontWeight }) => fontWeight};
   margin-left: 6px;
-`;
+`);
 
-const RatingItem = styled.div`
+const RatingItem = React.memo(styled.div`
   display: flex;
   align-items: center;
-`;
+`);
 
 function Rating({
   score = 0,
@@ -30,31 +30,26 @@ function Rating({
   fontWeight = 500,
   children,
 }) {
-  let stars = useRef([]);
+  let stars = [];
+  let fullNum = Math.floor(score);
+  let halfNum = Math.ceil(score) !== Math.floor(score) ? 1 : 0;
 
-  const changeStars = useCallback(() => {
-    let fullNum = Math.floor(score);
-    let halfNum = Math.ceil(score) !== Math.floor(score) ? 1 : 0;
+  const step = fullNum === 0 ? 100 : fullNum * 100;
 
-    const step = fullNum === 0 ? 100 : fullNum * 100;
-
-    stars.current = Array.from({ length: 5 }, () => ({})).map(() => {
-      if (fullNum-- > 0) {
-        return { state: 'full', step, width };
-      }
-      if (halfNum-- > 0) {
-        return { state: 'half', step, width };
-      }
-      return { state: 'empty', step, width };
-    });
-  }, [score, width]);
-
-  changeStars();
+  stars = Array.from({ length: 5 }, () => ({})).map(() => {
+    if (fullNum-- > 0) {
+      return { state: 'full', step, width };
+    }
+    if (halfNum-- > 0) {
+      return { state: 'half', step, width };
+    }
+    return { state: 'empty', step, width };
+  });
 
   return (
     <RatingItem>
       <StarWrapper>
-        {stars.current.map(({ state, step, width }, id) => (
+        {stars.map(({ state, step, width }, id) => (
           <li key={id}>
             <Star state={state} step={step} width={width} />
           </li>
@@ -81,11 +76,11 @@ const range0to5 = (props, propName, componentName) => {
 };
 
 Rating.propTypes = {
-  score: range0to5.isRequired,
+  score: range0to5,
   width: PropTypes.number,
   color: PropTypes.string,
   fontWeight: PropTypes.number,
   children: PropTypes.string,
 };
 
-export default Rating;
+export default React.memo(Rating);
