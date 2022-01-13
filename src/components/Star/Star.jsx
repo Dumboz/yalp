@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getHexaColor } from 'styles/color';
 
-const StarImg = (state = 'empty', step = 500, width = 23) => {
+function Star({ state = 'empty', step = 500, width = 23 }) {
   return (
     <svg
       width={width}
@@ -35,10 +35,6 @@ const StarImg = (state = 'empty', step = 500, width = 23) => {
       />
     </svg>
   );
-};
-
-function Star({ state, step, width }) {
-  return StarImg(state, step, width);
 }
 
 Star.propTypes = {
@@ -47,4 +43,4 @@ Star.propTypes = {
   width: PropTypes.number,
 };
 
-export default Star;
+export default React.memo(Star);
