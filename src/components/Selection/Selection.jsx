@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Input, Label as StyledLabel, List } from './Selection.styled';
 
 export function Selection({
@@ -14,7 +14,7 @@ export function Selection({
   const id = group + keyProp;
   const [check, setCheck] = useState(false);
 
-  const handleChange = () => {
+  const handleChange = (e) => {
     check ? setCheck(false) : setCheck(true);
   };
 
@@ -22,6 +22,7 @@ export function Selection({
     <List onClick={handleChange} onMouseOver={onMouseOver}>
       <Input
         id={id}
+        readOnly
         type={type}
         name={group}
         role="switch"

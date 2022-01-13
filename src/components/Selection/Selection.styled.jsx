@@ -5,6 +5,7 @@ const getRatio = (number, ratio = 0.68) => Math.floor(number * ratio);
 
 export const Input = styled.input`
   display: none;
+  pointer-events: none;
 `;
 
 export const Label = styled.label`
@@ -17,6 +18,7 @@ export const Label = styled.label`
   border-radius: ${({ type }) => (type === 'checkbox' ? '4px' : '50%')};
   background: ${({ checked, type }) =>
     type === 'checkbox' ? (checked ? '#357894' : '#FFFFFF') : '#FFFFFF'};
+  pointer-events: none;
 
   &.active {
     border: 1px solid #357894;
