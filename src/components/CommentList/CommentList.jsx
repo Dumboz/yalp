@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSize, setMargin } from 'utils';
+import { getSize, setRatioSize } from 'utils';
 import { Fragment } from 'react';
 
 const InlineList = styled.ul`
@@ -14,8 +14,8 @@ const InlineList = styled.ul`
 
 const CommaLi = styled.li`
   font-size: ${getSize}px;
-  margin-left: ${setMargin(0.5)}px;
-  margin-right: ${setMargin(0.5)}px;
+  margin-left: ${setRatioSize(0.5)}px;
+  margin-right: ${setRatioSize(0.5)}px;
   line-height: '1.4';
 `;
 
