@@ -1,93 +1,49 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getHexaColor } from 'styles/color';
+import { buttonStyle, ButtonItem } from './Button.styeld';
+import { Comment } from '../Comment/Comment';
+import { Icon } from '../Icon/Icon';
 
-const buttonTypes = {
-  default: {
-    color: getHexaColor('gray', 500),
-    background: getHexaColor('white', 100),
-    hover: getHexaColor('gray', 100),
-    border: '1px solid' + getHexaColor('gray', 200),
-  },
-  outline: {
-    color: getHexaColor('gray', 300),
-    background: getHexaColor('white', 100),
-    hover: getHexaColor('gray', 100),
-    border: '1px solid' + getHexaColor('gray', 200),
-  },
-  highlight: {
-    color: getHexaColor('white', 100),
-    background: getHexaColor('red', 400),
-    hover: getHexaColor('red', 300),
-    border: null,
-  },
-};
-
-const paddingValue = {
-  text: '8px 16px',
-  icon: '12px 16px',
-  textIcon: '6px 16px',
-};
-
-const borderFlatType = {
-  none: '4px',
-  top: '0px 0px 4px 4px',
-  left: '0px 4px 4px 0px',
-  right: '4px 0px 0px 4px',
-  bottom: '4px 4px 0px 0px',
-};
-
-const ButtonItem = styled.button`
-  box-sizing: border-box;
-  border: none;
-  cursor: pointer;
-
-  color: ${({ prop }) => buttonTypes[prop].color};
-  background: ${({ prop }) => buttonTypes[prop].background};
-  border: ${({ prop }) => buttonTypes[prop].border};
-  border-radius: ${({ borderFlatRadius }) => borderFlatType[borderFlatRadius]};
-
-  justify-content: center;
-  align-items: center;
-  padding: ${({ contents }) => paddingValue[contents]};
-
-  transition: background 0.4s ease;
-
-  &:hover {
-    background: ${({ prop }) => buttonTypes[prop].hover};
-  }
-`;
-
-/*
-  {
-    prop: 'default', 'outline', 'highlight',
-    constents: 'text', 'textIcon', 'icon',
-    borderFlatRadius: 'none', 'top', 'left', 'right', 'bottom'
-  }
-*/
 function Button({
-  prop = 'default',
-  contents = 'text',
-  borderFlatRadius = 'none',
+  buttonType = 'default',
+  flatBorderSide = 'none',
+  as = 'button',
+  href,
+  iconType,
+  size = 16,
   children,
 }) {
+  const contents = children ? (iconType ? 'textIcon' : 'text') : 'icon';
+
   return (
     <ButtonItem
-      prop={prop}
+      as={as}
+      href={href}
       contents={contents}
-      borderFlatRadius={borderFlatRadius}
+      buttonType={buttonType}
+      flatBorderSide={flatBorderSide}
     >
-      {children}
+      {contents === 'icon' ? (
+        <Icon type={iconType} size={size} />
+      ) : (
+        <Comment
+          iconType={iconType}
+          size={size}
+          color={buttonStyle[buttonType].color}
+        >
+          {children}
+        </Comment>
+      )}
     </ButtonItem>
   );
 }
 
-Button.prototype = {
-  prop: PropTypes.string,
-  contents: PropTypes.string,
-  borderFlatRadius: PropTypes.string,
+Button.propTypes = {
+  buttonType: PropTypes.oneOf(['default', 'outline', 'highlight']),
+  href: PropTypes.string,
+  as: PropTypes.oneOf(['button', 'a']),
+  flatBorderSide: PropTypes.oneOf(['none', 'top', 'left', 'right', 'bottom']),
   children: PropTypes.any,
 };
 
-export default Button;
+export default React.memo(Button);
