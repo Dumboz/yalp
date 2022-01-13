@@ -39,7 +39,7 @@ export function PriceFilterButtonGroup() {
         isSelect={inexpensive}
         aria-checked={inexpensive}
       >
-        {/* {'$'.repeat(i + 1)} */} $
+        $
       </PriceFilterButton>
       <PriceFilterButton onClick={toggleModerate} isSelect={moderate} aria-checked={moderate}>
         $$
