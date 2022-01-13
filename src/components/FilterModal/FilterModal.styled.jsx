@@ -1,5 +1,5 @@
+import React from 'react';
 import styled from 'styled-components';
-
 import { getHexaColor } from 'styles/color';
 
 export const Form = styled.form`
@@ -12,7 +12,7 @@ export const Form = styled.form`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
 `;
 
-export const Button = styled.button`
+export const Button = React.memo(styled.button`
   border: 0;
   width: 100%;
   padding: 8px;
@@ -28,7 +28,7 @@ export const Button = styled.button`
     border-radius: 4px;
     background-color: ${getHexaColor('gray', 100)};
   }
-`;
+`);
 
 export const List = styled.ul`
   margin: 0;
@@ -47,7 +47,36 @@ export const ListItem = styled.li`
   list-style: none;
   border-radius: 4px;
   box-sizing: border-box;
+  position: relative;
+
   &:hover {
     background-color: ${getHexaColor('gray', 100)};
+  }
+`;
+
+export const HoverBalloon = styled.div`
+  opacity: 0;
+  border-radius: 4px;
+  height: 100%;
+  width: auto;
+  background-color: ${getHexaColor('gray', 500)};
+  position: absolute;
+  top: 0px;
+  left: 110%;
+  padding: 10px;
+  color: ${getHexaColor('white')};
+  box-sizing: border-box;
+  font-size: 16px;
+  white-space: nowrap;
+
+  &:after {
+    content: '';
+    border-left: 0px solid transparent;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid ${getHexaColor('gray', 500)};
+    position: absolute;
+    top: 10px;
+    right: 100%;
   }
 `;
