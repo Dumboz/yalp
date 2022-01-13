@@ -1,10 +1,23 @@
+import styled from 'styled-components';
 import { oneOf } from 'prop-types';
+import { getSize } from 'utils';
 
-export const Icon = ({ type }) => {
-  return <img src={require(`assets/icon/Icon=${type}.svg`)} alt={type} />;
-};
+const SVG = styled.svg`
+  width: ${getSize}px;
+  height: ${getSize}px;
+  flex: none;
+`;
+
+export function Icon({ type, size, color }) {
+  return (
+    <SVG size={size}>
+      <use href={`#${type}`} fill={color} />
+    </SVG>
+  );
+}
 Icon.defaultProps = {
   type: 'fire',
+  color: 'black',
 };
 
 Icon.propTypes = {
