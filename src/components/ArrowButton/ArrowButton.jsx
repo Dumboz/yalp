@@ -1,24 +1,6 @@
-import styled from 'styled-components';
 import { Icon } from 'components';
-import { getSize, setMargin } from 'utils';
 import { oneOf } from 'prop-types';
-
-const Arrow = styled.button`
-  border: none;
-  width: ${getSize * 0.05}px;
-  background-color: #fff;
-  border-radius: 50%;
-  &:hover {
-    opacity: 0.7;
-    cursor: pointer;
-  }
-  &:disabled {
-    cursor: auto;
-    background-color: #fff;
-    opacity: 0.2;
-    border: 1px solid #d1cece;
-  }
-`;
+import Arrow from './ArrowButton.styled';
 
 export function ArrowButton({ type, size, isDisabled }) {
   console.log(isDisabled);
