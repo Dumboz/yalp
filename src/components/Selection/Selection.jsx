@@ -1,33 +1,40 @@
 import PropTypes from 'prop-types';
+import { useState, useCallback } from 'react';
 import { Input, Label as StyledLabel, List } from './Selection.styled';
 
 export function Selection({
-  key,
+  keyProp,
   type,
   group,
   children,
-  checked,
   fontSize,
   boxSize,
+  onMouseOver,
 }) {
-  const id = group + key;
+  const id = group + keyProp;
+  const [check, setCheck] = useState(false);
+
+  const handleChange = () => {
+    check ? setCheck(false) : setCheck(true);
+  };
+
   return (
-    <List key={key}>
+    <List onClick={handleChange} onMouseOver={onMouseOver}>
       <Input
+        id={id}
         type={type}
         name={group}
-        id={id}
         role="switch"
-        aria-checked={checked}
-        checked={checked}
+        checked={check}
+        aria-checked={check}
       />
       <StyledLabel
         type={type}
         htmlFor={id}
-        checked={checked}
-        className={checked ? 'active' : 'deactive'}
-        aria-labelledby={'contents'}
+        checked={check}
         boxSize={boxSize}
+        aria-labelledby={'contents'}
+        className={check ? 'active' : 'deactive'}
       />
       <span id="contents" tabIndex="0" style={{ fontSize }}>
         {children}

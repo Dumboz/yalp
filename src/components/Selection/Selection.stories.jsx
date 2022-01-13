@@ -29,14 +29,5 @@ CheckBox.args = {
   children: 'Has TV',
   checked: false,
   fontSize: 16,
-};
-
-export const RadioBox = Template.bind({});
-RadioBox.args = {
-  key: '1',
-  type: 'radio',
-  group: 'group1',
-  children: 'Has TV',
-  checked: false,
-  fontSize: 16,
+  boxSize: 22,
 };
