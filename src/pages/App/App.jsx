@@ -16,7 +16,8 @@ export function App() {
       <PriceFilterButton isSelect={false}>111111</PriceFilterButton>
       <PriceFilterButtonGroup />
       <InitSVG />
-      <ArrowButton size={24} />
+      <ArrowButton size={24} type='leftarrow' isDisabled={true} />
+      <Tags size={16}>안녕하세요</Tags>
     </>
   );
 }

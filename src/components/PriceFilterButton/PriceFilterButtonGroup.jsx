@@ -20,35 +20,51 @@ const ButtonGroup = styled.ul`
     background-color: #c7c5c5;
   }
 `;
+const repeatWord = (word, n) => word.repeat(n);
 
 export function PriceFilterButtonGroup() {
-  const [$, set$] = useState(false);
-  const [$$, set$$] = useState(false);
-  const [$$$, set$$$] = useState(false);
-  const [$$$$, set$$$$] = useState(false);
-  const buttonArr = new Array(4).fill([$, $$, $$$, $$$$]);
-
-  const toggle$ = () => set$(!$);
-  const toggle$$ = () => set$$(!$$);
-  const toggle$$$ = () => set$$$(!$$$);
-  const toggle$$$$ = () => set$$$$(!$$$$);
-
-  const toggleState = () => {};
-  console.log(buttonArr, toggle$);
+  const [inexpensive, setInexpensive] = useState(false); //naming ㅂㅏ꾸기
+  const [moderate, setModerate] = useState(false);
+  const [pricey, setPricey] = useState(false);
+  const [expensive, setExpensive] = useState(false);
+  const toggleInexpensive = () => setInexpensive(!inexpensive);
+  const toggleModerate = () => setModerate(!moderate);
+  const togglePricey = () => setPricey(!pricey);
+  const toggleExpensive = () => setExpensive(!expensive);
   return (
     <ButtonGroup>
-      <PriceFilterButton onClick={toggle$} isSelect={$} aria-checked={$}>
+      <PriceFilterButton
+        onClick={toggleInexpensive}
+        isSelect={inexpensive}
+        aria-checked={inexpensive}
+      >
         {/* {'$'.repeat(i + 1)} */} $
       </PriceFilterButton>
-      <PriceFilterButton onClick={toggle$$} isSelect={$$} aria-checked={$$}>
+      <PriceFilterButton onClick={toggleModerate} isSelect={moderate} aria-checked={moderate}>
         $$
       </PriceFilterButton>
-      <PriceFilterButton onClick={toggle$$$} isSelect={$$$} aria-checked={$$$}>
+      <PriceFilterButton onClick={togglePricey} isSelect={pricey} aria-checked={pricey}>
         $$$
       </PriceFilterButton>
-      <PriceFilterButton onClick={toggle$$$$} isSelect={$$$$} aria-checked={$$$$}>
+      <PriceFilterButton onClick={toggleExpensive} isSelect={expensive} aria-checked={expensive}>
         $$$$
       </PriceFilterButton>
     </ButtonGroup>
   );
+
+  // const [priceList, setPriceList] = useState(new Array(4).fill(false));
+  // const content = '';
+  // const handleSelect = select => {
+  //   const toggleState = priceList.map((check, idx) => {
+  //     if (idx === select) content = repeatWord('$', idx + 1);
+  //     return setPriceList(!check);
+  //   });
+  //   return (
+  //     <ButtonGroup>
+  //       <PriceFilterButton onClick={handleSelect} isSelect={priceList} aria-checked={priceList}>
+  //         {content}
+  //       </PriceFilterButton>
+  //     </ButtonGroup>
+  //   );
+  // };
 }
