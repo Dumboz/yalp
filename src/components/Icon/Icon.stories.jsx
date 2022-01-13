@@ -19,6 +19,9 @@ export default {
           'save',
           'search',
           'share',
+          'fillstar',
+          'leftarrow',
+          'rightarrow',
           'star',
           'talk',
         ],
@@ -47,6 +50,7 @@ const Template = (args) => (
 export const Calendar = Template.bind({});
 Calendar.args = {
   type: 'calendar',
+  color: 'black',
 };
 
 export const Fire = Template.bind({});
