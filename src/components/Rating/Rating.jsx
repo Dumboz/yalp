@@ -1,42 +1,16 @@
 import Star from 'components/Star/Star';
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
+import { StarWrapper, Text, RatingItem } from './Rating.styled';
 
-const StarWrapper = React.memo(styled.ul`
-  display: flex;
-  & li {
-    margin-right: 2px;
-  }
-`);
-
-const Text = React.memo(styled.p`
-  font-size: ${({ fontSize }) => fontSize + 'px'};
-  color: ${({ color }) => color};
-  font-weight: ${({ fontWeight }) => fontWeight};
-  margin-left: 6px;
-`);
-
-const RatingItem = React.memo(styled.div`
-  display: flex;
-  align-items: center;
-`);
-
-function Rating({
-  score = 0,
-  width = 23,
-  color = getHexaColor('gray', 300),
-  fontWeight = 500,
-  children,
-}) {
-  let stars = [];
+const createStarsArrsy = (score, width) => {
   let fullNum = Math.floor(score);
   let halfNum = Math.ceil(score) !== Math.floor(score) ? 1 : 0;
 
   const step = fullNum === 0 ? 100 : fullNum * 100;
 
-  stars = Array.from({ length: 5 }, () => ({})).map(() => {
+  return Array.from({ length: 5 }, () => ({})).map(() => {
     if (fullNum-- > 0) {
       return { state: 'full', step, width };
     }
@@ -45,6 +19,16 @@ function Rating({
     }
     return { state: 'empty', step, width };
   });
+};
+
+function Rating({
+  score = 0,
+  width = 23,
+  color = getHexaColor('gray', 300),
+  fontWeight = 500,
+  children,
+}) {
+  const stars = createStarsArrsy(score, width);
 
   return (
     <RatingItem>
