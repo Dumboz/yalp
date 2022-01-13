@@ -20,17 +20,18 @@ const ButtonGroup = styled.ul`
     background-color: #c7c5c5;
   }
 `;
-const repeatWord = (word, n) => word.repeat(n);
 
 export function PriceFilterButtonGroup() {
-  const [inexpensive, setInexpensive] = useState(false); //naming ㅂㅏ꾸기
+  const [inexpensive, setInexpensive] = useState(false);
   const [moderate, setModerate] = useState(false);
   const [pricey, setPricey] = useState(false);
   const [expensive, setExpensive] = useState(false);
+
   const toggleInexpensive = () => setInexpensive(!inexpensive);
   const toggleModerate = () => setModerate(!moderate);
   const togglePricey = () => setPricey(!pricey);
   const toggleExpensive = () => setExpensive(!expensive);
+
   return (
     <ButtonGroup>
       <PriceFilterButton
