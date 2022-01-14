@@ -16,13 +16,14 @@ const Template = (args) => (
 
 export const Defualt = Template.bind({});
 Defualt.args = {
-  size: 32,
   children: [
-    <Comment iconType="calendar" title="캘린더">
+    <Comment iconType="calendar" title="캘린더" size={32}>
       Hello1
     </Comment>,
-    <Comment title="아이콘 없음">Hello2</Comment>,
-    <Comment iconType="fire" title="불">
+    <Comment iconType="fire" title="불" size={32}>
+      Hello2
+    </Comment>,
+    <Comment title="아이콘 없음" size={32}>
       Hello3
     </Comment>,
   ],
