@@ -20,16 +20,13 @@ const CommaLi = styled.li`
 `;
 
 export function CommentList({ size, children }) {
-  if (!Array.isArray(children)) {
-    throw new Error(
-      'CommentList 컴포넌트에는 2개이상의 Comment가 작성되어야 합니다.'
-    );
-  }
+  children = Array.isArray(children) ? children : [children];
 
   return (
     <InlineList>
       {children.map(({ props, type: Item }, i) => {
-        if (!props) throw new Error('Comment 컴포넌트를 사용하세요');
+        if (Item.name !== 'Comment')
+          throw new Error('Comment 컴포넌트를 사용하세요');
 
         return (
           <Fragment key={props.title}>
