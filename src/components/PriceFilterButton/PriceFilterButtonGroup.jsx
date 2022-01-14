@@ -1,6 +1,6 @@
+import { ButtonGroup } from './PriceFilterButton.styled';
 import { PriceFilterButton } from './PriceFilterButton';
 import { useState } from 'react';
-import { ButtonGroup } from './PriceFilterButton.styled';
 
 export function PriceFilterButtonGroup() {
   const [inexpensive, setInexpensive] = useState(false);
