@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 
 const Button = styled.button`
   background-color: ${({ isSelect }) => (isSelect ? '#c7c5c5' : 'white')};
