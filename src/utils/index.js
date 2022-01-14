@@ -1,2 +1,1 @@
-export * from './styled/size';
-export * from './styled/color';
+export * from './styled/styled';
