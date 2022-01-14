@@ -1,19 +1,24 @@
 import styled from 'styled-components';
 import path from 'assets/filterIcon/check.svg';
 
+const getRatio = (number, ratio = 0.68) => Math.floor(number * ratio);
+
 export const Input = styled.input`
   display: none;
+  pointer-events: none;
 `;
 
 export const Label = styled.label`
-  width: 22px;
-  height: 22px;
+  position: relative;
+  display: inline-block;
   border: 1px solid #c4c4c4;
+  width: ${({ boxSize }) => boxSize}px;
+  height: ${({ boxSize }) => boxSize}px;
+  font-size: ${({ fontSize }) => fontSize};
   border-radius: ${({ type }) => (type === 'checkbox' ? '4px' : '50%')};
   background: ${({ checked, type }) =>
     type === 'checkbox' ? (checked ? '#357894' : '#FFFFFF') : '#FFFFFF'};
-  display: inline-block;
-  position: relative;
+  pointer-events: none;
 
   &.active {
     border: 1px solid #357894;
@@ -21,31 +26,36 @@ export const Label = styled.label`
 
   &.active[type='checkbox']:before {
     content: '';
-    display: inline-block;
-    height: 22px;
-    width: 22px;
-    background: url(${path}) no-repeat center center;
     position: absolute;
+    display: inline-block;
+    width: ${({ boxSize }) => boxSize}px;
+    height: ${({ boxSize }) => boxSize}px;
+    background: url(${path}) no-repeat center center;
   }
 
   &.active[type='radio']:before {
     content: '';
-    display: inline-block;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    background-color: #357894;
     position: absolute;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: #357894;
     transform: translate(24%, 23%);
+    height: ${({ boxSize }) => getRatio(boxSize)}px;
+    width: ${({ boxSize }) => getRatio(boxSize)}px;
   }
 `;
 
-export const List = styled.li`
-  list-style: none;
+export const List = styled.div`
+  gap: 5px;
+  width: 100%;
   display: flex;
   flex-flow: row;
-  justify-content: center;
+  list-style: none;
   align-items: center;
-  width: 100%;
-  gap: 5px;
+  justify-content: flex-start;
+`;
+
+export const Span = styled.span`
+  font-size: ${({ fontSize }) => fontSize};
+  pointer-events: none;
 `;

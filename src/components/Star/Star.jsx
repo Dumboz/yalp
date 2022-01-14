@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getHexaColor } from 'styles/color';
 
-const starImg = (state = 'empty', step = 500) => {
+function Star({ starType = 'empty', step = 500, width = 23 }) {
   return (
     <svg
-      width="23"
-      height="24"
+      width={width}
+      height={(24 / 23) * width}
       viewBox="0 0 23 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@ const starImg = (state = 'empty', step = 500) => {
         height="24"
         rx="3"
         fill={
-          state === 'half' || state === 'empty'
+          starType === 'half' || starType === 'empty'
             ? getHexaColor('gray', 200)
             : getHexaColor('primary', step)
         }
@@ -24,7 +24,7 @@ const starImg = (state = 'empty', step = 500) => {
       <path
         d="M0 3C0 1.34315 1.34315 0 3 0H12V24H3C1.34315 24 0 22.6569 0 21V3Z"
         fill={
-          state === 'empty'
+          starType === 'empty'
             ? getHexaColor('gray', 200)
             : getHexaColor('primary', step)
         }
@@ -35,15 +35,12 @@ const starImg = (state = 'empty', step = 500) => {
       />
     </svg>
   );
-};
-
-function Star({ state, step }) {
-  return starImg(state, step);
 }
 
 Star.propTypes = {
-  state: PropTypes.string,
-  color: PropTypes.number || PropTypes.string,
+  starType: PropTypes.oneOf(['empty', 'full', 'half']).isRequired,
+  step: PropTypes.number || PropTypes.string,
+  width: PropTypes.number,
 };
 
-export default Star;
+export default React.memo(Star);

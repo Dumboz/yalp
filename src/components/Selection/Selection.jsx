@@ -1,27 +1,48 @@
-import { Input, Label as StyledLabel, List } from './Selection.styled';
+import PropTypes from 'prop-types';
+import { useState, useCallback, useEffect } from 'react';
+import { Input, Label as StyledLabel, List, Span } from './Selection.styled';
 
-export function Selection({ key, type, name, children, checked }) {
-  const id = name + key;
+export function Selection({
+  keyProp,
+  type,
+  group,
+  children,
+  checked,
+  fontSize,
+  boxSize,
+  onClick,
+  content,
+}) {
+  const id = group + ' ' + keyProp;
+
   return (
-    <List key={key}>
+    <List onClick={onClick} aria-label={content}>
       <Input
-        type={type}
-        name={name}
         id={id}
-        role="switch"
-        aria-checked={checked}
+        readOnly
+        type={type}
+        name={group}
         checked={checked}
+        aria-checked={checked}
       />
       <StyledLabel
         type={type}
         htmlFor={id}
         checked={checked}
-        className={checked ? 'active' : 'deactive'}
+        boxSize={boxSize}
         aria-labelledby={'contents'}
+        className={checked ? 'active' : 'deactive'}
       />
-      <span id="contents" tabIndex="0">
+      <Span id="contents" tabIndex="-1" fontSize={fontSize}>
         {children}
-      </span>
+      </Span>
     </List>
   );
 }
+
+Selection.propTypes = {
+  type: PropTypes.string.isRequired,
+  group: PropTypes.string.isRequired,
+  children: PropTypes.string,
+  checked: PropTypes.bool,
+};
