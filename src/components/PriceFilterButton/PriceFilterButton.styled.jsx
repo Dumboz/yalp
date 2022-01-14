@@ -18,3 +18,9 @@ export const ButtonGroup = styled.ul`
     background-color: #c7c5c5;
   }
 `;
+
+export const Button = styled.button`
+  background-color: ${({ isSelect }) => (isSelect ? '#c7c5c5' : 'white')};
+  border: 1px solid ${({ isSelect }) => (isSelect ? '#1461a8' : '#5f5a5a')};
+  color: ${({ isSelect }) => (isSelect ? '#1461a8' : 'black')};
+`;

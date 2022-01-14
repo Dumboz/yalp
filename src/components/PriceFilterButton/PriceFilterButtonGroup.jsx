@@ -33,20 +33,4 @@ export function PriceFilterButtonGroup() {
       </PriceFilterButton>
     </ButtonGroup>
   );
-
-  // const [priceList, setPriceList] = useState(new Array(4).fill(false));
-  // const content = '';
-  // const handleSelect = select => {
-  //   const toggleState = priceList.map((check, idx) => {
-  //     if (idx === select) content = repeatWord('$', idx + 1);
-  //     return setPriceList(!check);
-  //   });
-  //   return (
-  //     <ButtonGroup>
-  //       <PriceFilterButton onClick={handleSelect} isSelect={priceList} aria-checked={priceList}>
-  //         {content}
-  //       </PriceFilterButton>
-  //     </ButtonGroup>
-  //   );
-  // };
 }

@@ -1,5 +1,6 @@
 import { ArrowButton } from './ArrowButton';
 import { InitSVG } from 'components/InitSVG/InitSVG';
+
 export default {
   title: 'ArrowButton',
   component: ArrowButton,
