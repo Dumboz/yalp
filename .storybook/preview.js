@@ -1,4 +1,5 @@
 import { GlobalStyle } from '../src/styles/global.styled';
+import { InitSVG } from '../src/components/InitSVG/InitSVG';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -14,6 +15,7 @@ export const decorators = [
     <>
       <GlobalStyle />
       <Story />
+      <InitSVG />
     </>
   ),
 ];
