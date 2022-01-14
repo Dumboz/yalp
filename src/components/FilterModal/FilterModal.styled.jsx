@@ -51,32 +51,33 @@ export const ListItem = styled.li`
 
   &:hover {
     background-color: ${getHexaColor('gray', 100)};
-  }
-`;
+    &::after {
+      content: '${({ content }) => content}';
+      color: ${getHexaColor('white')};
+      background-color: ${getHexaColor('gray', 500)};
+      position: absolute;
+      top: 0;
+      left: calc(100% + 16px);
+      width: auto;
+      height: 100%;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
 
-export const HoverBalloon = styled.div`
-  opacity: 0;
-  border-radius: 4px;
-  height: 100%;
-  width: auto;
-  background-color: ${getHexaColor('gray', 500)};
-  position: absolute;
-  top: 0px;
-  left: 110%;
-  padding: 10px;
-  color: ${getHexaColor('white')};
-  box-sizing: border-box;
-  font-size: 16px;
-  white-space: nowrap;
-
-  &:after {
-    content: '';
-    border-left: 0px solid transparent;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 8px solid ${getHexaColor('gray', 500)};
-    position: absolute;
-    top: 10px;
-    right: 100%;
+    &:before {
+      content: '';
+      border-left: 0px solid transparent;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 8px solid ${getHexaColor('gray', 500)};
+      position: absolute;
+      top: 10px;
+      left: calc(100% + 8px);
+    }
   }
 `;

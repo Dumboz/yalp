@@ -20,6 +20,8 @@ const reducer = (state, action) => {
     case 'UN_CHECK':
       state[action.id] = false;
       return [...state];
+    default:
+      return state;
   }
 };
 
@@ -45,7 +47,7 @@ export const FilterModal = ({ options }) => {
         {options.map((option, key) => {
           console.log(state[key].active);
           return (
-            <SelectionItem key={key}>
+            <SelectionItem key={key} content={HoverMessage[key]}>
               <Selection
                 boxSize={18}
                 fontSize={14}
@@ -57,9 +59,6 @@ export const FilterModal = ({ options }) => {
                 onMouseOver={handleMouseOver}>
                 {option}
               </Selection>
-              {/* <HoverBalloon ref={balloon[key]} className={'balloon'}>
-                {HoverMessage[key]}
-              </HoverBalloon> */}
             </SelectionItem>
           );
         })}
