@@ -11,12 +11,12 @@ export function Selection({
   fontSize,
   boxSize,
   onClick,
-  onMouseOver,
+  content,
 }) {
   const id = group + ' ' + keyProp;
 
   return (
-    <List onClick={onClick} onMouseOver={onMouseOver}>
+    <List onClick={onClick} aria-label={content}>
       <Input
         id={id}
         readOnly
@@ -33,7 +33,7 @@ export function Selection({
         aria-labelledby={'contents'}
         className={checked ? 'active' : 'deactive'}
       />
-      <Span id="contents" tabIndex="0" fontSize={fontSize}>
+      <Span id="contents" tabIndex="-1" fontSize={fontSize}>
         {children}
       </Span>
     </List>
