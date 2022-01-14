@@ -4,8 +4,6 @@ import { InitSVG, Icon, Comment } from 'components';
 import { CommentList } from 'components/CommentList/CommentList';
 import { PriceFilterButton } from 'components/PriceFilterButton/PriceFilterButton';
 import { UserInfo } from 'components/UserInfo/UserInfo';
-import { Tags } from 'components/Tags/Tags';
-import { ArrowButton } from 'components/ArrowButton/ArrowButton';
 
 export function App() {
   return (
@@ -36,8 +34,6 @@ export function App() {
 
       {/* 한 번이상 렌더링 되지 않는 로직 작성하기 */}
       <InitSVG />
-      <ArrowButton size={24} type='leftarrow' isDisabled={true} />
-      <Tags fontSize={24}>안녕하세요</Tags>
       <PriceFilterButton />
       <DetailMenuCard />
     </>
