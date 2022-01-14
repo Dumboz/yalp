@@ -1,5 +1,5 @@
-import { TimeInfoList } from './BusinessHours.styled';
-import { TimeInfoItem } from './BusinessHours.styled';
+import { TimeInfoList, TimeInfoItem } from './BusinessHours.styled';
+import { makeTimeEn } from 'utils';
 
 const Mock = {
   hours: [
@@ -56,13 +56,6 @@ const Mock = {
 
 const Week = ['Sun', 'Mon', 'The', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const makeTime = (time) => {
-  const noonType = +time > 1200 ? 'PM' : 'AM';
-  let realTime = +time > 1200 ? '' + (+time - 1200) : time;
-
-  return realTime.replace(/^../i, (e) => e + ':') + ' ' + noonType;
-};
-
 export function BusinessHours({ openTimeList, isOpenNow }) {
   const Today = new Date().getDay();
   const openState = isOpenNow ? 'Open' : 'Closed';
@@ -72,7 +65,7 @@ export function BusinessHours({ openTimeList, isOpenNow }) {
       {openTimeList.map(({ start, end, day }) => (
         <TimeInfoItem key={Week[day]} fontWeight={Today === day ? 700 : 600}>
           <span>{Week[day]}</span>
-          <span>{makeTime(start) + ' - ' + makeTime(end)}</span>
+          <span>{makeTimeEn(start) + ' - ' + makeTimeEn(end)}</span>
           {Today === day && <span data-open={openState}>{openState} now</span>}
         </TimeInfoItem>
       ))}
