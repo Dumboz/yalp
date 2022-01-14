@@ -12,12 +12,12 @@ const createStarsArrsy = (score, width) => {
 
   return Array.from({ length: 5 }, () => ({})).map(() => {
     if (fullNum-- > 0) {
-      return { state: 'full', step, width };
+      return { starType: 'full', step, width };
     }
     if (halfNum-- > 0) {
-      return { state: 'half', step, width };
+      return { starType: 'half', step, width };
     }
-    return { state: 'empty', step, width };
+    return { starType: 'empty', step, width };
   });
 };
 
@@ -33,9 +33,9 @@ function Rating({
   return (
     <RatingItem>
       <StarWrapper>
-        {stars.map(({ state, step, width }, id) => (
+        {stars.map(({ starType, step, width }, id) => (
           <li key={id}>
-            <Star state={state} step={step} width={width} />
+            <Star starType={starType} step={step} width={width} />
           </li>
         ))}
       </StarWrapper>
