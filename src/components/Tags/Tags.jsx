@@ -1,18 +1,11 @@
-import TagState from './Tags.styled';
-import PropTypes from 'prop-types';
+import { TagState } from './Tags.styled';
 
 export function Tags({ fontSize, children }) {
+  console.log(fontSize);
   return <TagState size={fontSize}>{children}</TagState>;
 }
 
-Tags.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
-  content: PropTypes.string.isRequired,
-};
-
 Tags.defaultTypes = {
-  width: 20,
-  height: 14,
-  content: 'HIIII',
+  fontSize: 24,
+  children: 'Japanese',
 };

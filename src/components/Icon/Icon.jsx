@@ -20,19 +20,22 @@ Icon.defaultProps = {
   color: 'black',
 };
 
-Icon.propTypes = {
-  type: oneOf([
-    'calendar',
-    'fire',
-    'follower',
-    'gallery',
-    'pencil',
-    'photo',
-    'reviews',
-    'save',
-    'share',
-    'search',
-    'star',
-    'talk',
-  ]),
-};
+// Icon.propTypes = {
+//   type: oneOf([
+//     'calendar',
+//     'fire',
+//     'follower',
+//     'gallery',
+//     'pencil',
+//     'photo',
+//     'reviews',
+//     'save',
+//     'search',
+//     'share',
+//     'fillstar',
+//     'leftarrow',
+//     'rightarrow',
+//     'star',
+//     'talk',
+//   ]),
+// };
