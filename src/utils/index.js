@@ -1,3 +1,2 @@
-export * from './styled/color';
-export * from './styled/size';
-export * from './styled/font';
+export * from './styled';
+export * from './time';
