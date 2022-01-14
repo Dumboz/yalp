@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { oneOf } from 'prop-types';
+import { getSize } from 'utils';
 
 const SVG = styled.svg`
-  width: ${({ size }) => size || 16}px;
-  height: ${({ size }) => size || 16}px;
+  width: ${getSize}px;
+  height: ${getSize}px;
   flex: none;
 `;
 
@@ -29,8 +30,11 @@ Icon.propTypes = {
     'photo',
     'reviews',
     'save',
-    'share',
     'search',
+    'share',
+    'fillstar',
+    'leftarrow',
+    'rightarrow',
     'star',
     'talk',
   ]),
