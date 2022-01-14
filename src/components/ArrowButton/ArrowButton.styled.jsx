@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Arrow = styled.button`
   border: none;
-  width: ${getSize * 0.05}px;
+  width: ${getSize}px;
   background-color: #fff;
   border-radius: 50%;
   &:hover {
