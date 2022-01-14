@@ -54,3 +54,8 @@ export const List = styled.div`
   align-items: center;
   justify-content: flex-start;
 `;
+
+export const Span = styled.span`
+  font-size: ${({ fontSize }) => fontSize};
+  pointer-events: none;
+`;
