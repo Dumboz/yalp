@@ -24,7 +24,11 @@ function Button({
       flatBorderSide={flatBorderSide}
     >
       {contents === 'icon' ? (
-        <Icon type={iconType} size={size} />
+        <Icon
+          type={iconType}
+          size={size}
+          color={buttonStyle[buttonType].color}
+        />
       ) : (
         <Comment
           iconType={iconType}
