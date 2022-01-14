@@ -18,6 +18,7 @@ export function Comment({ iconType, title, limit, size, children, color }) {
 }
 Comment.defaultProps = {
   limit: 180,
+  size: 16,
 };
 
 Comment.propTypes = {
