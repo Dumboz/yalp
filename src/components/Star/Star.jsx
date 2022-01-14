@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getHexaColor } from 'styles/color';
 
-function Star({ state = 'empty', step = 500, width = 23 }) {
+function Star({ starType = 'empty', step = 500, width = 23 }) {
   return (
     <svg
       width={width}
@@ -16,7 +16,7 @@ function Star({ state = 'empty', step = 500, width = 23 }) {
         height="24"
         rx="3"
         fill={
-          state === 'half' || state === 'empty'
+          starType === 'half' || starType === 'empty'
             ? getHexaColor('gray', 200)
             : getHexaColor('primary', step)
         }
@@ -24,7 +24,7 @@ function Star({ state = 'empty', step = 500, width = 23 }) {
       <path
         d="M0 3C0 1.34315 1.34315 0 3 0H12V24H3C1.34315 24 0 22.6569 0 21V3Z"
         fill={
-          state === 'empty'
+          starType === 'empty'
             ? getHexaColor('gray', 200)
             : getHexaColor('primary', step)
         }
@@ -38,7 +38,7 @@ function Star({ state = 'empty', step = 500, width = 23 }) {
 }
 
 Star.propTypes = {
-  state: PropTypes.oneOf(['empty', 'full', 'half']).isRequired,
+  starType: PropTypes.oneOf(['empty', 'full', 'half']).isRequired,
   step: PropTypes.number || PropTypes.string,
   width: PropTypes.number,
 };
