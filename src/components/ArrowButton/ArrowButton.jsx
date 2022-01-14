@@ -1,11 +1,11 @@
 import { Icon } from 'components';
 import { oneOf } from 'prop-types';
-import Arrow from './ArrowButton.styled';
+import { Arrow } from './ArrowButton.styled';
 
 export function ArrowButton({ type, size, isDisabled }) {
   console.log(isDisabled);
   return (
-    <Arrow size={size} disabled={isDisabled}>
+    <Arrow size={size} disabled={isDisabled} aria-label='button'>
       <Icon type={type} size={size}></Icon>
     </Arrow>
   );

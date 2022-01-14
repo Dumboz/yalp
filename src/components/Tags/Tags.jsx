@@ -1,5 +1,5 @@
-import TagState from './Tags.styled';
-import PropTypes from 'prop-types';
+import { TagState } from './Tags.styled';
+import { PropTypes } from 'prop-types';
 
 export function Tags({ fontSize, children }) {
   return <TagState size={fontSize}>{children}</TagState>;
