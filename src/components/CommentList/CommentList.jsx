@@ -45,3 +45,6 @@ export function CommentList({ size, children }) {
     </InlineList>
   );
 }
+CommentList.defaultProps = {
+  size: 16,
+};

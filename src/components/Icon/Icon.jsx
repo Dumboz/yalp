@@ -17,6 +17,7 @@ export function Icon({ type, size, color }) {
 }
 Icon.defaultProps = {
   type: 'fire',
+  size: 16,
   color: 'black',
 };
 

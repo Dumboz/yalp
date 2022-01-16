@@ -14,8 +14,8 @@ const Template = (args) => (
   </>
 );
 
-export const Defualt = Template.bind({});
-Defualt.args = {
+export const Default = Template.bind({});
+Default.args = {
   size: 32,
   children: [
     <Comment iconType="calendar" title="캘린더">
