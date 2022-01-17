@@ -20,15 +20,28 @@ const CommaLi = styled.li`
 `;
 
 export function CommentList({ size, children }) {
-  if (!Array.isArray(children)) {
-    throw new Error(
-      'CommentList 컴포넌트에는 2개이상의 Comment가 작성되어야 합니다.'
-    );
-  }
+  const comments = Array.isArray(children) ? children : [children];
+
+  const itemList = new Array(comments.length * 2 - 1)
+    .fill('•')
+    .map((e, i) => (i % 2 !== 0 ? e : comments[i / 2]));
 
   return (
     <InlineList>
-      {children.map(({ props, type: Item }, i) => {
+      {itemList.map((e, i) => {
+        if (e.type) {
+          const { type: Item } = e;
+          return (
+            <li key={e.props.title}>{<Item {...e.props} size={size} />}</li>
+          );
+        }
+        return (
+          <CommaLi size={size} aria-hidden key={e + i}>
+            {e}
+          </CommaLi>
+        );
+      })}
+      {/* {comments.map(({ props, type: Item }, i) => {
         if (!props) throw new Error('Comment 컴포넌트를 사용하세요');
 
         return (
@@ -41,7 +54,7 @@ export function CommentList({ size, children }) {
             <li>{<Item {...props} size={size} />}</li>
           </Fragment>
         );
-      })}
+      })} */}
     </InlineList>
   );
 }
