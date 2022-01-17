@@ -5,7 +5,7 @@ export default {
   component: ArrowButton,
 };
 
-const Template = args => (
+const Template = (args) => (
   <>
     <ArrowButton {...args} />
     <InitSVG />
@@ -14,8 +14,4 @@ const Template = args => (
 
 export const Default = Template.bind({});
 
-Default.args = {
-  type: 'rightarrow',
-  size: 24,
-  isDisabled: false,
-};
+Default.args = { direct: 'right', size: 30, disabled: true, hover: true };
