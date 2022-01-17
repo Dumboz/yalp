@@ -21,6 +21,6 @@ Comment.defaultProps = {
 };
 
 Comment.propTypes = {
-  title: string.isRequired,
+  title: string,
   children: string.isRequired,
 };

@@ -24,5 +24,7 @@ export const color = {
   white: {
     100: '#FFFFFF',
   },
-  white: '#FFFFFF',
+  green: {
+    500: '#02a16d',
+  },
 };
