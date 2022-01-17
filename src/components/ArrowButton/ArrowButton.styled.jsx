@@ -2,18 +2,19 @@ import { getSize } from 'utils';
 import styled from 'styled-components';
 
 export const Arrow = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   width: ${getSize}px;
+  height: ${getSize}px;
   background-color: #fff;
   border-radius: 50%;
-  &:hover {
-    opacity: 0.7;
-    cursor: pointer;
-  }
+  opacity: ${({ hover }) => (hover ? 1 : 0.6)};
+  transition: 500ms ease-out;
+
   &:disabled {
-    cursor: auto;
-    background-color: #fff;
+    cursor: default;
     opacity: 0.2;
-    border: 1px solid #d1cece;
   }
 `;

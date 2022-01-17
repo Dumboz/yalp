@@ -2,19 +2,21 @@ import { Icon } from 'components';
 import { oneOf } from 'prop-types';
 import { Arrow } from './ArrowButton.styled';
 
-export function ArrowButton({ type, size, isDisabled }) {
-  console.log(isDisabled);
+export function ArrowButton({ direct, size, disabled, hover }) {
+  const iconType = (direct && 'right') + 'arrow';
+
   return (
-    <Arrow size={size} disabled={isDisabled} aria-label='button'>
-      <Icon type={type} size={size}></Icon>
+    <Arrow size={size} disabled={disabled} hover={hover} aria-label="button">
+      <Icon type={iconType} size={size * (3 / 4)}></Icon>
     </Arrow>
   );
 }
 ArrowButton.propTypes = {
-  type: oneOf(['leftarrow', 'rightarrow']),
+  direct: oneOf(['left', 'right']),
 };
 ArrowButton.defaultProps = {
-  type: 'rightarrow',
+  direct: 'left',
   size: 24,
-  isDisabled: false,
+  disabled: false,
+  hover: true,
 };
