@@ -9,3 +9,6 @@ export default {
 const Template = (args) => <FilterButton {...args} />;
 
 export const Button = Template.bind({});
+Button.args = {
+  children: 'Price',
+};
