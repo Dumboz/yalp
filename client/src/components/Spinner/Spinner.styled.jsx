@@ -8,8 +8,8 @@ export const Wrapper = styled.div`
 
   & .spinner {
     animation: rotate infinite 1s;
-    width: ${({ size }) => size}px;
-    height: ${({ size }) => size}px;
+    width: ${({ height }) => height}px;
+    height: ${({ height }) => height}px;
     stroke: ${getHexaColor('gray', 200)};
     stroke-width: 10;
   }

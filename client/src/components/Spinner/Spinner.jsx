@@ -1,8 +1,8 @@
 import { Wrapper as SpinnerWrapper } from './Spinner.styled';
 
-export const Spinner = ({ width = 22 }) => {
+export const Spinner = ({ height = 22 }) => {
   return (
-    <SpinnerWrapper size={width}>
+    <SpinnerWrapper height={height}>
       <svg className="spinner" viewBox="0 0 50 50">
         <circle
           className="path"
