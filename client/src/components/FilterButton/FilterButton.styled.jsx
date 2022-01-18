@@ -3,6 +3,10 @@ import { getHexaColor } from 'styles/color';
 
 const RATIO_TO_HEIGHT = 2.2;
 
+export const Wrapper = styled.div`
+  position: relative;
+`;
+
 export const Button = styled.button`
   width: auto;
   min-width: ${({ height }) => height * RATIO_TO_HEIGHT}px;
@@ -23,11 +27,25 @@ export const Button = styled.button`
     background: ${getHexaColor('gray', 100)};
   }
 
+  &.expanded {
+    background: ${getHexaColor('gray', 100)};
+  }
+
   & .spinner.loading {
     display: block;
   }
 
   & .spinner {
     display: none;
+  }
+
+  & + .modal {
+    display: none;
+  }
+
+  & + .modal.active {
+    display: block;
+    position: absolute;
+    top: 110%;
   }
 `;

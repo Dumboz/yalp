@@ -28,6 +28,7 @@ export const Button = React.memo(styled.button`
   &:hover {
     border-radius: 4px;
     background-color: ${getHexaColor('gray', 100)};
+    color: ${getHexaColor('white')};
   }
 
   &:before {

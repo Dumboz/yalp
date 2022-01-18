@@ -10,13 +10,11 @@ const Template = (args) => <FilterButton {...args} />;
 export const Button = Template.bind({});
 Button.args = {
   children: 'Open Now',
-  height: 25,
-  fontSize: 15,
+  height: 30,
 };
 
 export const SecondTemplate = (args) => <FilterButton.DropDown {...args} />;
 SecondTemplate.args = {
   children: 'Price',
-  height: 25,
-  fontSize: 15,
+  height: 30,
 };
