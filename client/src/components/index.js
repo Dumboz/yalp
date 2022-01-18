@@ -8,3 +8,4 @@ export * from './DetailMenuCard/DetailMenuCard';
 export * from './UserInfo/UserInfo';
 export * from './Operation/Operation';
 export * from './Spinner/Spinner';
+export * from './FilterModal/FilterModal';
