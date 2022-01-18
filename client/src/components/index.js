@@ -7,3 +7,5 @@ export * from './PriceFilterButton/PriceFilterButton';
 export * from './DetailMenuCard/DetailMenuCard';
 export * from './UserInfo/UserInfo';
 export * from './Operation/Operation';
+export * from './Categories/Categories';
+export * from './CategoriesList/CategoriesList';
