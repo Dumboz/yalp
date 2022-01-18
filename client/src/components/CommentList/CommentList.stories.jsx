@@ -18,13 +18,11 @@ export const Default = Template.bind({});
 Default.args = {
   size: 32,
   children: [
-    <Comment key="캘린더" iconType="calendar" title="캘린더">
+    <Comment iconType="calendar" title="캘린더">
       Hello1
     </Comment>,
-    <Comment key="아이콘 없음" title="아이콘 없음">
-      Hello2
-    </Comment>,
-    <Comment key="불" iconType="fire" title="불">
+    <Comment title="아이콘 없음">Hello2</Comment>,
+    <Comment iconType="fire" title="불">
       Hello3
     </Comment>,
   ],
