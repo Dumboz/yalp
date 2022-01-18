@@ -25,6 +25,7 @@ export function CommentList({ size, children }) {
   const itemList = new Array(comments.length * 2 - 1)
     .fill('•')
     .map((e, i) => (i % 2 !== 0 ? e : comments[i / 2]));
+  console.log(itemList);
 
   return (
     <InlineList>
