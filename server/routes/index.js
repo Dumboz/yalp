@@ -1,4 +1,5 @@
 const express = require('express');
+
 const autoCompleteRoutes = require('./autocomplete');
 const businessesRoutes = require('./businesses');
 
