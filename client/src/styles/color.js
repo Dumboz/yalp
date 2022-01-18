@@ -12,7 +12,7 @@ export const getHexaColor = (type, step) => {
   const hexaColor = colorType[step.toString()];
   if (!hexaColor) {
     throw new Error(
-      `${hexaColor}: ${colorType}에서 해당 step은 존재하지 않습니다.`
+      `${hexaColor}: ${colorType}에서 해당 step은 존재하지 않습니다.`,
     );
   }
 
