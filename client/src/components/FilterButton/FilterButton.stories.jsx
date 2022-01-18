@@ -1,4 +1,3 @@
-import { array } from 'prop-types';
 import { FilterButton } from './FilterButton';
 
 export default {
@@ -15,7 +14,7 @@ Button.args = {
   fontSize: 15,
 };
 
-const SecondTemplate = (args) => <FilterButton.DropDown {...args} />;
+export const SecondTemplate = (args) => <FilterButton.DropDown {...args} />;
 SecondTemplate.args = {
   children: 'Price',
   height: 25,

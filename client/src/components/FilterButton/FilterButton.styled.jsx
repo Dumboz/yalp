@@ -17,7 +17,13 @@ export const Button = styled.button`
   box-sizing: border-box;
   gap: 8px;
 
-  & .spinner.active {
+  &.selected {
+    color: ${getHexaColor('blue', 500)};
+    border: 1px solid ${getHexaColor('blue', 500)};
+    background: ${getHexaColor('gray', 100)};
+  }
+
+  & .spinner.loading {
     display: block;
   }
 
