@@ -8,8 +8,8 @@ export function Selection({
   group,
   children,
   checked,
-  fontSize,
-  boxSize,
+  fontSize = 16,
+  boxSize = 22,
   onClick,
   content,
 }) {

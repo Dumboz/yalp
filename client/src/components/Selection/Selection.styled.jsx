@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import path from 'assets/filterIcon/check.svg';
+import { getHexaColor } from 'styles/color';
 
 const getRatio = (number, ratio = 0.68) => Math.floor(number * ratio);
 
@@ -11,17 +12,17 @@ export const Input = styled.input`
 export const Label = styled.label`
   position: relative;
   display: inline-block;
-  border: 1px solid #c4c4c4;
+  border: 1px solid ${getHexaColor('gray', 200)};
   width: ${({ boxSize }) => boxSize}px;
   height: ${({ boxSize }) => boxSize}px;
   font-size: ${({ fontSize }) => fontSize};
   border-radius: ${({ type }) => (type === 'checkbox' ? '4px' : '50%')};
-  background: ${({ checked, type }) =>
-    type === 'checkbox' ? (checked ? '#357894' : '#FFFFFF') : '#FFFFFF'};
+  background: ${getHexaColor('white')};
   pointer-events: none;
 
-  &.active {
-    border: 1px solid #357894;
+  &.active[type='checkbox'] {
+    border: 1px solid ${getHexaColor('blue', 500)};
+    background: ${getHexaColor('blue', 500)};
   }
 
   &.active[type='checkbox']:before {
