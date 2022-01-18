@@ -74,7 +74,8 @@ export const FilterModal = ({ className, changeChildren }) => {
               ref={(ref) => (selectionsRef.current[key] = ref)}
               content={HoverMessage[key]}
               tabIndex={'-1'}
-              onKeyDown={handleKeyDown}>
+              onKeyDown={handleKeyDown}
+            >
               <Selection
                 boxSize={18}
                 fontSize={14}
@@ -86,7 +87,8 @@ export const FilterModal = ({ className, changeChildren }) => {
                 }}
                 keyProp={key.toString()}
                 checked={state[key]}
-                content={HoverMessage[key]}>
+                content={HoverMessage[key]}
+              >
                 {option}
               </Selection>
             </SelectionItem>
@@ -96,7 +98,8 @@ export const FilterModal = ({ className, changeChildren }) => {
           fontSize={14}
           tabIndex={'-1'}
           onKeyDown={handleKeyDown}
-          ref={buttonRef}>
+          ref={buttonRef}
+        >
           Save
         </Button>
       </SelectionList>
