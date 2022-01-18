@@ -5,14 +5,16 @@ import { Description } from './Comment.styled';
 
 const cutText = (text, limit) => text.trim().slice(0, limit) + '...';
 
-export function Comment({ iconType, title, limit, size, children, color }) {
+export function Comment({ iconType, title, limit, size, children, color, as }) {
+  const CustomComment = iconType || title ? 'p' : 'span';
+
   return (
-    <Description size={size} color={color}>
+    <Description as={as} size={size} color={color}>
       {iconType && <Icon type={iconType} size={size} color={color} />}
       {title && <A11yHidden as="h3">{title}</A11yHidden>}
-      <p>
+      <CustomComment>
         {children.length > limit ? `"${cutText(children, limit)}"` : children}
-      </p>
+      </CustomComment>
     </Description>
   );
 }

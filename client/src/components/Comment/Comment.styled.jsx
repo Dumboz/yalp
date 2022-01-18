@@ -13,7 +13,8 @@ export const Description = styled.div`
     margin-right: ${setRatioSize(0.25)}px;
   }
 
-  & > p {
+  & > p,
+  & > span {
     margin: 0;
     display: inline-block;
     font-size: ${getSize}px;
