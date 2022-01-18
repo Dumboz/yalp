@@ -5,6 +5,10 @@ import { Spinner, Icon, FilterModal, CommentList, Comment } from 'components';
 
 const FONT_RATIO = 0.5;
 
+const isInArray = ({ title, content }, array) => {
+  return array.filter((item) => item.title === title).length > 0;
+};
+
 export const FilterButton = ({ children, height = 22 }) => {
   const fontSize = height * FONT_RATIO;
 
@@ -52,12 +56,24 @@ FilterButton.DropDown = function FilterDropDown({ children, height = 22 }) {
 
     if (FirstTitle === '') {
       setSelectionList([{ title, content }]);
-    } else {
-      const list = [...selectionList, { title, content }].sort((a, b) =>
-        a.content > b.content ? 1 : a.content < b.content ? -1 : 0
-      );
-      setSelectionList(list);
+      return;
     }
+
+    let List = [...selectionList];
+
+    if (isInArray({ title, content }, selectionList)) {
+      List = List.filter((item) => item.title !== title);
+      console.log(List);
+    } else {
+      List.push({ title, content });
+    }
+
+    if (List.length === 0) List.push({ title: '', content: children });
+
+    List.sort((a, b) =>
+      a.content > b.content ? 1 : a.content < b.content ? -1 : 0
+    );
+    setSelectionList(List);
   };
 
   return (
@@ -69,7 +85,9 @@ FilterButton.DropDown = function FilterDropDown({ children, height = 22 }) {
         fontSize={fontSize}>
         <CommentList>
           {selectionList.map((item) => (
-            <Comment title={item.title}>{item.content}</Comment>
+            <Comment key={item.title} title={item.title}>
+              {item.content}
+            </Comment>
           ))}
         </CommentList>
         <Icon type="dropdown" size={fontSize * 0.8} />

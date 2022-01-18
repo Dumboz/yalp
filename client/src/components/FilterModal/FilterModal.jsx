@@ -82,7 +82,7 @@ export const FilterModal = ({ className, changeChildren }) => {
                 type={'checkbox'}
                 onClick={(e) => {
                   handleChange(e.target);
-                  changeChildren(e);
+                  changeChildren && changeChildren(e);
                 }}
                 keyProp={key.toString()}
                 checked={state[key]}
