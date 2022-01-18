@@ -8,11 +8,14 @@ const { AUTOCOMPLETE, URL, API_KEY } = process.env;
 router.get('/:id?', async (req, res) => {
   const { query } = req;
   const QUERY = makeQuery(query);
-  const { data } = await axios(URL + AUTOCOMPLETE + (QUERY && '?' + QUERY), {
-    headers: { Authorization: API_KEY },
-  });
-
-  res.send(data);
+  try {
+    const { data } = await axios(URL + AUTOCOMPLETE + (QUERY && '?' + QUERY), {
+      headers: { Authorization: API_KEY },
+    });
+    res.send(data);
+  } catch (e) {
+    console.error(e.message);
+  }
 });
 
 module.exports = router;
