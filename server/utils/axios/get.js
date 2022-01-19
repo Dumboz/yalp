@@ -2,7 +2,7 @@ const { default: axios } = require('axios');
 
 const { API_KEY } = process.env;
 
-const getURLData = async URL => {
+const getURLData = async (URL) => {
   try {
     const { data } = await axios(URL, {
       headers: { Authorization: API_KEY },
