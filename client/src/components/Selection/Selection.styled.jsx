@@ -28,8 +28,8 @@ export const Label = styled.label`
     content: '';
     position: absolute;
     display: inline-block;
-    width: ${({ boxSize }) => boxSize}px;
-    height: ${({ boxSize }) => boxSize}px;
+    width: 100%;
+    height: 100%;
     background: url(${path}) no-repeat center center;
   }
 
