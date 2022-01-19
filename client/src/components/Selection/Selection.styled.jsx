@@ -40,7 +40,7 @@ export const Label = styled.label`
     border-radius: 50%;
     display: inline-block;
     background-color: #357894;
-    transform: translate(24%, 23%);
+    transform: translate(22%, 22%);
     height: ${({ boxSize }) => getRatio(boxSize)}px;
     width: ${({ boxSize }) => getRatio(boxSize)}px;
   }
