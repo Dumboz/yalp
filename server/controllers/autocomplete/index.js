@@ -1,18 +1,11 @@
-const { AUTOCOMPLETE, URL } = process.env;
 const { makeQuery } = require('../../utils');
 const { getURLData } = require('../../utils/axios/get');
+const { AUTOCOMPLETE, URL } = process.env;
 
 const sendAutocompleteWords = async (req, res) => {
   const { query } = req;
   const QUERY = makeQuery(query);
-  try {
-    const { data } = await axios(URL + AUTOCOMPLETE + (QUERY && '?' + QUERY), {
-      headers: { Authorization: API_KEY },
-    });
-    res.send(data);
-  } catch (e) {
-    console.error(e.message);
-  }
+  res.send(await getURLData(URL + AUTOCOMPLETE + (QUERY && '?' + QUERY)));
 };
 
 module.exports = { sendAutocompleteWords };
