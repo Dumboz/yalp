@@ -9,13 +9,13 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const [autoTerms, setAutoTerms] = useState();
 
   const onChange = useCallback(
-    e => {
+    (e) => {
       setLocation(e.target.value);
     },
-    [setLocation],
+    [setLocation]
   );
 
-  const onSubmit = useCallback(e => {
+  const onSubmit = useCallback((e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     console.log('onsubmit');
@@ -25,16 +25,22 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   }, []);
 
   const onAutocomplete = useCallback(
-    async e => {
-      const response = await getAutocomplete({
-        text: e.target.value,
-        latitude: 37.786942,
-        longitude: -122.399643,
-      });
+    async (e) => {
+      try {
+        const response = await getAutocomplete({
+          text: e.target.value,
+          latitude: 37.786942,
+          longitude: -122.399643,
+        });
 
-      setAutoTerms(response.terms.map(term => term.text));
+        console.log(e.target.value, { response });
+
+        setAutoTerms(response.terms.map((term) => term.text));
+      } catch (e) {
+        console.error('In searchForm, onAutocomplete function > ', e.message);
+      }
     },
-    [setAutoTerms],
+    [setAutoTerms]
   );
 
   return (
@@ -50,7 +56,8 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         />
       </Label>
       <datalist autoComplete="off" id="descriptionList">
-        {autoTerms && autoTerms.map(term => <option value={term} key={term} />)}
+        {autoTerms &&
+          autoTerms.map((term) => <option value={term} key={term} />)}
       </datalist>
       <Label width={464}>
         {showLabel ? <Text>Near</Text> : <A11yHidden>Near</A11yHidden>}

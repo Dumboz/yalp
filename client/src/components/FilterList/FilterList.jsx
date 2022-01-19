@@ -9,13 +9,9 @@ export const FilterList = ({ type = 'checkbox', heading, options }) => {
   isOver && options.splice(4);
 
   const handleClick = (e) => {
-    const selectionButton = e.target.children[1];
-    const isChecked = e.target.firstElementChild.checked;
-    const type = e.target.firstElementChild.type;
+    const type = e.target.querySelector('input').type;
 
-    if (type === 'checkbox')
-      selectionButton.classList.toggle('active', !isChecked);
-    else {
+    if (type === 'radio') {
       [...listRef.current.children].forEach((item) => {
         const input = item.querySelector('input');
         const label = item.querySelector('label');
