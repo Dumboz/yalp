@@ -1,12 +1,12 @@
 import { CategoriesItem, CategoriesUl } from './CategoriesList.styled';
 import { makeArray } from 'utils';
-export function CategoriesList({ children }) {
+export function CategoriesList({ size, children }) {
   const Categories = makeArray(children);
 
   return (
     <CategoriesUl>
       {Categories.map((Category) => (
-        <CategoriesItem>{Category}</CategoriesItem>
+        <CategoriesItem size={size}>{Category}</CategoriesItem>
       ))}
     </CategoriesUl>
   );
