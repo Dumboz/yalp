@@ -5,7 +5,6 @@ const { getURLData } = require('../../utils/axios/get');
 const sendAutocompleteWords = async (req, res) => {
   const { query } = req;
   const QUERY = makeQuery(query);
-
   res.send(await getURLData(URL + AUTOCOMPLETE + (QUERY && '?' + QUERY)));
 };
 

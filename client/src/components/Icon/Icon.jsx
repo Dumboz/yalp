@@ -38,5 +38,6 @@ Icon.propTypes = {
     'rightarrow',
     'star',
     'talk',
+    'dropdown',
   ]),
 };

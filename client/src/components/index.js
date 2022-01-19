@@ -12,3 +12,6 @@ export * from './ArrowButton/ArrowButton';
 export * from './RestaurantCard/RestaurantCard';
 export * from './Service/Service';
 export * from './ServiceList/ServiceList';
+export * from './Spinner/Spinner';
+export * from './FilterModal/FilterModal';
+export * from './Selection/Selection';

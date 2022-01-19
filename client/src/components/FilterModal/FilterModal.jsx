@@ -24,7 +24,7 @@ const reducer = (state, action) => {
   }
 };
 
-export const FilterModal = () => {
+export const FilterModal = ({ className, changeChildren }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const selectionsRef = useRef([]);
   const buttonRef = useRef(null);
@@ -65,7 +65,7 @@ export const FilterModal = () => {
   }, []);
 
   return (
-    <Form>
+    <Form className={className}>
       <SelectionList>
         {options.map((option, key) => {
           return (
@@ -81,7 +81,10 @@ export const FilterModal = () => {
                 fontSize={14}
                 group={'price'}
                 type={'checkbox'}
-                onClick={(e) => handleChange(e.target)}
+                onClick={(e) => {
+                  handleChange(e.target);
+                  changeChildren && changeChildren(e);
+                }}
                 keyProp={key.toString()}
                 checked={state[key]}
                 content={HoverMessage[key]}
