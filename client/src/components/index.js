@@ -8,3 +8,7 @@ export * from './DetailMenuCard/DetailMenuCard';
 export * from './UserInfo/UserInfo';
 export * from './Operation/Operation';
 export * from './CategoriesList/CategoriesList';
+export * from './ArrowButton/ArrowButton';
+export * from './RestaurantCard/RestaurantCard';
+export * from './Service/Service';
+export * from './ServiceList/ServiceList';

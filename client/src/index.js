@@ -14,22 +14,17 @@ import {
 import { InitSVG } from 'components';
 import axios from 'axios';
 
-// const yelp = require('yelp-fusion');
-
 async function call(query) {
   const { data } = await axios.get('/api' + query);
-  
+
   console.log(data);
 }
 
 function Exam() {
-  // const params = useParams();
-  // const [searchParams, setSearchParams] = useSearchParams();
   const { pathname, search } = useLocation();
 
   console.log(pathname + search);
 
-  // const query = params['*'] + '?' + searchParams;
   call(pathname + search);
   console.log('hi');
 

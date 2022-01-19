@@ -3,7 +3,7 @@ import { color } from './theme';
 export const getHexaColor = (type, step) => {
   const colorType = color[type];
 
-  if (type === 'white') return colorType;
+  if (type === 'white') return colorType[100];
 
   if (!colorType) {
     throw new Error(`${colorType}: 해당 색상은 존재하지 않습니다.`);
