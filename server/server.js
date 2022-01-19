@@ -14,5 +14,5 @@ app.use(cors());
 app.use('/api', routes);
 
 app.listen(PORT, () =>
-  console.log(`⚙️ http://localhost:${PORT} 개발 서버 구동 중...`)
+  console.log(`⚙️ http://localhost:${PORT} 개발 서버 구동 중...`),
 );
