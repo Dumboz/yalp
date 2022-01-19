@@ -10,7 +10,7 @@ export const Description = styled.div`
   & > svg {
     margin-top: ${setRatioSize(0.2)}px;
     margin-bottom: ${setRatioSize(0.2)}px;
-    margin-right: ${setRatioSize(0.25)}px;
+    margin-right: ${setRatioSize(0.5)}px;
   }
 
   & > p,
