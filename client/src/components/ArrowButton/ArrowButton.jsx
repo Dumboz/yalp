@@ -3,7 +3,7 @@ import { oneOf } from 'prop-types';
 import { Arrow } from './ArrowButton.styled';
 
 export function ArrowButton({ direct, size, disabled, hover }) {
-  const iconType = (direct && 'right') + 'arrow';
+  const iconType = direct + 'arrow';
 
   return (
     <Arrow size={size} disabled={disabled} hover={hover} aria-label="button">
