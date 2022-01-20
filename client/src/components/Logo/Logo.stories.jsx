@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template = (args) => (
+const Template = args => (
   <>
     <Logo {...args} />
     <InitSVG />
@@ -24,4 +24,5 @@ const Template = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   type: 'logo',
+  size: 190,
 };
