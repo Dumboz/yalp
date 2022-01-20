@@ -1,14 +1,12 @@
-import { string, arrayOf } from 'prop-types';
-import { useRef } from 'react';
-import { Selection } from 'components';
-import { Wrapper, Heading, List, Button } from './FilterList.styled';
 import axios from 'axios';
+import { useRef } from 'react';
 import { makeQuery } from 'utils';
+import { Selection } from 'components';
+import { string, arrayOf } from 'prop-types';
+import { Wrapper, Heading, List, Button } from './FilterList.styled';
 
 export const FilterList = ({ type = 'checkbox', heading, options }) => {
   const listRef = useRef(null);
-  //   const isOver = options.length > 4;
-  //   isOver && options.splice(4);
 
   const handleClick = async (e) => {
     const type = e.target.querySelector('input').type;
@@ -40,9 +38,16 @@ export const FilterList = ({ type = 'checkbox', heading, options }) => {
     }
   };
 
+  const makePascalCase = (str) => {
+    return str
+      .split(' ')
+      .map((char) => (char = char[0].toUpperCase() + char.slice(1)))
+      .join(' ');
+  };
+
   return (
     <Wrapper>
-      <Heading>{heading}</Heading>
+      <Heading>{makePascalCase(heading)}</Heading>
       <List ref={listRef}>
         {options.map((item, key) => (
           <li key={key} tabIndex={'0'}>

@@ -18,6 +18,6 @@ const Template = (args) => <FilterList {...args} />;
 export const List = Template.bind({});
 List.args = {
   type: 'checkbox',
-  heading: 'Option Title',
+  heading: 'option title',
   options: ['options1', 'options2', 'options3', 'options4'],
 };
