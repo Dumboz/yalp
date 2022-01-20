@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from 'pages';
@@ -13,42 +13,50 @@ import {
 } from 'react-router-dom';
 import { InitSVG } from 'components';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchBusinesses } from 'store/features/businesses';
+import { StoreProvider } from './store';
 
-// const yelp = require('yelp-fusion');
-
-async function call(query) {
+async function call(query, setState) {
   const { data } = await axios.get('/api' + query);
-  
-  console.log(data);
+  setState(data);
+  return { data };
 }
 
-function Exam() {
-  // const params = useParams();
-  // const [searchParams, setSearchParams] = useSearchParams();
+const Exam = () => {
+  const dispatch = useDispatch();
   const { pathname, search } = useLocation();
 
-  console.log(pathname + search);
+  useEffect(() => {
+    // call(pathname + search, setState);
+    dispatch(fetchBusinesses(pathname + search));
+    console.log({ url: pathname + search });
+  }, []);
 
-  // const query = params['*'] + '?' + searchParams;
-  call(pathname + search);
-  console.log('hi');
-
-  return <div>hi</div>;
-}
+  const businessesReducer = useSelector(
+    ({ businessesReducer }) => businessesReducer,
+  );
+  console.log({ businessesReducer });
+  return <div>{JSON.stringify(businessesReducer)}</div>;
+};
 
 ReactDOM.render(
   // <React.StrictMode>
   <>
     <GlobalStyle />
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="*" element={<Exam />} />
-        </Route>
-      </Routes>
-      <InitSVG />
+      <StoreProvider>
+        <Routes>
+          <Route path="/" element={<App />}>
+            {/* <Route path="search" element={<SearchPage />} />
+          <Route path=":id" element={<DetailPage />} /> */}
+            <Route path="*" element={<Exam />} />
+          </Route>
+        </Routes>
+        <InitSVG />
+      </StoreProvider>
     </BrowserRouter>
     {/* </React.StrictMode> */}
   </>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
