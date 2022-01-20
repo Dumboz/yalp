@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { useRef } from 'react';
 import { makeQuery } from 'utils';
-import { Selection } from 'components';
-import { string, arrayOf } from 'prop-types';
+import { Selection, PriceFilterButtonGroup } from 'components';
+import { string, arrayOf, oneOf, array } from 'prop-types';
 import { Wrapper, Heading, List, Button } from './FilterList.styled';
 
-export const FilterList = ({ type = 'checkbox', heading, options }) => {
+export const FilterList = ({ type = 'checkbox', heading, options = [] }) => {
   const listRef = useRef(null);
 
   const handleClick = async (e) => {
@@ -45,25 +45,35 @@ export const FilterList = ({ type = 'checkbox', heading, options }) => {
       .join(' ');
   };
 
+  const setOptions = (options) => {
+    return type !== 'price' ? (
+      options.map((item, key) => (
+        <li key={key} tabIndex={'0'}>
+          <Selection
+            type={type}
+            onClick={handleClick}
+            group={heading}
+            children={item[0]}
+          />
+        </li>
+      ))
+    ) : (
+      <li>
+        <PriceFilterButtonGroup />
+      </li>
+    );
+  };
+
   return (
     <Wrapper>
       <Heading>{makePascalCase(heading)}</Heading>
-      <List ref={listRef}>
-        {options.map((item, key) => (
-          <li key={key} tabIndex={'0'}>
-            <Selection type={type} onClick={handleClick} group={heading}>
-              {item}
-            </Selection>
-          </li>
-        ))}
-      </List>
-      <Button>See all</Button>
+      <List ref={listRef}>{setOptions(options)}</List>
     </Wrapper>
   );
 };
 
-FilterList.propTypes = {
-  type: string,
-  heading: string.isRequired,
-  options: arrayOf(string),
-};
+// FilterList.propTypes = {
+//   type: oneOf(['checkbox', 'radio', 'price']).isRequired,
+//   heading: string.isRequired,
+//   options: arrayOf(array),
+// };
