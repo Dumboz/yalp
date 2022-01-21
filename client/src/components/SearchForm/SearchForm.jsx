@@ -9,7 +9,7 @@ import { makeQuery } from 'utils';
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const [location, setLocation] = useState(locationWord);
   const [autoTerms, setAutoTerms] = useState();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onChange = useCallback(
     (e) => {
@@ -26,25 +26,19 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
     for (const [key, value] of formData.entries()) {
       formObj[key] = value;
     }
-    navigate('/businesses/search?' + makeQuery(formObj));
+    // navigate('/businesses/search?' + makeQuery(formObj));
     e.preventDefault();
   }, []);
 
   const onAutocomplete = useCallback(
     async (e) => {
-      try {
-        const response = await getAutocomplete({
-          text: e.target.value,
-          latitude: 37.786942,
-          longitude: -122.399643,
-        });
+      const response = await getAutocomplete({
+        text: e.target.value,
+        latitude: 37.786942,
+        longitude: -122.399643,
+      });
 
-        console.log(e.target.value, { response });
-
-        setAutoTerms(response.terms.map((term) => term.text));
-      } catch (e) {
-        console.error('In searchForm, onAutocomplete function > ', e.message);
-      }
+      setAutoTerms(response.terms.map((term) => term.text));
     },
     [setAutoTerms]
   );
