@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState, useCallback, useEffect } from 'react';
 import { Input, Label as StyledLabel, List, Span } from './Selection.styled';
+import { A11yHidden } from 'components';
 
 export function Selection({
   keyProp,
@@ -8,30 +9,36 @@ export function Selection({
   group,
   children,
   checked,
-  fontSize,
-  boxSize,
+  fontSize = 16,
+  boxSize = 22,
   onClick,
   content,
 }) {
   const id = group + ' ' + keyProp;
 
+  const handleCheck = (e) => {
+    const isChecked = e.target.firstElementChild.checked;
+    e.target.firstElementChild.checked = isChecked ? false : true;
+
+    const label = e.target.children[1];
+    label.classList.toggle('active');
+  };
+
   return (
-    <List onClick={onClick} aria-label={content}>
-      <Input
-        id={id}
-        readOnly
-        type={type}
-        name={group}
-        checked={checked}
-        aria-checked={checked}
-      />
+    <List
+      onClick={(e) => {
+        handleCheck(e);
+        onClick && onClick(e);
+      }}
+      aria-label={content}>
+      <Input id={id} type={type} name={group} aria-checked={checked} />
       <StyledLabel
         type={type}
         htmlFor={id}
         checked={checked}
         boxSize={boxSize}
         aria-labelledby={'contents'}
-        className={checked ? 'active' : 'deactive'}
+        // className={checked ? 'active' : 'deactive'}
       />
       <Span id="contents" tabIndex="-1" fontSize={fontSize}>
         {children}

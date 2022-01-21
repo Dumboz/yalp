@@ -18,19 +18,22 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
     [setLocation],
   );
 
-  const onSubmit = useCallback(e => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formObj = {};
+  const onSubmit = useCallback(
+    e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const formObj = {};
 
-    for (const [key, value] of formData.entries()) {
-      formObj[key] = value;
-    }
-    formObj.offset = 0;
+      for (const [key, value] of formData.entries()) {
+        formObj[key] = value;
+      }
+      formObj.offset = 0;
 
-    navigate('/businesses/search?' + makeQuery(formObj));
-    e.preventDefault();
-  }, []);
+      navigate('/businesses/search?' + makeQuery(formObj));
+      e.preventDefault();
+    },
+    [navigate],
+  );
 
   const onAutocomplete = useCallback(
     async e => {

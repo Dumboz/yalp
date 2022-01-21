@@ -1,17 +1,17 @@
 import { makeTimeKo } from 'utils';
-import { OpenInfo, TimeInfo } from './Operation.styled';
+import { OpenInfo, TimeInfo, OperationWrapper } from './Operation.styled';
 
-export function Operation({ start, end, isOpenNow }) {
+export function Operation({ start, end, isOpenNow, size }) {
   const openState = isOpenNow ? 'Open' : 'Closed';
   const time = isOpenNow
     ? ' ' + makeTimeKo(start) + ' ~ ' + makeTimeKo(end)
     : ' untill ' + makeTimeKo(start);
 
   return (
-    <>
+    <OperationWrapper size={size}>
       <OpenInfo isOpen={isOpenNow}>{openState}</OpenInfo>
       <TimeInfo>{time}</TimeInfo>
-    </>
+    </OperationWrapper>
   );
 }
 

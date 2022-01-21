@@ -1,9 +1,17 @@
 import styled from 'styled-components';
+import { getHexaColor } from 'styles/color';
 
 export const ButtonGroup = styled.ul`
+  display: flex;
+  width: 200px;
   & > button {
-    border: 1px solid black;
+    font-weight: 700;
+    flex-basis: 50px;
+    padding: 6px;
+    box-sizing: border-box;
+    border: 1px solid ${getHexaColor('gray', 200)};
     border-right: none;
+    transition: background-color 0.3s;
   }
   & > button:first-child {
     border-top-left-radius: 16px;
@@ -12,10 +20,11 @@ export const ButtonGroup = styled.ul`
   & > button:last-child {
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
-    border-right: 1px solid black;
+    border-right: 1px solid ${getHexaColor('gray', 200)};
   }
   & > button:hover {
-    background-color: #c7c5c5;
+    background: ${getHexaColor('gray', 100)};
+    transition: 0.3s;
   }
 `;
 

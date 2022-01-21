@@ -9,6 +9,7 @@ export default {
       control: {
         type: 'select',
         options: [
+          '',
           'calendar',
           'fire',
           'follower',
