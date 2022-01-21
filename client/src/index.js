@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { App, SearchPage, DetailPage } from 'pages';
 import { GlobalStyle } from 'styles/global.styled';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { store } from 'app/store';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { StoreProvider } from './store';
 import { InitSVG } from 'components';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchBusinesses } from 'store/features/businesses';
+import { updateBusinesses } from 'store/businesses';
 import styled from 'styled-components';
+import { useGetBusinessesQuery } from 'services/businesses';
 
 const StyledExam = styled.div`
   margin-top: 100px;
@@ -22,22 +22,30 @@ const Exam = () => {
   const dispatch = useDispatch();
   const { pathname, search } = useLocation();
 
-  useEffect(() => {
-    console.log(fetchBusinesses(pathname + search));
+  const { data, error, isLoading } = useGetBusinessesQuery(search);
+  if (isLoading) {
+    dispatch(updateBusinesses({ error, isLoading }));
+  } else {
+    dispatch(
+      updateBusinesses({
+        businesses: data.businesses,
+        total: data.total,
+        region: data.region,
+        error,
+        isLoading,
+      }),
+    );
+  }
 
-    dispatch(fetchBusinesses(pathname + search));
-    console.log({ url: pathname + search });
-  }, [pathname, search, dispatch]);
-
-  const businessesReducer = useSelector(
+  const { businesses, total, region } = useSelector(
     ({ businessesReducer }) => businessesReducer,
   );
+
   return (
     <StyledExam>
-      <div>{`offset:` + businessesReducer.offset}</div>
-      <div>{`total:` + businessesReducer.total}</div>
-      <div>{`region:` + businessesReducer.region}</div>
-      <div>{JSON.stringify(businessesReducer)}</div>
+      <div>{'total' + !isLoading && JSON.stringify(total)}</div>
+      <div>{'region' + !isLoading && JSON.stringify(region)}</div>
+      <div>{JSON.stringify(businesses)}</div>
     </StyledExam>
   );
 };
@@ -46,7 +54,7 @@ ReactDOM.render(
   // <React.StrictMode>
   <>
     <GlobalStyle />
-    <Provider store={store}>
+    <StoreProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
@@ -57,7 +65,7 @@ ReactDOM.render(
         </Routes>
         <InitSVG />
       </BrowserRouter>
-    </Provider>
+    </StoreProvider>
     {/* </React.StrictMode> */}
   </>,
   document.getElementById('root'),
