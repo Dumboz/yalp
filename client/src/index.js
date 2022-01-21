@@ -16,28 +16,37 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchBusinesses } from 'store/features/businesses';
 import { StoreProvider } from './store';
+import styled from 'styled-components';
 
-async function call(query, setState) {
-  const { data } = await axios.get('/api' + query);
-  setState(data);
-  return { data };
-}
+const StyledExam = styled.div`
+  margin-top: 100px;
+  background-color: yellow;
+  width: 100%;
+  min-height: 100px;
+`;
 
 const Exam = () => {
   const dispatch = useDispatch();
   const { pathname, search } = useLocation();
 
   useEffect(() => {
-    // call(pathname + search, setState);
+    console.log(fetchBusinesses(pathname + search));
+
     dispatch(fetchBusinesses(pathname + search));
     console.log({ url: pathname + search });
-  }, []);
+  }, [pathname, search, dispatch]);
 
   const businessesReducer = useSelector(
     ({ businessesReducer }) => businessesReducer,
   );
-  console.log({ businessesReducer });
-  return <div>{JSON.stringify(businessesReducer)}</div>;
+  return (
+    <StyledExam>
+      <div>{`offset:` + businessesReducer.offset}</div>
+      <div>{`total:` + businessesReducer.total}</div>
+      <div>{`region:` + businessesReducer.region}</div>
+      <div>{JSON.stringify(businessesReducer)}</div>
+    </StyledExam>
+  );
 };
 
 ReactDOM.render(
