@@ -3,10 +3,14 @@ import Button from 'components/Button/Button';
 import React, { useState, useCallback } from 'react';
 import { getAutocomplete } from 'api';
 import { Label, Text, Input, Form } from './SearchForm.styled';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { makeQuery } from 'utils';
+const queryString = require('query-string');
 
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
+  const { pathname, search } = useLocation();
+  const { term: defaltTerm } = queryString.parse(search);
+  const [term, setTerm] = useState(defaltTerm);
   const [location, setLocation] = useState(locationWord);
   const [autoTerms, setAutoTerms] = useState();
   const navigate = useNavigate();
@@ -43,6 +47,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         longitude: -122.399643,
       });
 
+      setTerm(e.target.value);
       setAutoTerms(response.terms.map(term => term.text));
     },
     [setAutoTerms],
@@ -57,6 +62,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
           name="term"
           id="term"
           list="termList"
+          value={term}
           placeholder={searchWord}
         />
       </Label>
