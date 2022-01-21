@@ -39,5 +39,6 @@ Icon.propTypes = {
     'star',
     'talk',
     'dropdown',
+    'done',
   ]),
 };

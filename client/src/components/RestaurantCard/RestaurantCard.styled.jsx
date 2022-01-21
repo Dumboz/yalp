@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
+import { Link } from 'react-router-dom';
 
-export const CardLink = styled.a`
+export const CardLink = styled(Link)`
   display: block;
   max-width: 900px;
   transition: 200ms ease-in;
+
+  & ~ & {
+    margin-top: 24px;
+  }
 `;
 export const Figure = styled.figure`
   border: 1px solid ${getHexaColor('gray', 100)};
@@ -53,12 +58,13 @@ export const TagsWrapper = styled.div`
   }
 `;
 
-export const ImgContainer = styled.div`
+export const ImgWrapper = styled.div`
   width: 30%;
   padding: 2.5%;
 `;
 export const Img = styled.div`
   background-color: red;
+  border-radius: 6px;
   width: 100%;
   height: 0;
   padding-bottom: 100%;

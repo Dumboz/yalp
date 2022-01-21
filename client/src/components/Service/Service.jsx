@@ -14,9 +14,10 @@ export function Service({ isServe, size, children }) {
 }
 
 Service.defaultProps = {
+  isServe: true,
   size: 16,
 };
 
 Service.propTypes = {
-  children: string,
+  // children: string,
 };
