@@ -19,6 +19,9 @@ export function Selection({
   const handleCheck = (e) => {
     const isChecked = e.target.firstElementChild.checked;
     e.target.firstElementChild.checked = isChecked ? false : true;
+
+    const label = e.target.children[1];
+    label.classList.toggle('active');
   };
 
   return (
@@ -35,7 +38,7 @@ export function Selection({
         checked={checked}
         boxSize={boxSize}
         aria-labelledby={'contents'}
-        className={checked ? 'active' : 'deactive'}
+        // className={checked ? 'active' : 'deactive'}
       />
       <Span id="contents" tabIndex="-1" fontSize={fontSize}>
         {children}
