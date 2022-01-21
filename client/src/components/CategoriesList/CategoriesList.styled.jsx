@@ -16,4 +16,9 @@ export const CategoriesItem = styled.li`
   color: ${getHexaColor('gray', 400)};
   background-color: ${getHexaColor('gray', 100)};
   border-radius: 4px;
+  transition: 200ms ease-in;
+
+  &:hover {
+    background-color: ${getHexaColor('gray', 200)};
+  }
 `;

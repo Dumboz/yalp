@@ -9,16 +9,16 @@ import { makeQuery } from 'utils';
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const [location, setLocation] = useState(locationWord);
   const [autoTerms, setAutoTerms] = useState();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onChange = useCallback(
-    e => {
+    (e) => {
       setLocation(e.target.value);
     },
-    [setLocation],
+    [setLocation]
   );
 
-  const onSubmit = useCallback(e => {
+  const onSubmit = useCallback((e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formObj = {};
@@ -26,21 +26,21 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
     for (const [key, value] of formData.entries()) {
       formObj[key] = value;
     }
-    navigate('/businesses/search?' + makeQuery(formObj));
+    // navigate('/businesses/search?' + makeQuery(formObj));
     e.preventDefault();
   }, []);
 
   const onAutocomplete = useCallback(
-    async e => {
+    async (e) => {
       const response = await getAutocomplete({
         text: e.target.value,
         latitude: 37.786942,
         longitude: -122.399643,
       });
 
-      setAutoTerms(response.terms.map(term => term.text));
+      setAutoTerms(response.terms.map((term) => term.text));
     },
-    [setAutoTerms],
+    [setAutoTerms]
   );
 
   return (
@@ -56,7 +56,8 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         />
       </Label>
       <datalist autoComplete="off" id="termList">
-        {autoTerms && autoTerms.map(term => <option value={term} key={term} />)}
+        {autoTerms &&
+          autoTerms.map((term) => <option value={term} key={term} />)}
       </datalist>
       <Label width={464}>
         {showLabel ? <Text>Near</Text> : <A11yHidden>Near</A11yHidden>}
