@@ -12,8 +12,9 @@ import {
 const queryString = require('query-string');
 
 function Pagenation() {
-  // const { total } = useSelector(({ businessesReducer }) => businessesReducer);
-  const total = 240;
+  const { isLoading, total } = useSelector(
+    ({ businessesReducer }) => businessesReducer,
+  );
   const { pathname, search } = useLocation();
   const [_, setSearchParams] = useSearchParams({});
   const query = queryString.parse(search);
@@ -21,13 +22,6 @@ function Pagenation() {
   const lastPage = Math.ceil(+total / 20);
   const currentPage = (+offset || 0) + 1;
   const pageList = [currentPage];
-
-  let i = 1;
-  while (pageList.length < 9) {
-    if (currentPage + i <= lastPage) pageList.push(currentPage + i);
-    if (currentPage - i > 0) pageList.unshift(currentPage - i);
-    i++;
-  }
 
   const onClick = useCallback(
     direct => {
@@ -38,6 +32,17 @@ function Pagenation() {
     },
     [offset, query, setSearchParams],
   );
+
+  if (isLoading) return <></>;
+
+  let i = 1;
+  while (pageList.length < 9) {
+    if (currentPage + i <= lastPage) pageList.push(currentPage + i);
+    if (pageList.length === lastPage) break;
+    if (currentPage - i > 0) pageList.unshift(currentPage - i);
+    if (pageList.length === lastPage) break;
+    i++;
+  }
 
   return (
     <PagenationWrapper>
@@ -70,5 +75,4 @@ function Pagenation() {
   );
 }
 
-// export default React.memo(Pagenation);
-export default Pagenation;
+export default React.memo(Pagenation);
