@@ -26,6 +26,8 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
     for (const [key, value] of formData.entries()) {
       formObj[key] = value;
     }
+    formObj.offset = 0;
+
     navigate('/businesses/search?' + makeQuery(formObj));
     e.preventDefault();
   }, []);
