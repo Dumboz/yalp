@@ -17,7 +17,7 @@ export function Comment({ iconType, title, limit, size, children, color, as }) {
         <CustomComment>
           {children?.length > limit
             ? `"${cutText(children, limit)}"`
-            : children || <Skeleton />}
+            : children}
         </CustomComment>
       ) : (
         <Skeleton />
