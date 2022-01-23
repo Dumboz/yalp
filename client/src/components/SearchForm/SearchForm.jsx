@@ -5,6 +5,7 @@ import { getAutocomplete } from 'api';
 import { Label, Text, Input, Form } from './SearchForm.styled';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { makeQuery } from 'utils';
+import { useSelector } from 'react-redux';
 const queryString = require('query-string');
 
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
@@ -14,6 +15,12 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const [location, setLocation] = useState(locationWord);
   const [autoTerms, setAutoTerms] = useState();
   const navigate = useNavigate();
+
+  const { isLoading, total } = useSelector(
+    ({ businessesReducer }) => businessesReducer,
+  );
+
+  console.log('SearchForm', { isLoading });
 
   const onChange = useCallback(
     e => {
@@ -33,7 +40,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
       }
       formObj.offset = 0;
 
-      navigate('/businesses/search?' + makeQuery(formObj));
+      navigate('/search?' + makeQuery(formObj));
       e.preventDefault();
     },
     [navigate],
@@ -41,16 +48,15 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
 
   const onAutocomplete = useCallback(
     async e => {
+      setTerm(e.target.value);
+
       const response = await getAutocomplete({
         text: e.target.value,
-        latitude: 37.786942,
-        longitude: -122.399643,
       });
 
-      setTerm(e.target.value);
       setAutoTerms(response.terms.map(term => term.text));
     },
-    [setAutoTerms],
+    [setAutoTerms, setTerm],
   );
 
   return (
@@ -73,7 +79,11 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         {showLabel ? <Text>Near</Text> : <A11yHidden>Near</A11yHidden>}
         <Input name="location" value={location} onChange={onChange} />
       </Label>
-      <Button buttonType="highlight" iconType="search" flatBorderSide="left" />
+      <Button
+        buttonType="highlight"
+        iconType={isLoading ? 'loading' : 'search'}
+        flatBorderSide="left"
+      />
     </Form>
   );
 }

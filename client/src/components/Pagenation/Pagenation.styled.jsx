@@ -18,7 +18,7 @@ export const PagenationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 200px;
+  /* margin-top: 200px; */
   width: 100%;
   padding: 20px 0;
   border-top: 1px solid ${getHexaColor('gray', 100)};

@@ -12,9 +12,7 @@ import {
 const queryString = require('query-string');
 
 function Pagenation() {
-  const { isLoading, total } = useSelector(
-    ({ businessesReducer }) => businessesReducer,
-  );
+  const { total } = useSelector(({ businessesReducer }) => businessesReducer);
   const { pathname, search } = useLocation();
   const [_, setSearchParams] = useSearchParams({});
   const query = queryString.parse(search);
@@ -32,8 +30,6 @@ function Pagenation() {
     },
     [offset, query, setSearchParams],
   );
-
-  if (isLoading) return <></>;
 
   let i = 1;
   while (pageList.length < 9) {

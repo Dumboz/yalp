@@ -33,12 +33,12 @@ const Exam = () => {
         region: data.region,
         error,
         isLoading,
-      }),
+      })
     );
   }
 
   const { businesses, total, region } = useSelector(
-    ({ businessesReducer }) => businessesReducer,
+    ({ businessesReducer }) => businessesReducer
   );
 
   return (
@@ -58,9 +58,9 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="*" element={<Exam />} />
-            {/* <Route path="search" element={<SearchPage />} />
-            <Route path=":id" element={<DetailPage />} /> */}
+            {/* <Route path="*" element={<Exam />} /> */}
+            <Route path="search" element={<SearchPage />} />
+            <Route path=":id" element={<DetailPage />} />
           </Route>
         </Routes>
         <InitSVG />
@@ -68,5 +68,5 @@ ReactDOM.render(
     </StoreProvider>
     {/* </React.StrictMode> */}
   </>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

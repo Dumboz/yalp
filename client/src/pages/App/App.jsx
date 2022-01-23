@@ -10,7 +10,6 @@ export function App() {
         searchWord={`tacos, Cheap Dinner, Max's`}
         locationWord="New York"
       />
-      <Pagenation />
       <Outlet />
     </>
   );

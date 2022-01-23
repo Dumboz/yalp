@@ -1,5 +1,11 @@
 {
-  "feature": {
+  "price": {
+    "$": 1,
+    "$$": 2,
+    "$$$": 3,
+    "$$$$": 4
+  },
+  "features": {
     "Hot and New": "hot_and_new",
     "Request a Quote": "request_a_quote",
     "Reservation": "reservation",

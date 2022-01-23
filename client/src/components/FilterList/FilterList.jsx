@@ -1,14 +1,22 @@
-import axios from 'axios';
+import QueryString from 'qs';
+import db from 'db/filter.json';
 import { useRef } from 'react';
-import { makeQuery } from 'utils';
+import { oneOf } from 'prop-types';
+import { Wrapper, Heading, List } from './FilterList.styled';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { Selection, PriceFilterButtonGroup } from 'components';
-import { string, arrayOf, oneOf, array } from 'prop-types';
-import { Wrapper, Heading, List, Button } from './FilterList.styled';
 
-export const FilterList = ({ type = 'checkbox', heading, options = [] }) => {
+export const FilterList = ({
+  categories,
+  type = 'checkbox',
+  heading,
+  options = [],
+}) => {
   const listRef = useRef(null);
+  const { search } = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     const type = e.target.querySelector('input').type;
     const isChecked = e.target.querySelector('input').checked;
 
@@ -20,21 +28,30 @@ export const FilterList = ({ type = 'checkbox', heading, options = [] }) => {
       });
     }
 
-    if (isChecked) {
-      // 비동기 통신
-      // try {
-      //   const query = makeQuery({
-      //     latitude: 37.786942,
-      //     longitude: -122.399643,
-      //   });
-      //   const { data } = await axios.get(
-      //     `/api/businesses/search?location=boston&term=burrito+sushi+noodles`
-      //   );
-      //   console.log({ data });
-      // } catch (e) {
-      //   console.error('FilterList.js 에서 에러가 발생했습니다. ', e.message);
-      // }
-      // console.log(e.target.querySelector('span').textContent);
+    const term = e.target.querySelector('span').textContent;
+    const data = db[categories];
+    const query = QueryString.parse(search.replace(/^\?/, ''));
+
+    switch (categories) {
+      case 'features':
+        const newQuery = {
+          ...query,
+          attributes: isChecked
+            ? encodeURI(query?.attributes ? query?.attributes : '') +
+              encodeURI(data[term] + ',')
+            : encodeURI(query?.attributes?.replace(`${data[term]},`, '')),
+        };
+        !newQuery.attributes && delete newQuery.attributes;
+        setSearchParams(newQuery);
+        break;
+      case 'distance':
+        setSearchParams({
+          ...query,
+          radius: encodeURI(Number(data[term])),
+        });
+        break;
+      default:
+        break;
     }
   };
 
@@ -72,8 +89,7 @@ export const FilterList = ({ type = 'checkbox', heading, options = [] }) => {
   );
 };
 
-// FilterList.propTypes = {
-//   type: oneOf(['checkbox', 'radio', 'price']).isRequired,
-//   heading: string.isRequired,
-//   options: arrayOf(array),
-// };
+FilterList.propTypes = {
+  categories: oneOf(['price', 'features', 'distance']).isRequired,
+  type: oneOf(['checkbox', 'radio', 'price']).isRequired,
+};
