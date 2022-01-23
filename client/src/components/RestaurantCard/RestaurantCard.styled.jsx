@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const CardLink = styled(Link)`
   display: block;
   max-width: 900px;
-  transition: 200ms ease-in;
+  /* transition: 200ms ease-in; */
   margin-top: 24px;
 `;
 export const Figure = styled.figure`
