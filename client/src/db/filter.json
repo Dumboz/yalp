@@ -1,0 +1,25 @@
+{
+  "price": {
+    "$": 1,
+    "$$": 2,
+    "$$$": 3,
+    "$$$$": 4
+  },
+  "features": {
+    "Hot and New": "hot_and_new",
+    "Request a Quote": "request_a_quote",
+    "Reservation": "reservation",
+    "Waitlist Reservation": "waitlist_reservation",
+    "Offer Deals": "deals",
+    "Gender Netural Restrooms": "gender_neutral_restrooms",
+    "Open to All": "open_to_all",
+    "WheelChair Accessible": "wheelchair_accessible"
+  },
+  "distance": {
+    "Within 4 Block": "800",
+    "Walking (1 mi.)": "1600",
+    "Biking (2 mi.)": "3200",
+    "Driving (5 mi.)": "8000",
+    "Bird's-eye View": "15000"
+  }
+}
