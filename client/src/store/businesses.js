@@ -1,27 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getBusinesses } from 'api';
 
-// https://redux-toolkit.js.org/api/createAsyncThunk
-// createAsyncThunk(action.type, callback function which return promise)
-
-const initialState = [];
+const initialState = {
+  data: {},
+  businesses: {},
+  total: 0,
+  region: {},
+  error: null,
+  isLoading: true,
+};
 
 const businesses = createSlice({
   name: 'businesses',
   initialState,
   reducers: {
     updateBusinesses(state, action) {
-      Object.assign(state, action.payload);
+      const {
+        payload: { businesses, total, region, isLoading, error },
+      } = action;
+      state.businesses = businesses;
+      state.total = total;
+      state.region = region;
+      state.isLoading = isLoading;
+      state.error = error;
     },
     resetBusinesses(state, action) {
-      Object.assign(state, initialState);
-    },
-    pushBusinesses(state, action) {
-      state.push(...action.payload);
+      state.businesses = {};
+      state.total = 0;
+      state.region = {};
+      state.error = null;
+      state.isLoading = true;
     },
   },
 });
 
-export const { updateBusinesses, resetBusinesses, pushBusinesses } =
-  businesses.actions;
+export const { updateBusinesses, resetBusinesses } = businesses.actions;
 export default businesses.reducer;
