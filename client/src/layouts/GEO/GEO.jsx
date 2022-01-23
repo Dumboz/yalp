@@ -15,7 +15,7 @@ export function GEO({ features: featuresList }) {
         lat: 37.786882,
         lng: -122.399972,
       },
-      zoom: 12,
+      zoom: 14,
     };
 
     loader.load().then((google) => {
