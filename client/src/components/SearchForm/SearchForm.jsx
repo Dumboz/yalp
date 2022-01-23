@@ -5,6 +5,7 @@ import { getAutocomplete } from 'api';
 import { Label, Text, Input, Form } from './SearchForm.styled';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { makeQuery } from 'utils';
+import { useSelector } from 'react-redux';
 const queryString = require('query-string');
 
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
@@ -15,15 +16,21 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const [autoTerms, setAutoTerms] = useState();
   const navigate = useNavigate();
 
+  const { isLoading, total } = useSelector(
+    ({ businessesReducer }) => businessesReducer
+  );
+
+  console.log('SearchForm', { isLoading });
+
   const onChange = useCallback(
-    e => {
+    (e) => {
       setLocation(e.target.value);
     },
-    [setLocation],
+    [setLocation]
   );
 
   const onSubmit = useCallback(
-    e => {
+    (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
       const formObj = {};
@@ -36,11 +43,11 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
       navigate('/businesses/search?' + makeQuery(formObj));
       e.preventDefault();
     },
-    [navigate],
+    [navigate]
   );
 
   const onAutocomplete = useCallback(
-    async e => {
+    async (e) => {
       const response = await getAutocomplete({
         text: e.target.value,
         latitude: 37.786942,
@@ -48,9 +55,9 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
       });
 
       setTerm(e.target.value);
-      setAutoTerms(response.terms.map(term => term.text));
+      setAutoTerms(response.terms.map((term) => term.text));
     },
-    [setAutoTerms],
+    [setAutoTerms]
   );
 
   return (
@@ -67,13 +74,18 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         />
       </Label>
       <datalist autoComplete="off" id="termList">
-        {autoTerms && autoTerms.map(term => <option value={term} key={term} />)}
+        {autoTerms &&
+          autoTerms.map((term) => <option value={term} key={term} />)}
       </datalist>
       <Label width={464}>
         {showLabel ? <Text>Near</Text> : <A11yHidden>Near</A11yHidden>}
         <Input name="location" value={location} onChange={onChange} />
       </Label>
-      <Button buttonType="highlight" iconType="search" flatBorderSide="left" />
+      <Button
+        buttonType="highlight"
+        iconType={isLoading ? 'fire' : 'search'}
+        flatBorderSide="left"
+      />
     </Form>
   );
 }
