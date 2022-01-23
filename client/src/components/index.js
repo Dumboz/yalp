@@ -15,4 +15,5 @@ export * from './ServiceList/ServiceList';
 export * from './Spinner/Spinner';
 export * from './FilterModal/FilterModal';
 export * from './FilterList/FilterList';
+export * from './FilterSection/FilterSection';
 export * from './Selection/Selection';
