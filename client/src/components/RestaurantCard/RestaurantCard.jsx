@@ -41,38 +41,40 @@ export function RestaurantCard({
   price && featureList.push(price);
 
   return (
-    <CardLink to={'/' + id}>
-      <Figure>
-        <ImgWrapper>
-          <Img src={image_url} alt={name} />
-        </ImgWrapper>
-        <figcaption>
-          <h3>{name}</h3>
-          <Rating score={+rating} width={18}>
-            {'' + review_count}
-          </Rating>
-          <TagsWrapper>
-            <CategoriesList size={fontSize}>
-              {categories.map(({ title }) => title)}
-            </CategoriesList>
-            {!!featureList.length && (
-              <FeatureList size={fontSize}>
-                {featureList.map((feature) => {
-                  return <Comment key={feature}>{feature}</Comment>;
-                })}
-              </FeatureList>
-            )}
-          </TagsWrapper>
-          {/* <Operation size={fontSize} /> */}
-          {/* <Comment iconType="talk" title="most recently review" size={fontSize}>
+    <li>
+      <CardLink to={'/' + id}>
+        <Figure>
+          <ImgWrapper>
+            <Img src={image_url} alt={name} />
+          </ImgWrapper>
+          <figcaption>
+            <h3>{name}</h3>
+            <Rating score={+rating} width={18}>
+              {'' + review_count}
+            </Rating>
+            <TagsWrapper>
+              <CategoriesList size={fontSize}>
+                {categories.map(({ title }) => title)}
+              </CategoriesList>
+              {!!featureList.length && (
+                <FeatureList size={fontSize}>
+                  {featureList.map((feature) => {
+                    return <Comment key={feature}>{feature}</Comment>;
+                  })}
+                </FeatureList>
+              )}
+            </TagsWrapper>
+            {/* <Operation size={fontSize} /> */}
+            {/* <Comment iconType="talk" title="most recently review" size={fontSize}>
             {review}
           </Comment> */}
-          {!!transactions.length && (
-            <ServiceList size={fontSize}>{transactions}</ServiceList>
-          )}
-        </figcaption>
-      </Figure>
-    </CardLink>
+            {!!transactions.length && (
+              <ServiceList size={fontSize}>{transactions}</ServiceList>
+            )}
+          </figcaption>
+        </Figure>
+      </CardLink>
+    </li>
   );
 }
 RestaurantCard.defaultProps = {

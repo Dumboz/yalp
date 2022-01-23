@@ -6,10 +6,7 @@ export const CardLink = styled(Link)`
   display: block;
   max-width: 900px;
   transition: 200ms ease-in;
-
-  & ~ & {
-    margin-top: 24px;
-  }
+  margin-top: 24px;
 `;
 export const Figure = styled.figure`
   border: 1px solid ${getHexaColor('gray', 100)};
