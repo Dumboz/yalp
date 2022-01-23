@@ -16,3 +16,4 @@ export * from './Spinner/Spinner';
 export * from './FilterModal/FilterModal';
 export * from './FilterList/FilterList';
 export * from './Selection/Selection';
+export { default as Header } from './Header/Header';

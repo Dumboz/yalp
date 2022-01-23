@@ -34,7 +34,7 @@ export const Text = React.memo(styled.span`
   height: 100%;
 `);
 
-export const Input = React.memo(styled.input.attrs(props => ({
+export const Input = React.memo(styled.input.attrs((props) => ({
   type: 'text',
   ...props,
 }))`
