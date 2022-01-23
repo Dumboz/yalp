@@ -18,17 +18,25 @@ export function PriceFilterButtonGroup() {
       <PriceFilterButton
         onClick={toggleInexpensive}
         isSelect={inexpensive}
-        aria-checked={inexpensive}
-      >
+        aria-checked={inexpensive}>
         $
       </PriceFilterButton>
-      <PriceFilterButton onClick={toggleModerate} isSelect={moderate} aria-checked={moderate}>
+      <PriceFilterButton
+        onClick={toggleModerate}
+        isSelect={moderate}
+        aria-checked={moderate}>
         $$
       </PriceFilterButton>
-      <PriceFilterButton onClick={togglePricey} isSelect={pricey} aria-checked={pricey}>
+      <PriceFilterButton
+        onClick={togglePricey}
+        isSelect={pricey}
+        aria-checked={pricey}>
         $$$
       </PriceFilterButton>
-      <PriceFilterButton onClick={toggleExpensive} isSelect={expensive} aria-checked={expensive}>
+      <PriceFilterButton
+        onClick={toggleExpensive}
+        isSelect={expensive}
+        aria-checked={expensive}>
         $$$$
       </PriceFilterButton>
     </ButtonGroup>

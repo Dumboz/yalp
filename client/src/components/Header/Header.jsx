@@ -20,7 +20,10 @@ const HeaderWrapper = React.memo(styled.div`
   align-items: center;
 `);
 
-function Header({ searchWord, locationWord }) {
+function Header({
+  searchWord = `tacos, Cheap Dinner, Max's`,
+  locationWord = 'New York',
+}) {
   return (
     <HeaderWrapper>
       <Logo size={100} />

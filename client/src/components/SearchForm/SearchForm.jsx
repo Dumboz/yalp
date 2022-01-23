@@ -3,13 +3,24 @@ import Button from 'components/Button/Button';
 import React, { useState, useCallback } from 'react';
 import { getAutocomplete } from 'api';
 import { Label, Text, Input, Form } from './SearchForm.styled';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { makeQuery } from 'utils';
+import { useSelector } from 'react-redux';
+const queryString = require('query-string');
 
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
+  const { pathname, search } = useLocation();
+  const { term: defaltTerm } = queryString.parse(search);
+  const [term, setTerm] = useState(defaltTerm);
   const [location, setLocation] = useState(locationWord);
   const [autoTerms, setAutoTerms] = useState();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const { isLoading, total } = useSelector(
+    ({ businessesReducer }) => businessesReducer
+  );
+
+  console.log('SearchForm', { isLoading });
 
   const onChange = useCallback(
     (e) => {
@@ -18,17 +29,22 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
     [setLocation]
   );
 
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formObj = {};
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const formObj = {};
 
-    for (const [key, value] of formData.entries()) {
-      formObj[key] = value;
-    }
-    // navigate('/businesses/search?' + makeQuery(formObj));
-    e.preventDefault();
-  }, []);
+      for (const [key, value] of formData.entries()) {
+        formObj[key] = value;
+      }
+      formObj.offset = 0;
+
+      navigate('/businesses/search?' + makeQuery(formObj));
+      e.preventDefault();
+    },
+    [navigate]
+  );
 
   const onAutocomplete = useCallback(
     async (e) => {
@@ -38,6 +54,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         longitude: -122.399643,
       });
 
+      setTerm(e.target.value);
       setAutoTerms(response.terms.map((term) => term.text));
     },
     [setAutoTerms]
@@ -52,6 +69,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
           name="term"
           id="term"
           list="termList"
+          value={term}
           placeholder={searchWord}
         />
       </Label>
@@ -63,7 +81,11 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         {showLabel ? <Text>Near</Text> : <A11yHidden>Near</A11yHidden>}
         <Input name="location" value={location} onChange={onChange} />
       </Label>
-      <Button buttonType="highlight" iconType="search" flatBorderSide="left" />
+      <Button
+        buttonType="highlight"
+        iconType={isLoading ? 'fire' : 'search'}
+        flatBorderSide="left"
+      />
     </Form>
   );
 }

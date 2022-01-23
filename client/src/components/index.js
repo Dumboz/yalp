@@ -15,6 +15,7 @@ export * from './ServiceList/ServiceList';
 export * from './Spinner/Spinner';
 export * from './FilterModal/FilterModal';
 export * from './FilterList/FilterList';
+export * from './FilterSection/FilterSection';
 export * from './Selection/Selection';
 export * from './TitleWrapper/TitleWrapper';
 export { default as Header } from './Header/Header';
