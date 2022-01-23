@@ -11,17 +11,19 @@ export const FilterSection = () => {
   return (
     <List>
       <ListItem>
-        <FilterList heading="filters" type="price" />
+        <FilterList categories="price" heading="filters" type="price" />
       </ListItem>
       <ListItem>
         <FilterList
+          categories="features"
           heading="features"
           type="checkbox"
-          options={getOptions('feature')}
+          options={getOptions('features')}
         />
       </ListItem>
       <ListItem>
         <FilterList
+          categories="distance"
           heading="distance"
           type="radio"
           options={getOptions('distance')}
