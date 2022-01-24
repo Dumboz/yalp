@@ -67,6 +67,7 @@ export function RestaurantCard({
             // const { is_open_now, open } = restaurantDetail.hours[0];
             // const { start, end } = open?.find(({ day }) => day === today);
             setReview(restaurantReview?.reviews[0].text);
+            console.log({ restaurantDetail, restaurantReview });
             // setOperationState({
             //   isOpenNow: is_open_now,
             //   start,
