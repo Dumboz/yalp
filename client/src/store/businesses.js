@@ -6,7 +6,7 @@ const initialState = {
   total: 0,
   region: {},
   error: null,
-  isLoading: true,
+  isLoading: false,
 };
 
 const businesses = createSlice({
