@@ -11,45 +11,6 @@ import { updateBusinesses } from 'store/businesses';
 import styled from 'styled-components';
 import { useGetBusinessesQuery } from 'services/businesses';
 
-const StyledExam = styled.div`
-  margin-top: 100px;
-  background-color: yellow;
-  width: 100%;
-  min-height: 100px;
-`;
-
-const Exam = () => {
-  const dispatch = useDispatch();
-  const { pathname, search } = useLocation();
-
-  const { data, error, isLoading } = useGetBusinessesQuery(search);
-  if (isLoading) {
-    dispatch(updateBusinesses({ error, isLoading }));
-  } else {
-    dispatch(
-      updateBusinesses({
-        businesses: data.businesses,
-        total: data.total,
-        region: data.region,
-        error,
-        isLoading,
-      })
-    );
-  }
-
-  const { businesses, total, region } = useSelector(
-    ({ businessesReducer }) => businessesReducer
-  );
-
-  return (
-    <StyledExam>
-      <div>{'total' + !isLoading && JSON.stringify(total)}</div>
-      <div>{'region' + !isLoading && JSON.stringify(region)}</div>
-      <div>{JSON.stringify(businesses)}</div>
-    </StyledExam>
-  );
-};
-
 ReactDOM.render(
   // <React.StrictMode>
   <>
@@ -58,7 +19,6 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
-            {/* <Route path="*" element={<Exam />} /> */}
             <Route path="search" element={<SearchPage />} />
             <Route path=":id" element={<DetailPage />} />
           </Route>
@@ -68,5 +28,5 @@ ReactDOM.render(
     </StoreProvider>
     {/* </React.StrictMode> */}
   </>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
