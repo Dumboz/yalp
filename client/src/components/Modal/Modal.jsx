@@ -10,7 +10,7 @@ const CloseButton = React.memo(({ onClick }) => {
   );
 });
 
-function Modal({ visible = true, children }) {
+function Modal({ visible = false, children }) {
   const [visibleModal, setVisibleModal] = useState(visible);
   const modalWrapper = useRef(null);
 
@@ -22,9 +22,16 @@ function Modal({ visible = true, children }) {
     e => {
       if (
         (e.type === 'keydown' && e.key === 'Escape') ||
-        (e.type === 'click' &&
-          (e.target === e.currentTarget || e.target.closest('button')))
+        (e.type === 'click' && e.target === e.currentTarget)
       )
+        setVisibleModal(false);
+    },
+    [setVisibleModal],
+  );
+
+  const closeButton = useCallback(
+    e => {
+      if (e.type === 'click' && e.target.closest('button'))
         setVisibleModal(false);
     },
     [setVisibleModal],
@@ -40,8 +47,8 @@ function Modal({ visible = true, children }) {
           className="modal-inner"
           onKeyDown={closeModal}
         >
+          <CloseButton tabIndex={1} onClick={closeButton} />
           {children}
-          <CloseButton onClick={closeModal} />
         </ModalInner>
       </ModalWrapper>
     </>
