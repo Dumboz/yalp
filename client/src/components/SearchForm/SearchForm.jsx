@@ -10,8 +10,8 @@ const queryString = require('query-string');
 
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const { pathname, search } = useLocation();
-  const { term: defaltTerm } = queryString.parse(search);
-  const [term, setTerm] = useState(defaltTerm);
+  const searchObj = queryString.parse(search);
+  const [term, setTerm] = useState(searchObj.term);
   const [location, setLocation] = useState(locationWord);
   const [autoTerms, setAutoTerms] = useState();
   const navigate = useNavigate();
@@ -19,8 +19,6 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const { isLoading, total } = useSelector(
     ({ businessesReducer }) => businessesReducer,
   );
-
-  console.log('SearchForm', { isLoading });
 
   const onChange = useCallback(
     e => {
@@ -33,7 +31,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
     e => {
       e.preventDefault();
       const formData = new FormData(e.target);
-      const formObj = {};
+      const formObj = { ...searchObj };
 
       for (const [key, value] of formData.entries()) {
         formObj[key] = value;
@@ -43,7 +41,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
       navigate('/search?' + makeQuery(formObj));
       e.preventDefault();
     },
-    [navigate],
+    [navigate, searchObj],
   );
 
   const onAutocomplete = useCallback(

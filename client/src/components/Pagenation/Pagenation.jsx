@@ -34,9 +34,9 @@ function Pagenation() {
   let i = 1;
   while (pageList.length < 9) {
     if (currentPage + i <= lastPage) pageList.push(currentPage + i);
-    if (pageList.length === lastPage) break;
+    if (pageList.length >= lastPage) break;
     if (currentPage - i > 0) pageList.unshift(currentPage - i);
-    if (pageList.length === lastPage) break;
+    if (pageList.length >= lastPage) break;
     i++;
   }
 
@@ -62,7 +62,7 @@ function Pagenation() {
         </Ul>
         <ArrowButton
           direct="right"
-          disabled={pageList.includes(lastPage)}
+          disabled={pageList.includes(lastPage) || lastPage === 0}
           onClick={() => onClick('right')}
         />
       </PagelistWrapper>
