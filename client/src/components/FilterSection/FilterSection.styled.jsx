@@ -6,6 +6,13 @@ export const List = styled.ul`
   flex-flow: column;
   gap: 15px;
   padding-left: 15px;
+  position: sticky;
+  top: 130px;
+  align-self: flex-start;
+
+  & li:first-child {
+    border: 0;
+  }
 `;
 
 export const ListItem = styled.li`

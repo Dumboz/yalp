@@ -37,11 +37,16 @@ export const FilterList = ({
         const newQuery = {
           ...query,
           attributes: isChecked
-            ? encodeURI(query?.attributes ? query?.attributes : '') +
-              encodeURI(data[term] + ',')
-            : encodeURI(query?.attributes?.replace(`${data[term]},`, '')),
+            ? encodeURI(query?.attributes ? query?.attributes + ',' : '') +
+              encodeURI(data[term])
+            : encodeURI(query?.attributes?.replace(`${data[term]}`, '')),
         };
+
+        newQuery.attributes = newQuery?.attributes.replace(/(,\s*$)/, '') ?? '';
+        newQuery.attributes = newQuery?.attributes.replace(/(^,*)/, '') ?? '';
+        newQuery.attributes = newQuery?.attributes.replace(/,{2}/, ',') ?? '';
         !newQuery.attributes && delete newQuery.attributes;
+
         setSearchParams(newQuery);
         break;
       case 'distance':
