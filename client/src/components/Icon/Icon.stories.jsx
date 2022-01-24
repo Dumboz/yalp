@@ -9,6 +9,7 @@ export default {
       control: {
         type: 'select',
         options: [
+          'loading',
           'calendar',
           'fire',
           'follower',
@@ -40,7 +41,7 @@ export default {
   },
 };
 
-const Template = (args) => (
+const Template = args => (
   <>
     <Icon {...args} />
     <InitSVG />

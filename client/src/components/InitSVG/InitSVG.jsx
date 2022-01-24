@@ -3,6 +3,24 @@ import { createPortal } from 'react-dom';
 export function InitSVG() {
   return createPortal(
     <svg xmlns="http://www.w3.org/2000/svg">
+      <symbol id="loading" viewBox="0 0 16 16">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8H14C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2V0Z"
+        >
+          <animateTransform
+            attributeName="transform"
+            begin="0s"
+            dur=".8s"
+            type="rotate"
+            from="0 8 8"
+            to="360 8 8"
+            repeatCount="indefinite"
+          />
+        </path>
+      </symbol>
+
       <symbol id="fire" viewBox="0 0 16 16">
         <path
           fill="#F15C00"
@@ -113,6 +131,6 @@ export function InitSVG() {
         <path d="M9.06 15.38A4.667 4.667 0 0 1 5.76 14L2 10.24a4.666 4.666 0 0 1 0-6.6l.926-.94a.667.667 0 0 1 .947 0l3.333 3.333a.667.667 0 0 1 0 .94A1.334 1.334 0 1 0 9.093 8.86a.667.667 0 0 1 .94 0l3.3 3.334a.667.667 0 0 1 0 .946l-.973.86a4.666 4.666 0 0 1-3.3 1.38zM3.4 4.113l-.474.474a3.333 3.333 0 0 0 0 4.713L6.7 13.073a3.333 3.333 0 0 0 4.713 0l.473-.473-2.42-2.42a2.667 2.667 0 0 1-3.24-.407 2.667 2.667 0 0 1-.406-3.24L3.4 4.113zm8.52 3.967a.667.667 0 0 1-.667-.667 2.667 2.667 0 0 0-2.667-2.666.667.667 0 1 1 0-1.334 4 4 0 0 1 4 4 .667.667 0 0 1-.666.667zm2.793 0a.667.667 0 0 1-.666-.667 5.46 5.46 0 0 0-5.46-5.46.667.667 0 0 1 0-1.333 6.8 6.8 0 0 1 6.793 6.793.667.667 0 0 1-.667.667z" />
       </symbol>
     </svg>,
-    document.body
+    document.body,
   );
 }

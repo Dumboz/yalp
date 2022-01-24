@@ -40,5 +40,6 @@ Icon.propTypes = {
     'talk',
     'dropdown',
     'done',
+    'loading',
   ]),
 };
