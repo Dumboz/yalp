@@ -7,7 +7,19 @@ import { SearchContainer } from './SearchPage.styled';
 import { FilterSection } from 'components';
 import { updateBusinesses } from 'store/businesses';
 import Pagenation from 'components/Pagenation/Pagenation';
-import { Icon } from 'components/Icon/Icon';
+import { TitleWrapper } from 'components/TitleWrapper/TitleWrapper';
+import styled from 'styled-components';
+
+const GEOWrapper = styled.div`
+  width: 50%;
+  position: relative;
+`;
+
+const FilterWrapper = styled.div`
+  width: 30%;
+  position: relative;
+`;
+
 export function SearchPage() {
   const dispatch = useDispatch();
   const { search } = useLocation();
@@ -34,12 +46,22 @@ export function SearchPage() {
 
   return (
     <SearchContainer>
+      <FilterWrapper>
+        <FilterSection />
+      </FilterWrapper>
       {error && <>error</>}
       {isLoading && <>Loading...</>}
-      {!isLoading && <FilterSection />}
-      {data?.businesses && <BusinessesList businesses={data?.businesses} />}
-      {data?.businesses && <GEO features={features} />}
-      {!isLoading && <Pagenation />}
+      {!isLoading && data?.businesses && (
+        <TitleWrapper title="All Results" margin={10}>
+          <BusinessesList businesses={data?.businesses} />
+          {!isLoading && <Pagenation />}
+        </TitleWrapper>
+      )}
+      {data?.businesses && (
+        <GEOWrapper>
+          <GEO features={features} />
+        </GEOWrapper>
+      )}
     </SearchContainer>
   );
 }
