@@ -13,11 +13,16 @@ export function PriceFilterButton({ isSelect, onClick, children }) {
     const newQuery = {
       ...query,
       price: !isSelect
-        ? encodeURI(query?.price + ',' ?? '') + encodeURI(data[children])
-        : encodeURI(query?.price?.replace(`${data[children]},`, '') ?? ''),
+        ? encodeURI(query?.price ? query.price + ',' : '') +
+          encodeURI(data[children])
+        : encodeURI(query?.price?.replace(`${data[children]}`, '') ?? ''),
     };
+
+    newQuery.price = newQuery?.price.replace(/(,\s*$)/, '') ?? '';
+    newQuery.price = newQuery?.price.replace(/(^,*)/, '') ?? '';
+    newQuery.price = newQuery?.price.replace(/,{2}/, ',') ?? '';
     !newQuery.price && delete newQuery.price;
-    console.log(newQuery);
+
     setSearchParams(newQuery);
   };
 
