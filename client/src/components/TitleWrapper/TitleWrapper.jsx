@@ -3,14 +3,31 @@ import { setTextAlign } from 'utils/styled/center';
 
 const Title = styled.h2`
   text-align: ${setTextAlign};
+  font-size: ${({ size }) => size}px;
+  line-height: 1.5;
+  margin: ${({ margin }) => margin}px 0;
+  font-weight: 900;
 `;
 
-export function TitleWrapper({ title, center, children }) {
+const TitleContainer = styled.div`
+  width: 100%;
+  margin: 20px;
+`;
+
+export function TitleWrapper({
+  title,
+  center,
+  size = 20,
+  margin = 0,
+  children,
+}) {
   return (
-    <>
-      <Title center={center}>{title}</Title>
+    <TitleContainer>
+      <Title center={center} size={size} margin={margin}>
+        {title}
+      </Title>
       {children}
-    </>
+    </TitleContainer>
   );
 }
 
