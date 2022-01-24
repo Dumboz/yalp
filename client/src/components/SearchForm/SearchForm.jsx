@@ -17,20 +17,20 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const navigate = useNavigate();
 
   const { isLoading, total } = useSelector(
-    ({ businessesReducer }) => businessesReducer
+    ({ businessesReducer }) => businessesReducer,
   );
 
   console.log('SearchForm', { isLoading });
 
   const onChange = useCallback(
-    (e) => {
+    e => {
       setLocation(e.target.value);
     },
-    [setLocation]
+    [setLocation],
   );
 
   const onSubmit = useCallback(
-    (e) => {
+    e => {
       e.preventDefault();
       const formData = new FormData(e.target);
       const formObj = {};
@@ -40,24 +40,23 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
       }
       formObj.offset = 0;
 
-      navigate('/businesses/search?' + makeQuery(formObj));
+      navigate('/search?' + makeQuery(formObj));
       e.preventDefault();
     },
-    [navigate]
+    [navigate],
   );
 
   const onAutocomplete = useCallback(
-    async (e) => {
+    async e => {
+      setTerm(e.target.value);
+
       const response = await getAutocomplete({
         text: e.target.value,
-        latitude: 37.786942,
-        longitude: -122.399643,
       });
 
-      setTerm(e.target.value);
-      setAutoTerms(response.terms.map((term) => term.text));
+      setAutoTerms(response.terms.map(term => term.text));
     },
-    [setAutoTerms]
+    [setAutoTerms, setTerm],
   );
 
   return (
@@ -74,8 +73,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         />
       </Label>
       <datalist autoComplete="off" id="termList">
-        {autoTerms &&
-          autoTerms.map((term) => <option value={term} key={term} />)}
+        {autoTerms && autoTerms.map(term => <option value={term} key={term} />)}
       </datalist>
       <Label width={464}>
         {showLabel ? <Text>Near</Text> : <A11yHidden>Near</A11yHidden>}
@@ -83,7 +81,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
       </Label>
       <Button
         buttonType="highlight"
-        iconType={isLoading ? 'fire' : 'search'}
+        iconType={isLoading ? 'loading' : 'search'}
         flatBorderSide="left"
       />
     </Form>

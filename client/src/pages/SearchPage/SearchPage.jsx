@@ -7,6 +7,7 @@ import { SearchContainer } from './SearchPage.styled';
 import { FilterSection } from 'components';
 import { updateBusinesses } from 'store/businesses';
 import Pagenation from 'components/Pagenation/Pagenation';
+import { Icon } from 'components/Icon/Icon';
 export function SearchPage() {
   const dispatch = useDispatch();
   const { search } = useLocation();
@@ -27,7 +28,7 @@ export function SearchPage() {
         region: data.region,
         error,
         isLoading,
-      })
+      }),
     );
   }
 
@@ -38,7 +39,7 @@ export function SearchPage() {
       {!isLoading && <FilterSection />}
       {data?.businesses && <BusinessesList businesses={data?.businesses} />}
       {data?.businesses && <GEO features={features} />}
-      <Pagenation />
+      {!isLoading && <Pagenation />}
     </SearchContainer>
   );
 }
