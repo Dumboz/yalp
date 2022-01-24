@@ -5,6 +5,7 @@ import { oneOf } from 'prop-types';
 import { Wrapper, Heading, List } from './FilterList.styled';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { Selection, PriceFilterButtonGroup } from 'components';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const FilterList = ({
   categories,
@@ -15,6 +16,7 @@ export const FilterList = ({
   const listRef = useRef(null);
   const { search } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     const type = e.target.querySelector('input').type;
@@ -36,6 +38,7 @@ export const FilterList = ({
       case 'features':
         const newQuery = {
           ...query,
+          offset: 0,
           attributes: isChecked
             ? encodeURI(query?.attributes ? query?.attributes + ',' : '') +
               encodeURI(data[term])
@@ -52,6 +55,7 @@ export const FilterList = ({
       case 'distance':
         setSearchParams({
           ...query,
+          offset: 0,
           radius: encodeURI(Number(data[term])),
         });
         break;

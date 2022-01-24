@@ -114,8 +114,7 @@ export function RestaurantCard({
             <Comment
               iconType="talk"
               title="most recently review"
-              size={fontSize}
-            >
+              size={fontSize}>
               {review}
             </Comment>
             {!!transactions.length && (
