@@ -28,7 +28,7 @@ export function SearchPage() {
         region: data.region,
         error,
         isLoading,
-      }),
+      })
     );
   }
 
@@ -37,8 +37,10 @@ export function SearchPage() {
       {error && <>error</>}
       {isLoading && <>Loading...</>}
       {!isLoading && <FilterSection />}
-      {data?.businesses && <BusinessesList businesses={data?.businesses} />}
-      {data?.businesses && <GEO features={features} />}
+      {!isLoading && data?.businesses && (
+        <BusinessesList businesses={data?.businesses} />
+      )}
+      {!isLoading && data?.businesses && <GEO features={features} />}
       {!isLoading && <Pagenation />}
     </SearchContainer>
   );
