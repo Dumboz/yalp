@@ -7,7 +7,7 @@ import { SearchContainer } from './SearchPage.styled';
 import { FilterSection } from 'components';
 import { updateBusinesses } from 'store/businesses';
 import Pagenation from 'components/Pagenation/Pagenation';
-import { TitleWrapper } from 'components/TitleWrapper/TitleWrapper';
+import { TitleWrapper } from 'components';
 import styled from 'styled-components';
 
 const GEOWrapper = styled.div`
@@ -52,7 +52,7 @@ export function SearchPage() {
       {error && <>error</>}
       {isLoading && <>Loading...</>}
       {!isLoading && data?.businesses && (
-        <TitleWrapper title="All Results" margin={10}>
+        <TitleWrapper title="All Results" containerMargin={20}>
           <BusinessesList businesses={data?.businesses} />
           {!isLoading && <Pagenation />}
         </TitleWrapper>

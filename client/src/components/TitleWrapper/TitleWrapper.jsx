@@ -6,11 +6,12 @@ const Title = styled.h2`
   font-size: ${({ size }) => size}px;
   line-height: 1.5;
   font-weight: 900;
-  margin: ${({ margin }) => margin};
+  margin: ${({ margin }) => margin}px;
 `;
 
 const TitleContainer = styled.div`
   width: 100%;
+  margin: ${({ containerMargin }) => containerMargin}px;
 `;
 
 export function TitleWrapper({
@@ -18,11 +19,12 @@ export function TitleWrapper({
   center,
   size = 20,
   margin = 0,
+  containerMargin,
   children,
   as = 'h2',
 }) {
   return (
-    <TitleContainer>
+    <TitleContainer containerMargin={containerMargin}>
       <Title as={as} center={center} size={size} margin={margin}>
         {title}
       </Title>
