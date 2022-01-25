@@ -42,5 +42,6 @@ Icon.propTypes = {
     'done',
     'loading',
     'close',
+    'claimed',
   ]),
 };
