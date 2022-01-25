@@ -8,6 +8,7 @@ export const InlineList = styled.ul`
 `;
 
 export const CommaLi = styled.li`
+  color: ${({ color }) => color};
   font-size: ${getSize}px;
   margin-left: ${setRatioSize(0.5)}px;
   margin-right: ${setRatioSize(0.5)}px;

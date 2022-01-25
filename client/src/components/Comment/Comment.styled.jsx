@@ -5,7 +5,7 @@ import { getHexaColor } from 'styles/color';
 export const Description = styled.div`
   display: flex;
   align-items: top;
-  color: ${getHexaColor('gray', 500)};
+  color: ${({ color }) => color};
 
   & > svg {
     margin-top: ${setRatioSize(0.2)}px;

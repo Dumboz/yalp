@@ -5,20 +5,19 @@ import { getAutocomplete } from 'api';
 import { Label, Text, Input, Form } from './SearchForm.styled';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { makeQuery } from 'utils';
-import { useSelector } from 'react-redux';
+import { useGetBusinessesQuery } from 'services/businesses';
+
 const queryString = require('query-string');
 
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
-  const { pathname, search } = useLocation();
+  const { search } = useLocation();
   const searchObj = queryString.parse(search);
   const [term, setTerm] = useState(searchObj.term);
   const [location, setLocation] = useState(locationWord);
   const [autoTerms, setAutoTerms] = useState();
   const navigate = useNavigate();
 
-  const { isLoading, total } = useSelector(
-    ({ businessesReducer }) => businessesReducer,
-  );
+  const { isLoading } = useGetBusinessesQuery(search);
 
   const onChange = useCallback(
     e => {
@@ -39,7 +38,6 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
       formObj.offset = 0;
 
       navigate('/search?' + makeQuery(formObj));
-      e.preventDefault();
     },
     [navigate, searchObj],
   );
