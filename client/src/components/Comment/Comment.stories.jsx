@@ -25,6 +25,7 @@ export default {
           'rightarrow',
           'star',
           'talk',
+          'claimed',
         ],
       },
     },
