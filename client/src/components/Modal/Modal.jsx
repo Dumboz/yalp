@@ -16,23 +16,28 @@ function Modal({ visible = false, children }) {
 
   useEffect(() => {
     modalWrapper.current.focus();
-  });
+    document.body.style.overflow = 'hidden';
+  }, []);
 
   const closeModal = useCallback(
     e => {
       if (
         (e.type === 'keydown' && e.key === 'Escape') ||
         (e.type === 'click' && e.target === e.currentTarget)
-      )
+      ) {
+        document.body.style.overflow = null;
         setVisibleModal(false);
+      }
     },
     [setVisibleModal],
   );
 
   const closeButton = useCallback(
     e => {
-      if (e.type === 'click' && e.target.closest('button'))
+      if (e.type === 'click' && e.target.closest('button')) {
+        document.body.style.overflow = null;
         setVisibleModal(false);
+      }
     },
     [setVisibleModal],
   );
