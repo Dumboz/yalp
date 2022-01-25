@@ -13,6 +13,9 @@ export default {
     containerMargin: {
       control: 'range',
     },
+    color: {
+      control: 'color',
+    },
   },
 };
 

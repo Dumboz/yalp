@@ -3,6 +3,7 @@ import { Icon } from 'components/Icon/Icon';
 import { string } from 'prop-types';
 import { Description } from './Comment.styled';
 import { Skeleton } from 'components/Skeleton/Skeleton.styled';
+import { getHexaColor } from 'styles/color';
 
 const cutText = (text, limit) => text.trim().slice(0, limit) + '...';
 
@@ -28,6 +29,7 @@ export function Comment({ iconType, title, limit, size, children, color, as }) {
 Comment.defaultProps = {
   limit: 180,
   size: 16,
+  color: getHexaColor('gray', 500),
 };
 
 Comment.propTypes = {

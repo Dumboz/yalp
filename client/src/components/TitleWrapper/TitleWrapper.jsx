@@ -1,18 +1,5 @@
-import styled from 'styled-components';
-import { setTextAlign } from 'utils/styled/center';
-
-const Title = styled.h2`
-  text-align: ${setTextAlign};
-  font-size: ${({ size }) => size}px;
-  line-height: 1.5;
-  font-weight: 900;
-  margin: ${({ margin }) => margin}px;
-`;
-
-const TitleContainer = styled.div`
-  width: 100%;
-  margin: ${({ containerMargin }) => containerMargin}px;
-`;
+import { getHexaColor } from 'styles/color';
+import { TitleContainer, Title } from './TitleWrapper.styled';
 
 export function TitleWrapper({
   title,
@@ -20,11 +7,12 @@ export function TitleWrapper({
   size = 20,
   margin = 0,
   containerMargin,
-  children,
   as = 'h2',
+  color = getHexaColor('gray', 500),
+  children,
 }) {
   return (
-    <TitleContainer containerMargin={containerMargin}>
+    <TitleContainer containerMargin={containerMargin} color={color}>
       <Title as={as} center={center} size={size} margin={margin}>
         {title}
       </Title>
