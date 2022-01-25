@@ -7,19 +7,7 @@ import { SearchContainer } from './SearchPage.styled';
 import { FilterSection } from 'components';
 import { updateBusinesses } from 'store/businesses';
 import Pagenation from 'components/Pagenation/Pagenation';
-import { TitleWrapper } from 'components/TitleWrapper/TitleWrapper';
-import styled from 'styled-components';
-
-const GEOWrapper = styled.div`
-  width: 50%;
-  position: relative;
-`;
-
-const FilterWrapper = styled.div`
-  width: 30%;
-  position: relative;
-`;
-
+import { Icon } from 'components/Icon/Icon';
 export function SearchPage() {
   const dispatch = useDispatch();
   const { search } = useLocation();
@@ -40,28 +28,20 @@ export function SearchPage() {
         region: data.region,
         error,
         isLoading,
-      }),
+      })
     );
   }
 
   return (
     <SearchContainer>
-      <FilterWrapper>
-        <FilterSection />
-      </FilterWrapper>
       {error && <>error</>}
       {isLoading && <>Loading...</>}
+      {!isLoading && <FilterSection />}
       {!isLoading && data?.businesses && (
-        <TitleWrapper title="All Results" margin={10}>
-          <BusinessesList businesses={data?.businesses} />
-          {!isLoading && <Pagenation />}
-        </TitleWrapper>
+        <BusinessesList businesses={data?.businesses} />
       )}
-      {data?.businesses && (
-        <GEOWrapper>
-          <GEO features={features} />
-        </GEOWrapper>
-      )}
+      {!isLoading && data?.businesses && <GEO features={features} />}
+      {!isLoading && <Pagenation />}
     </SearchContainer>
   );
 }

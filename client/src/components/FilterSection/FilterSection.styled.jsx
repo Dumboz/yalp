@@ -3,9 +3,6 @@ import { getHexaColor } from 'styles/color';
 
 export const List = styled.ul`
   display: inline-flex;
-  position: sticky;
-  align-self: flex-start;
-  top: 130px;
   flex-flow: column;
   gap: 15px;
   padding-left: 15px;

@@ -3,17 +3,9 @@ import { TitleWrapper } from './TitleWrapper';
 export default {
   title: 'TitleWrapper',
   component: TitleWrapper,
-  argTypes: {
-    size: {
-      control: 'range',
-    },
-    margin: {
-      control: 'range',
-    },
-  },
 };
 
-const Template = args => <TitleWrapper {...args} />;
+const Template = (args) => <TitleWrapper {...args} />;
 
 export const Default = Template.bind({});
 
