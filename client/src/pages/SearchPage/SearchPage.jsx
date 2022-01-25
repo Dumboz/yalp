@@ -46,11 +46,13 @@ export function SearchPage() {
 
   return (
     <SearchContainer>
-      <FilterWrapper>
-        <FilterSection />
-      </FilterWrapper>
       {error && <>error</>}
       {isLoading && <>Loading...</>}
+      {!isLoading && (
+        <FilterWrapper>
+          <FilterSection />
+        </FilterWrapper>
+      )}
       {!isLoading && data?.businesses && (
         <TitleWrapper title="All Results" containerMargin={20}>
           <BusinessesList businesses={data?.businesses} />
