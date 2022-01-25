@@ -38,10 +38,13 @@ export default {
         },
       },
     },
+    color: {
+      control: 'color',
+    },
   },
 };
 
-const Template = (args) => (
+const Template = args => (
   <>
     <Comment {...args} />
     <InitSVG />
