@@ -10,6 +10,12 @@ export default {
     margin: {
       control: 'range',
     },
+    containerMargin: {
+      control: 'range',
+    },
+    color: {
+      control: 'color',
+    },
   },
 };
 
@@ -20,5 +26,6 @@ export const Default = Template.bind({});
 Default.args = {
   title: 'This is Title',
   center: true,
+  containerMargin: 20,
   children: 'huihihiihih',
 };

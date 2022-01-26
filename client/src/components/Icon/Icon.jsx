@@ -41,5 +41,7 @@ Icon.propTypes = {
     'dropdown',
     'done',
     'loading',
+    'close',
+    'claimed',
   ]),
 };

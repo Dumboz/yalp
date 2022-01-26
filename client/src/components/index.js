@@ -19,3 +19,4 @@ export * from './FilterSection/FilterSection';
 export * from './Selection/Selection';
 export * from './TitleWrapper/TitleWrapper';
 export { default as Header } from './Header/Header';
+export { default as Modal } from './Modal/Modal';
