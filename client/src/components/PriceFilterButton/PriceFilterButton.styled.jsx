@@ -5,6 +5,8 @@ export const ButtonGroup = styled.ul`
   display: flex;
   width: 200px;
   & > button {
+    color: ${getHexaColor('gray', 500)};
+    font-size: 12px;
     font-weight: 700;
     flex-basis: 50px;
     padding: 6px;
