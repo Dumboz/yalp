@@ -33,3 +33,7 @@ export const OpenTimeWrapper = styled.div`
 export const RatingWrapper = styled.div`
   margin-bottom: 10px;
 `;
+
+export const DetailBannerWrapper = styled.div`
+  min-width: 1100px;
+`;

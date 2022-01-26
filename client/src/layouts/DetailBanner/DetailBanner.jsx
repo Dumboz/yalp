@@ -12,6 +12,7 @@ import {
   Title,
   OpenTimeWrapper,
   RatingWrapper,
+  DetailBannerWrapper,
 } from './DetailBanner.styled';
 
 function DetailBanner({ restaurantDetail }) {
@@ -34,7 +35,7 @@ function DetailBanner({ restaurantDetail }) {
   const [select, setSelect] = useState();
 
   return (
-    <>
+    <DetailBannerWrapper>
       {visible && (
         <PhotoModal
           visible={visible}
@@ -111,7 +112,7 @@ function DetailBanner({ restaurantDetail }) {
           </OpenTimeWrapper>
         </DetailWrapper>
       </DetailContainer>
-    </>
+    </DetailBannerWrapper>
   );
 }
 
