@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useGetBusinessesQuery } from 'services/businesses';
 import { BusinessesList } from 'layouts';
 import { GEO } from 'layouts/GEO/GEO';
@@ -9,7 +8,6 @@ import {
   FilterWrapper,
 } from './SearchPage.styled';
 import { FilterSection } from 'components';
-import { updateBusinesses } from 'store/businesses';
 import Pagenation from 'components/Pagenation/Pagenation';
 import { TitleWrapper } from 'components';
 import { useState } from 'react';

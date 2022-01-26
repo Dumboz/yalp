@@ -1,10 +1,12 @@
 import QueryString from 'qs';
 import db from 'db/filter.json';
-import { useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { oneOf } from 'prop-types';
 import { Wrapper, Heading, List } from './FilterList.styled';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { Selection, PriceFilterButtonGroup } from 'components';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFeatures, setDistance } from 'store/filterSlice';
 
 export const FilterList = ({
   categories,
@@ -13,33 +15,29 @@ export const FilterList = ({
   options = [],
 }) => {
   const listRef = useRef(null);
+  const filterState = useSelector((state) => state.filter);
+
   const { search } = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     const type = e.target.querySelector('input').type;
     const isChecked = e.target.querySelector('input').checked;
-
-    if (type === 'radio') {
-      [...listRef.current.children].forEach((item) => {
-        const input = item.querySelector('input');
-        const label = item.querySelector('label');
-        label.classList.toggle('active', input.checked);
-      });
-    }
-
-    const term = e.target.querySelector('span').textContent;
-    const data = db[categories];
     const query = QueryString.parse(search.replace(/^\?/, ''));
+    const option = e.target.querySelector('span').textContent;
+    const data = db[categories];
 
     switch (categories) {
       case 'features':
+        // query 요청
         const newQuery = {
           ...query,
+          offset: 0,
           attributes: isChecked
             ? encodeURI(query?.attributes ? query?.attributes + ',' : '') +
-              encodeURI(data[term])
-            : encodeURI(query?.attributes?.replace(`${data[term]}`, '')),
+              encodeURI(data[option])
+            : encodeURI(query?.attributes?.replace(`${data[option]}`, '')),
         };
 
         newQuery.attributes = newQuery?.attributes.replace(/(,\s*$)/, '') ?? '';
@@ -48,12 +46,21 @@ export const FilterList = ({
         !newQuery.attributes && delete newQuery.attributes;
 
         setSearchParams(newQuery);
+
+        // store state 요청
+        dispatch(setFeatures(data[option]));
+
         break;
       case 'distance':
+        // query 요청
         setSearchParams({
           ...query,
-          radius: encodeURI(Number(data[term])),
+          offset: 0,
+          radius: encodeURI(Number(data[option])),
         });
+
+        // store state 요청
+        dispatch(setDistance(data[option]));
         break;
       default:
         break;
@@ -72,6 +79,7 @@ export const FilterList = ({
       options.map((item, key) => (
         <li key={key} tabIndex={'0'}>
           <Selection
+            keyProp={key}
             type={type}
             onClick={handleClick}
             group={heading}

@@ -1,6 +1,6 @@
 import db from 'db/filter.json';
 import { List, ListItem } from './FilterSection.styled';
-import { FilterList, PriceFilterButton } from 'components';
+import { FilterList } from 'components';
 
 export const FilterSection = () => {
   const getOptions = (type) => {

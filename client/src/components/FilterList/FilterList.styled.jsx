@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   align-items: flex-start;
   flex-flow: column;
   gap: 5px;
+  color: ${getHexaColor('gray', 500)};
 `;
 
 export const Heading = styled.h3`

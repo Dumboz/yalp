@@ -16,7 +16,6 @@ export function GEO({
 
   const ref = useRef();
   const { search } = useLocation();
-  console.log(businesses);
 
   useEffect(() => {
     let zIndex = 100;
