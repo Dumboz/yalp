@@ -17,6 +17,7 @@ export function DetailPage({ id }) {
     <>
       {error && <>error</>}
       {isLoading && <>Loading...</>}
+      {!isLoading && <DetailBanner restaurantDetail={data.restaurantDetail} />}
       {!isLoading && <Reviews reviewList={data.restaurantReview.reviews} />}
     </>
   );
