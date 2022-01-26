@@ -1,5 +1,6 @@
+import { useLocation } from 'react-router-dom';
 import { useGetRestaurantQuery } from 'services/businesses';
-import { Location, Footer } from 'layouts';
+import { Location, Footer, DetailBanner } from 'layouts';
 
 export function DetailPage({ id }) {
   const { data, error, isLoading } = useGetRestaurantQuery(id);
@@ -16,10 +17,12 @@ export function DetailPage({ id }) {
       {error && <>error</>}
       {isLoading && <>Loading...</>}
       {!isLoading && <Location />}
+      {!isLoading && <DetailBanner restaurantDetail={data.restaurantDetail} />}
       <Footer />
     </>
   );
 }
+
 DetailPage.defaultProps = {
   id: 'MWV8AoySYObkfVpaLhaqKQ',
 };

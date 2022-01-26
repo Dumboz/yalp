@@ -10,8 +10,7 @@ const CloseButton = React.memo(({ onClick }) => {
   );
 });
 
-function Modal({ visible = false, children }) {
-  const [visibleModal, setVisibleModal] = useState(visible);
+function Modal({ visible, setVisible, children }) {
   const modalWrapper = useRef(null);
 
   useEffect(() => {
@@ -26,26 +25,26 @@ function Modal({ visible = false, children }) {
         (e.type === 'click' && e.target === e.currentTarget)
       ) {
         document.body.style.overflow = null;
-        setVisibleModal(false);
+        setVisible(false);
       }
     },
-    [setVisibleModal],
+    [setVisible],
   );
 
   const closeButton = useCallback(
     e => {
       if (e.type === 'click' && e.target.closest('button')) {
         document.body.style.overflow = null;
-        setVisibleModal(false);
+        setVisible(false);
       }
     },
-    [setVisibleModal],
+    [setVisible],
   );
 
   return (
     <>
-      <ModalDim visible={visibleModal} tabIndex={-1} />
-      <ModalWrapper visible={visibleModal} onClick={closeModal} tabIndex={-1}>
+      <ModalDim visible={visible} tabIndex={-1} />
+      <ModalWrapper visible={visible} onClick={closeModal} tabIndex={-1}>
         <ModalInner
           ref={modalWrapper}
           tabIndex={0}

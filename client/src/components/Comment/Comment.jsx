@@ -7,11 +7,27 @@ import { getHexaColor } from 'styles/color';
 
 const cutText = (text, limit) => text.trim().slice(0, limit) + '...';
 
-export function Comment({ iconType, title, limit, size, children, color, as }) {
+export function Comment({
+  iconType,
+  title,
+  limit,
+  size,
+  children,
+  color,
+  as,
+  fontWeight,
+  marginRight,
+}) {
   const CustomComment = iconType || title ? 'p' : 'span';
 
   return (
-    <Description as={as} size={size} color={color}>
+    <Description
+      as={as}
+      size={size}
+      color={color}
+      fontWeight={fontWeight}
+      marginRight={marginRight}
+    >
       {iconType && <Icon type={iconType} size={size} color={color} />}
       {title && <A11yHidden as="h3">{title}</A11yHidden>}
       {children ? (
@@ -30,6 +46,8 @@ Comment.defaultProps = {
   limit: 180,
   size: 16,
   color: getHexaColor('gray', 500),
+  fontWeight: 500,
+  marginRight: 0,
 };
 
 Comment.propTypes = {
