@@ -6,7 +6,7 @@ export const TimeInfoList = styled.ul`
   padding: 0;
 `;
 export const TimeInfoItem = styled.li`
-  font-weight: 600;
+  /* font-weight: 600; */
   list-style: none;
   line-height: 24px;
 
@@ -17,7 +17,7 @@ export const TimeInfoItem = styled.li`
 
     &:first-child {
       margin-top: 0;
-      min-width: 48px;
+      min-width: 60px;
       font-weight: ${getFontWeight};
     }
 

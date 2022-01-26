@@ -16,3 +16,11 @@ export const FilterWrapper = styled.div`
   margin: 20px;
   position: relative;
 `;
+
+export const LoadingSpinner = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+`;

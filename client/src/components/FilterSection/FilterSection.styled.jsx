@@ -12,6 +12,7 @@ export const List = styled.ul`
   position: sticky;
   top: 130px;
   align-self: flex-start;
+  margin-bottom: 200px;
 
   & li:first-child {
     border: 0;

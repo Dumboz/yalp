@@ -3,9 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const businessesApi = createApi({
   reducerPath: 'businessesApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4001' }),
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getBusinesses: builder.query({
-      query: filter => `api/businesses/search/${filter}`,
+      query: (filter) => `api/businesses/search/${filter}`,
     }),
   }),
 });
@@ -13,9 +13,9 @@ export const businessesApi = createApi({
 export const restaurantApi = createApi({
   reducerPath: 'restaurantApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4001' }),
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getRestaurant: builder.query({
-      query: id => `api/businesses/${id.replace('/restaurant/', '')}`,
+      query: (id) => `api/businesses/${id.replace('/restaurant/', '')}`,
     }),
   }),
 });

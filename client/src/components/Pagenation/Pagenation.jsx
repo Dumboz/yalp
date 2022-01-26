@@ -19,18 +19,18 @@ function Pagenation() {
   const [_, setSearchParams] = useSearchParams({});
   const query = queryString.parse(search);
   const { offset } = query;
-  const lastPage = Math.ceil(+total / 20);
+  const lastPage = Math.ceil(+total / 10);
   const currentPage = (+offset || 0) + 1;
   const pageList = [currentPage];
 
   const onClick = useCallback(
-    direct => {
+    (direct) => {
       setSearchParams({
         ...query,
         offset: direct === 'right' ? +offset + 1 : +offset - 1,
       });
     },
-    [offset, query, setSearchParams],
+    [offset, query, setSearchParams]
   );
 
   let i = 1;
@@ -51,7 +51,7 @@ function Pagenation() {
           onClick={() => onClick('left')}
         />
         <Ul>
-          {pageList.map(page => {
+          {pageList.map((page) => {
             query.offset = page - 1;
             return (
               <Li key={page} isCurrent={page === currentPage}>

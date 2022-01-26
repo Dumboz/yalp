@@ -129,7 +129,7 @@ export function RestaurantCard({
   return (
     <li ref={ref}>
       <CardLink
-        to={'/' + id}
+        to={'/restaurant/' + id}
         onMouseEnter={pullUpMarker(GEOArr[index])}
         onMouseLeave={restoreMarker(GEOArr[index])}
       >
@@ -158,7 +158,8 @@ export function RestaurantCard({
             <Comment
               iconType="talk"
               title="most recently review"
-              size={fontSize}>
+              size={fontSize}
+            >
               {review}
             </Comment>
             {!!transactions.length && (

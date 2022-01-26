@@ -4,9 +4,15 @@ import { SortButton } from 'components/SortButton/SortButton';
 import { getHexaColor } from 'styles/color';
 import { useCallback, useEffect, useState } from 'react';
 
-export const Reviews = (reviewList) => {
-  const reviews = reviewList.reviewList;
-  const [copyOfReviews, setCopyOfReviews] = useState([...reviews]);
+import { useGetRestaurantQuery } from 'services/businesses';
+import { useLocation } from 'react-router-dom';
+
+export const Reviews = () => {
+  const { pathname: id } = useLocation();
+  const { data, error, isLoading } = useGetRestaurantQuery(id);
+  const [copyOfReviews, setCopyOfReviews] = useState([
+    ...data.restaurantReview.reviews,
+  ]);
 
   const showModal = useCallback((e) => {
     const modalElement = document.querySelector('.modal-menu');
@@ -28,9 +34,8 @@ export const Reviews = (reviewList) => {
 
     switch (option) {
       case 'Newest First':
-        console.log('hi');
         setCopyOfReviews(
-          copyOfReviews.sort((a, b) =>
+          [...copyOfReviews].sort((a, b) =>
             new Date(a.time_created) > new Date(b.time_created)
               ? -1
               : new Date(a.time_created) < new Date(b.time_created)
@@ -41,7 +46,7 @@ export const Reviews = (reviewList) => {
         break;
       case 'Oldest First':
         setCopyOfReviews(
-          copyOfReviews.sort((a, b) =>
+          [...copyOfReviews].sort((a, b) =>
             new Date(a.time_created) > new Date(b.time_created)
               ? 1
               : new Date(a.time_created) < new Date(b.time_created)
@@ -49,11 +54,10 @@ export const Reviews = (reviewList) => {
               : 0
           )
         );
-
         break;
       case 'Highest Rated':
         setCopyOfReviews(
-          copyOfReviews.sort((a, b) =>
+          [...copyOfReviews].sort((a, b) =>
             a.rating > b.rating ? 1 : a.rating < b.rating ? -1 : 0
           )
         );
@@ -61,11 +65,10 @@ export const Reviews = (reviewList) => {
         break;
       case 'Lowest Rated':
         setCopyOfReviews(
-          copyOfReviews.sort((a, b) =>
+          [...copyOfReviews].sort((a, b) =>
             a.rating > b.rating ? -1 : a.rating < b.rating ? 1 : 0
           )
         );
-
         break;
       default:
         break;
@@ -78,12 +81,12 @@ export const Reviews = (reviewList) => {
   return (
     <>
       <SortButton showModal={showModal} selectSort={selectSort} />
-      {copyOfReviews.map((review) => (
-        <ReviewWrapper key={review.id}>
-          <ReviewCard review={review}></ReviewCard>
-          {review.id}
-        </ReviewWrapper>
-      ))}
+      {!isLoading &&
+        copyOfReviews.map((review) => (
+          <ReviewWrapper key={review.id}>
+            <ReviewCard review={review}></ReviewCard>
+          </ReviewWrapper>
+        ))}
       {/* {JSON.stringify(copyOfReviews.map((review) => review.time_created))} */}
     </>
   );
