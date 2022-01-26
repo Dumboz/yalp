@@ -8,7 +8,6 @@ import {
 import Rating from 'components/Rating/Rating';
 
 export const ReviewCard = (review) => {
-  console.log(review);
   const { rating, text, time_created, user } = review.review;
   const { name, image_url } = user;
 
@@ -24,7 +23,7 @@ export const ReviewCard = (review) => {
       <UserWrapper>
         <UserImg>
           <picture>
-            <source srcset={image_url} />
+            <source srcSet={image_url} />
             <img src={fallback} alt={'profile'} />
           </picture>
         </UserImg>
