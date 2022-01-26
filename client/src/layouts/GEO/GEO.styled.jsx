@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Map = styled.div`
@@ -13,4 +14,20 @@ export const MapWrapper = styled.div`
   position: sticky;
   left: 0;
   top: 130px;
+`;
+
+export const MapCardContainer = styled.div`
+  margin: 0;
+  padding: 0;
+  width: 180px;
+  padding-top: 5px;
+  padding-left: 5px;
+`;
+
+export const MapCategories = styled.ul`
+  font-size: 12px;
+
+  & > li {
+    display: inline;
+  }
 `;
