@@ -10,10 +10,12 @@ import {
 import { FilterSection } from 'components';
 import Pagenation from 'components/Pagenation/Pagenation';
 import { TitleWrapper } from 'components';
+import { useState } from 'react';
 
 export function SearchPage() {
   const { search } = useLocation();
   const { data, error, isLoading } = useGetBusinessesQuery(search);
+  const [GEOArr, setGEOArr] = useState([]);
 
   return (
     <SearchContainer>
@@ -26,14 +28,17 @@ export function SearchPage() {
       )}
       {!isLoading && data?.businesses && (
         <TitleWrapper title="All Results" containerMargin={20}>
-          <BusinessesList businesses={data?.businesses} />
-          {!isLoading && <Pagenation />}
+          <BusinessesList businesses={data?.businesses} GEOArr={GEOArr} />
+          <Pagenation />
         </TitleWrapper>
       )}
       {data?.businesses && (
         <GEOWrapper>
           <GEO
             features={data?.businesses.map(({ coordinates }) => coordinates)}
+            businesses={data?.businesses}
+            GEOArr={GEOArr}
+            setGEOArr={setGEOArr}
           />
         </GEOWrapper>
       )}
