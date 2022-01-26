@@ -1,6 +1,5 @@
 import { ArrowButton } from 'components/ArrowButton/ArrowButton';
 import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import {
   Ul,
@@ -9,11 +8,14 @@ import {
   PagenationWrapper,
   Text,
 } from './Pagenation.styled';
+import { useGetBusinessesQuery } from 'services/businesses';
 const queryString = require('query-string');
 
 function Pagenation() {
-  const { total } = useSelector(({ businessesReducer }) => businessesReducer);
   const { pathname, search } = useLocation();
+  const {
+    data: { total },
+  } = useGetBusinessesQuery(search);
   const [_, setSearchParams] = useSearchParams({});
   const query = queryString.parse(search);
   const { offset } = query;
@@ -71,4 +73,4 @@ function Pagenation() {
   );
 }
 
-export default React.memo(Pagenation);
+export default Pagenation;
