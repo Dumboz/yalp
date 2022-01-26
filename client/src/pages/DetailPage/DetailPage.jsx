@@ -1,3 +1,4 @@
+import { DetailBanner } from 'layouts';
 import { useLocation } from 'react-router-dom';
 import { useGetRestaurantQuery } from 'services/businesses';
 
@@ -15,10 +16,11 @@ export function DetailPage({ id }) {
     <>
       {error && <>error</>}
       {isLoading && <>Loading...</>}
-      {/* {!isLoading && <Reviews reviews={data.restaurantReview.reviews} />} */}
+      {!isLoading && <DetailBanner restaurantDetail={data.restaurantDetail} />}
     </>
   );
 }
+
 DetailPage.defaultProps = {
   id: 'MWV8AoySYObkfVpaLhaqKQ',
 };
