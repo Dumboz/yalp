@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useGetRestaurantQuery } from 'services/businesses';
+import { Reviews } from 'components/Review/Reviews';
 
 export function DetailPage({ id }) {
   const { data, error, isLoading } = useGetRestaurantQuery(id);
@@ -15,7 +16,7 @@ export function DetailPage({ id }) {
     <>
       {error && <>error</>}
       {isLoading && <>Loading...</>}
-      {/* {!isLoading && <Reviews reviews={data.restaurantReview.reviews} />} */}
+      {!isLoading && <Reviews reviewList={data.restaurantReview.reviews} />}
     </>
   );
 }
