@@ -57,14 +57,12 @@ export const filterSlice = createSlice({
 
       const key = Object.entries(state.distance).filter(([_, bool]) => bool);
 
-      console.log(key, action.payload);
-
       return {
         ...state,
         distance: {
           ...state.distance,
           [key[0][0]]: false,
-          [action.payload]: !payloadState,
+          [action.payload]: true,
         },
       };
     },
