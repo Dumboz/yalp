@@ -5,6 +5,7 @@ export const StarWrapper = React.memo(styled.ul`
   display: flex;
   & li {
     margin-right: 2px;
+    line-height: 0;
   }
 `);
 
