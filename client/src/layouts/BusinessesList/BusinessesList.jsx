@@ -1,11 +1,16 @@
 import { RestaurantCard } from 'components';
 import styled from 'styled-components';
 
-export function BusinessesList({ businesses }) {
+export function BusinessesList({ businesses, GEOArr }) {
   return (
     <BusinessesUl>
-      {businesses.map((restaurant) => (
-        <RestaurantCard key={restaurant.id} {...restaurant} />
+      {businesses.map((restaurant, index) => (
+        <RestaurantCard
+          index={index}
+          key={restaurant.id}
+          {...restaurant}
+          GEOArr={GEOArr}
+        />
       ))}
     </BusinessesUl>
   );
