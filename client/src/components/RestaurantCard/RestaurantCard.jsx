@@ -67,7 +67,6 @@ export function RestaurantCard({
         fetch(`http://localhost:4001/api/businesses/${id}`)
           .then((res) => res.json())
           .then(({ restaurantDetail, restaurantReview }) => {
-            console.log(name, restaurantDetail);
             if (!restaurantDetail.hours) {
               restaurantDetail.hours = [
                 {
@@ -80,16 +79,13 @@ export function RestaurantCard({
             const { start, end } = open?.find(({ day }) => day === today);
 
             setReview(restaurantReview?.reviews[0].text);
-            console.log({ restaurantDetail, restaurantReview });
             setOperationState({
               isOpenNow: is_open_now,
               start,
               end,
             });
-            console.log(name, review);
           });
 
-        console.log('hi');
         observer.unobserve(ref.current);
       });
     }, options);
@@ -113,7 +109,6 @@ export function RestaurantCard({
 
     const nextZ = marker.increasementZIndex();
 
-    console.log(nextZ);
     marker.setZIndex(nextZ);
   };
 

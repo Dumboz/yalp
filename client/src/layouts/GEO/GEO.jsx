@@ -16,6 +16,7 @@ export function GEO({
 
   const ref = useRef();
   const { search } = useLocation();
+  console.log(businesses);
 
   useEffect(() => {
     let zIndex = 100;
@@ -77,7 +78,7 @@ export function GEO({
           map: map,
           icon: markerIcon,
           label: { ...markerLabel, text: `${i + 1}` },
-          title: 'asdfdasf',
+          title: businesses[i].name,
         });
         marker.increasementZIndex = increasementZIndex;
 
@@ -95,7 +96,7 @@ export function GEO({
             color: getHexaColor('primary', 500),
           });
 
-          marker.setZIndex(0);
+          marker.setZIndex(increasementZIndex());
 
           const infoBox = document.createElement('div');
           infoBox.innerHTML = renderToString(<MapCard {...businesses[i]} />);
