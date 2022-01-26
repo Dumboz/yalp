@@ -4,11 +4,13 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { businessesApi, restaurantApi } from 'services/businesses';
 import businessesReducer from './../store/businesses';
 import mapReducer from './mapSlice';
+import filterReducer from './filterSlice';
 
 export const store = configureStore({
   reducer: {
     businessesReducer,
     map: mapReducer,
+    filter: filterReducer,
     [businessesApi.reducerPath]: businessesApi.reducer,
     [restaurantApi.reducerPath]: restaurantApi.reducer,
   },

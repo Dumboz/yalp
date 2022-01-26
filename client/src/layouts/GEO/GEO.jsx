@@ -13,7 +13,7 @@ export function GEO({ features: featuresList }) {
   setTimeout(() => {
     dispatch(setAddress('New York'));
   }, 1000);
-  console.log(address);
+  // console.log(address);
 
   useEffect(() => {
     const loader = new Loader({
@@ -32,7 +32,7 @@ export function GEO({ features: featuresList }) {
       // Geocoder
       geocoder.geocode({ address }, (results, status) => {
         if (status === 'OK') {
-          console.log(results);
+          // console.log(results);
           map.setCenter(results[0].geometry.location);
         } else {
           alert(

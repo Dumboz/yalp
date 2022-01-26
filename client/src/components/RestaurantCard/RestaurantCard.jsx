@@ -67,7 +67,7 @@ export function RestaurantCard({
             // const { is_open_now, open } = restaurantDetail.hours[0];
             // const { start, end } = open?.find(({ day }) => day === today);
             setReview(restaurantReview?.reviews[0].text);
-            console.log({ restaurantDetail, restaurantReview });
+            // console.log({ restaurantDetail, restaurantReview });
             // setOperationState({
             //   isOpenNow: is_open_now,
             //   start,
@@ -78,7 +78,7 @@ export function RestaurantCard({
             // console.log(restaurantDetail.hours[0].is_open_now);
           });
 
-        console.log('hi');
+        // console.log('hi');
         observer.unobserve(ref.current);
       });
     }, options);
@@ -114,8 +114,7 @@ export function RestaurantCard({
             <Comment
               iconType="talk"
               title="most recently review"
-              size={fontSize}
-            >
+              size={fontSize}>
               {review}
             </Comment>
             {!!transactions.length && (
