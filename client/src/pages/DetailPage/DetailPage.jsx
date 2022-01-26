@@ -16,8 +16,8 @@ export function DetailPage({ id }) {
     <>
       {error && <>error</>}
       {isLoading && <>Loading...</>}
-      {!isLoading && <Location />}
       {!isLoading && <DetailBanner restaurantDetail={data.restaurantDetail} />}
+      {!isLoading && <Location />}
       <Footer />
     </>
   );
