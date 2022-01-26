@@ -42,6 +42,10 @@ export const filterSlice = createSlice({
       };
     },
     setFeatures: (state, action) => {
+      if (action.payload === 'initial') {
+        return initialState;
+      }
+
       const payloadState = state.features[action.payload];
 
       return {

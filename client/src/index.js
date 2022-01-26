@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { App, SearchPage, DetailPage } from 'pages';
+import { App, SearchPage, DetailPage, PageNotFound } from 'pages';
 import { GlobalStyle } from 'styles/global.styled';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { StoreProvider } from './store';
@@ -24,6 +24,11 @@ ReactDOM.render(
             />
             <Route path="search" element={<SearchPage />} />
             <Route path="restaurant/:id" element={<DetailPage />} />
+            <Route path="page-not-found" element={<PageNotFound />} />
+            <Route
+              path="*"
+              element={<Navigate to="page-not-found" replace={true} />}
+            />
           </Route>
         </Routes>
         <InitSVG />
