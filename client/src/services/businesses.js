@@ -15,7 +15,7 @@ export const restaurantApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4001' }),
   endpoints: (builder) => ({
     getRestaurant: builder.query({
-      query: (id) => `api/businesses/${id}`,
+      query: (id) => `api/businesses/${id.replace('/restaurant/', '')}`,
     }),
   }),
 });

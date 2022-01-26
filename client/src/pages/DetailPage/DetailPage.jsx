@@ -5,10 +5,7 @@ import { Reviews } from 'components/Review/Reviews';
 
 export function DetailPage() {
   const { pathname } = useLocation();
-  const { error, isLoading } = useGetRestaurantQuery(
-    pathname.replace(/^\//, '')
-  );
-
+  const { error, isLoading } = useGetRestaurantQuery(pathname);
   return (
     <>
       {error && <>error</>}
@@ -16,7 +13,7 @@ export function DetailPage() {
       {!isLoading && <DetailBanner />}
       {!isLoading && <Location />}
       {!isLoading && <Reviews />}
-      <Footer />
+      {!isLoading && <Footer />}
     </>
   );
 }

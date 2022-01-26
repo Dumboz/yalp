@@ -19,9 +19,7 @@ import { useGetRestaurantQuery } from 'services/businesses';
 
 function DetailBanner() {
   const { pathname } = useLocation();
-  const { data, isLoading } = useGetRestaurantQuery(
-    pathname.replace(/^\//, '')
-  );
+  const { data, isLoading } = useGetRestaurantQuery(pathname);
   let name;
   let rating;
   let review_count;

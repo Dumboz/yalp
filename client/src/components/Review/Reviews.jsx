@@ -9,9 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 export const Reviews = () => {
   const { pathname: id } = useLocation();
-  const { data, error, isLoading } = useGetRestaurantQuery(
-    id.replace(/^\//, '')
-  );
+  const { data, error, isLoading } = useGetRestaurantQuery(id);
   const [copyOfReviews, setCopyOfReviews] = useState([
     ...data.restaurantReview.reviews,
   ]);
@@ -87,7 +85,6 @@ export const Reviews = () => {
         copyOfReviews.map((review) => (
           <ReviewWrapper key={review.id}>
             <ReviewCard review={review}></ReviewCard>
-            {review.id}
           </ReviewWrapper>
         ))}
       {/* {JSON.stringify(copyOfReviews.map((review) => review.time_created))} */}

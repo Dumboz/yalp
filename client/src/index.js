@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { App, SearchPage, DetailPage } from 'pages';
 import { GlobalStyle } from 'styles/global.styled';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { StoreProvider } from './store';
 import { InitSVG } from 'components';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateBusinesses } from 'store/businesses';
-import styled from 'styled-components';
-import { useGetBusinessesQuery } from 'services/businesses';
+
+const defaultQuery =
+  'search?term=restaurant&location=New%20York&offset=0&radius=800&limit=10';
 
 ReactDOM.render(
   // <React.StrictMode>
@@ -19,8 +18,12 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
+            <Route
+              index
+              element={<Navigate to={defaultQuery} replace={true} />}
+            />
             <Route path="search" element={<SearchPage />} />
-            <Route path=":id" element={<DetailPage />} />
+            <Route path="restaurant/:id" element={<DetailPage />} />
           </Route>
         </Routes>
         <InitSVG />

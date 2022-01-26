@@ -63,8 +63,8 @@ Footer.List = function List({ title, children }) {
     <FooterListWrapper>
       <h4>{title}</h4>
       <ul>
-        {children.map((item) => (
-          <li key={item}>{item}</li>
+        {children.map((item, i) => (
+          <li key={item + i}>{item}</li>
         ))}
       </ul>
     </FooterListWrapper>

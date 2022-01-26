@@ -10,9 +10,7 @@ const yelpIcon =
 
 export function Location() {
   const { pathname: id } = useLocation();
-  const { data, error, isLoading } = useGetRestaurantQuery(
-    id.replace(/^\//, '')
-  );
+  const { data, error, isLoading } = useGetRestaurantQuery(id);
   let locationInfoList = [];
   let staticImgOption = '';
   let latitude;
