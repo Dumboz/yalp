@@ -27,7 +27,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="search" element={<SearchPage />} />
-            <Route path=":id" element={<DetailPage />} />
+            <Route path="restaurant/:id" element={<DetailPage />} />
             <Route path="page-not-found" element={<PageNotFound />} />
             <Route
               path="*"
