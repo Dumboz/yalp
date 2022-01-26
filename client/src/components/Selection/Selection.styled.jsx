@@ -57,6 +57,7 @@ export const List = styled.div`
 `;
 
 export const Span = styled.span`
-  font-size: ${({ fontSize }) => fontSize};
+  font-size: ${({ fontSize }) => fontSize}px;
   pointer-events: none;
+  color: ${getHexaColor('gray', 500)};
 `;
