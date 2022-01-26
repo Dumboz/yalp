@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-import { getHexaColor } from 'styles/color';
 import {
   FooterContainer,
   FooterWrapper,
@@ -61,7 +59,6 @@ export function Footer() {
 }
 
 Footer.List = function List({ title, children }) {
-  console.log(children);
   return (
     <FooterListWrapper>
       <h4>{title}</h4>
