@@ -45,7 +45,7 @@ export function SearchPage() {
           </GEOWrapper>
         )}
       </SearchContainer>
-      <Footer />
+      {!isLoading && <Footer />}
     </>
   );
 }

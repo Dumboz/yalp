@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
 export const FooterContainer = styled.div`
   background-color: ${getHexaColor('gray', 100)};
+  padding-top: 100px;
 `;
 
 export const FooterWrapper = styled.div`
@@ -9,7 +10,6 @@ export const FooterWrapper = styled.div`
   max-width: 80%;
   display: flex;
   flex-wrap: wrap;
-  padding-top: 40px;
   padding-bottom: 20px;
 
   & > div:not(:last-child) {
