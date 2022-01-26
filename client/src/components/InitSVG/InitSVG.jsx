@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 
 export function InitSVG() {
   return createPortal(
-    <svg xmlns="http://www.w3.org/2000/svg">
+    <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
       <symbol id="claimed" viewBox="0 0 16 16">
         <path
           fillRule="evenodd"

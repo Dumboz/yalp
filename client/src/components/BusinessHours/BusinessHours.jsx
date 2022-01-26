@@ -56,14 +56,14 @@ const Mock = {
 
 const Week = ['Sun', 'Mon', 'The', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export function BusinessHours({ openTimeList, isOpenNow }) {
+export function BusinessHours({ open, isOpenNow }) {
   const Today = new Date().getDay();
   const openState = isOpenNow ? 'Open' : 'Closed';
 
   return (
     <TimeInfoList>
-      {openTimeList.map(({ start, end, day }) => (
-        <TimeInfoItem key={Week[day]} fontWeight={Today === day ? 700 : 600}>
+      {open.map(({ start, end, day }) => (
+        <TimeInfoItem key={Week[day]} fontWeight={Today === day ? 600 : 400}>
           <span>{Week[day]}</span>
           <span>{makeTimeEn(start) + ' - ' + makeTimeEn(end)}</span>
           {Today === day && <span data-open={openState}>{openState} now</span>}
