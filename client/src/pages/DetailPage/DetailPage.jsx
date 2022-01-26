@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useGetRestaurantQuery } from 'services/businesses';
 import { Location, Footer, DetailBanner } from 'layouts';
+import { Reviews } from 'components/Review/Reviews';
 
 export function DetailPage({ id }) {
   const { data, error, isLoading } = useGetRestaurantQuery(id);
@@ -18,6 +19,7 @@ export function DetailPage({ id }) {
       {isLoading && <>Loading...</>}
       {!isLoading && <DetailBanner restaurantDetail={data.restaurantDetail} />}
       {!isLoading && <Location />}
+      {!isLoading && <Reviews reviewList={data.restaurantReview.reviews} />}
       <Footer />
     </>
   );
