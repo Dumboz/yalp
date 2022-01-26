@@ -3,6 +3,7 @@ import { CommentList } from 'components/CommentList/CommentList';
 import Rating from 'components/Rating/Rating';
 import PhotoModal from 'layouts/PhotoModal/PhotoModal';
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
 import { makeTimeString } from 'utils';
 import CarouselWarpper from './Carousel';
@@ -13,6 +14,10 @@ import {
   OpenTimeWrapper,
   RatingWrapper,
 } from './DetailBanner.styled';
+
+const DetailBannerWrapper = styled.div`
+  min-width: 1100px;
+`;
 
 function DetailBanner({ restaurantDetail }) {
   const {
@@ -34,7 +39,7 @@ function DetailBanner({ restaurantDetail }) {
   const [select, setSelect] = useState();
 
   return (
-    <>
+    <DetailBannerWrapper>
       {visible && (
         <PhotoModal
           visible={visible}
@@ -111,7 +116,7 @@ function DetailBanner({ restaurantDetail }) {
           </OpenTimeWrapper>
         </DetailWrapper>
       </DetailContainer>
-    </>
+    </DetailBannerWrapper>
   );
 }
 
