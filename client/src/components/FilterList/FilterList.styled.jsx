@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 export const Heading = styled.h3`
   font-size: 16px;
   font-weight: 700;
+  color: ${getHexaColor('gray', 500)};
 `;
 
 export const List = styled.ul`
@@ -21,6 +22,7 @@ export const List = styled.ul`
   display: flex;
   flex-flow: column;
   gap: 3px;
+  color: ${getHexaColor('gray', 500)};
 `;
 
 export const Button = styled.button`
