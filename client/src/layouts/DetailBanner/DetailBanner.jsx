@@ -3,7 +3,6 @@ import { CommentList } from 'components/CommentList/CommentList';
 import Rating from 'components/Rating/Rating';
 import PhotoModal from 'layouts/PhotoModal/PhotoModal';
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
 import { makeTimeString } from 'utils';
 import CarouselWarpper from './Carousel';
@@ -13,11 +12,8 @@ import {
   Title,
   OpenTimeWrapper,
   RatingWrapper,
+  DetailBannerWrapper,
 } from './DetailBanner.styled';
-
-const DetailBannerWrapper = styled.div`
-  min-width: 1100px;
-`;
 
 function DetailBanner({ restaurantDetail }) {
   const {
