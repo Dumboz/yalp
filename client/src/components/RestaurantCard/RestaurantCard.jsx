@@ -53,41 +53,49 @@ export function RestaurantCard({
   const ref = useRef();
   const today = new Date().getDay();
 
-  // useEffect(() => {
-  //   const options = {
-  //     root: null,
-  //     rootMargin: '0px 0px 700px',
-  //     threshlod: 0,
-  //   };
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px 0px 700px',
+      threshlod: 0,
+    };
 
-  //   const observer = new IntersectionObserver((entries) => {
-  //     entries.forEach((entry) => {
-  //       if (!entry.isIntersecting) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-  //       // fetch(`http://localhost:4001/api/businesses/${id}`)
-  //       //   .then((res) => res.json())
-  //       //   .then(({ restaurantDetail, restaurantReview }) => {
-  //       //     // const { is_open_now, open } = restaurantDetail.hours[0];
-  //       //     // const { start, end } = open?.find(({ day }) => day === today);
-  //       //     setReview(restaurantReview?.reviews[0].text);
-  //       //     console.log({ restaurantDetail, restaurantReview });
-  //       //     // setOperationState({
-  //       //     //   isOpenNow: is_open_now,
-  //       //     //   start,
-  //       //     //   end,
-  //       //     // });
-  //       //     // console.log(restaurantDetail.hours[0]);
-  //       //     // console.log(restaurantDetail.hours[0].open);
-  //       //     // console.log(restaurantDetail.hours[0].is_open_now);
-  //       //   });
+        fetch(`http://localhost:4001/api/businesses/${id}`)
+          .then((res) => res.json())
+          .then(({ restaurantDetail, restaurantReview }) => {
+            console.log(name, restaurantDetail);
+            if (!restaurantDetail.hours) {
+              restaurantDetail.hours = [
+                {
+                  is_open_now: null,
+                  open: [{ day: today, start: '0000', end: '0000' }],
+                },
+              ];
+            }
+            const { is_open_now, open } = restaurantDetail?.hours[0];
+            const { start, end } = open?.find(({ day }) => day === today);
 
-  //       // console.log('hi');
-  //       observer.unobserve(ref.current);
-  //     });
-  //   }, options);
+            setReview(restaurantReview?.reviews[0].text);
+            console.log({ restaurantDetail, restaurantReview });
+            setOperationState({
+              isOpenNow: is_open_now,
+              start,
+              end,
+            });
+            console.log(name, review);
+          });
 
-  //   // observer.observe(ref.current);
-  // }, []);
+        console.log('hi');
+        observer.unobserve(ref.current);
+      });
+    }, options);
+
+    observer.observe(ref.current);
+  }, []);
 
   const pullUpMarker = (marker) => () => {
     if (!marker) return;
@@ -151,7 +159,7 @@ export function RestaurantCard({
                 </FeatureList>
               )}
             </TagsWrapper>
-            <Operation size={fontSize} />
+            <Operation size={fontSize} {...OperationState} />
             <Comment
               iconType="talk"
               title="most recently review"
