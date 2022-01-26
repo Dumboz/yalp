@@ -1,3 +1,4 @@
+import { DetailBanner } from 'layouts';
 import { useLocation } from 'react-router-dom';
 import { useGetRestaurantQuery } from 'services/businesses';
 import { Reviews } from 'components/Review/Reviews';
@@ -20,6 +21,7 @@ export function DetailPage({ id }) {
     </>
   );
 }
+
 DetailPage.defaultProps = {
   id: 'MWV8AoySYObkfVpaLhaqKQ',
 };

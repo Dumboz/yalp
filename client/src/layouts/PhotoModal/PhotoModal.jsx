@@ -13,38 +13,44 @@ import {
   PhotoPriview,
 } from './PhotoModal.styled';
 
-function PhotoModal({ title, photos, select: selectedURL }) {
-  const [select, setSelect] = useState(selectedURL);
+function PhotoModal({
+  visible,
+  setVisible,
+  title,
+  photos,
+  select: selectedId,
+}) {
+  const [select, setSelect] = useState(selectedId);
 
   const changeSelectPhoto = useCallback(
-    (e, photo) => {
+    (e, id) => {
       e.preventDefault();
-      setSelect(photo);
+      setSelect(id);
     },
     [setSelect],
   );
 
   return (
-    <Modal visible={true}>
+    <Modal visible={visible} setVisible={setVisible}>
       <ModalInnder>
         <PhotoWrapper>
           <ArrowButtonWrapper>
             <ArrowButton
               direct="left"
-              disabled={photos.indexOf(select) === 0}
+              disabled={select === 0}
               onClick={e => {
-                changeSelectPhoto(e, photos[photos.indexOf(select) - 1]);
+                changeSelectPhoto(e, select - 1);
               }}
             />
             <ArrowButton
               direct="right"
-              disabled={photos.indexOf(select) + 1 === photos.length}
+              disabled={select + 1 === photos.length}
               onClick={e => {
-                changeSelectPhoto(e, photos[photos.indexOf(select) + 1]);
+                changeSelectPhoto(e, select + 1);
               }}
             />
           </ArrowButtonWrapper>
-          <Photo src={select} />
+          <Photo src={photos[select]} />
         </PhotoWrapper>
         <ContentWrapper>
           <TitleWrapper
@@ -52,13 +58,13 @@ function PhotoModal({ title, photos, select: selectedURL }) {
             title={`Photos for ${title}`}
             margin="0px 0px 20px 0px"
           >
-            <Text>{`${photos.indexOf(select) + 1} of ${photos.length}`}</Text>
+            <Text>{`${select + 1} of ${photos.length}`}</Text>
             <PhotoList>
               {photos.map((photo, id) => (
-                <li key={photo}>
-                  <PhotoButton onClick={e => changeSelectPhoto(e, photo)}>
+                <li key={id}>
+                  <PhotoButton onClick={e => changeSelectPhoto(e, id)}>
                     <picture>
-                      <PhotoPriview isSelect={select === photo} src={photo} />
+                      <PhotoPriview isSelect={select === id} src={photo} />
                     </picture>
                   </PhotoButton>
                 </li>
