@@ -13,33 +13,26 @@ import { useState } from 'react';
 
 export function SearchPage() {
   const { search } = useLocation();
-  const { data, error, isLoading } = useGetBusinessesQuery(search);
+  const { error, isLoading } = useGetBusinessesQuery(search);
   const [GEOArr, setGEOArr] = useState([]);
 
   return (
     <>
       <SearchContainer>
+        <FilterWrapper>
+          <FilterSection />
+        </FilterWrapper>
         {error && <>error</>}
         {isLoading && <>Loading...</>}
         {!isLoading && (
-          <FilterWrapper>
-            <FilterSection />
-          </FilterWrapper>
-        )}
-        {!isLoading && data?.businesses && (
           <TitleWrapper title="All Results" containerMargin={20}>
-            <BusinessesList businesses={data?.businesses} GEOArr={GEOArr} />
+            <BusinessesList GEOArr={GEOArr} />
             <Pagenation />
           </TitleWrapper>
         )}
-        {data?.businesses && (
+        {!isLoading && (
           <GEOWrapper>
-            <GEO
-              features={data?.businesses.map(({ coordinates }) => coordinates)}
-              businesses={data?.businesses}
-              GEOArr={GEOArr}
-              setGEOArr={setGEOArr}
-            />
+            <GEO setGEOArr={setGEOArr} />
           </GEOWrapper>
         )}
       </SearchContainer>

@@ -6,16 +6,21 @@ import QueryString from 'qs';
 import { renderToString } from 'react-dom/server';
 import { MapCard } from './MapCard';
 import { getHexaColor } from 'styles/color';
-export function GEO({
-  features: markerPositions,
-  businesses,
-  GEOArr,
-  setGEOArr,
-}) {
+import { useGetBusinessesQuery } from 'services/businesses';
+
+export function GEO({ setGEOArr }) {
   let arr = [];
+  let businesses;
+  let markerPositions;
 
   const ref = useRef();
   const { search } = useLocation();
+  const { data, isLoading } = useGetBusinessesQuery(search);
+
+  if (!isLoading) {
+    markerPositions = data?.businesses.map(({ coordinates }) => coordinates);
+    businesses = data?.businesses;
+  }
 
   useEffect(() => {
     let zIndex = 100;

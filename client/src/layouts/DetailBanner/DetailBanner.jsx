@@ -13,19 +13,35 @@ import {
   OpenTimeWrapper,
   RatingWrapper,
 } from './DetailBanner.styled';
+import { useLocation } from 'react-router-dom';
+import { useGetRestaurantQuery } from 'services/businesses';
 
-function DetailBanner({ restaurantDetail }) {
-  const {
-    name,
-    rating,
-    review_count,
-    price,
-    is_closed,
-    is_claimed,
-    categories,
-    hours,
-    photos,
-  } = restaurantDetail;
+function DetailBanner() {
+  const { pathname } = useLocation();
+  const { data, isLoading } = useGetRestaurantQuery(
+    pathname.replace(/^\//, '')
+  );
+  let name;
+  let rating;
+  let review_count;
+  let price;
+  let is_closed;
+  let is_claimed;
+  let categories;
+  let hours;
+  let photos;
+
+  if (!isLoading) {
+    name = data.restaurantDetail.name;
+    rating = data.restaurantDetail.rating;
+    review_count = data.restaurantDetail.review_count;
+    price = data.restaurantDetail.price;
+    is_closed = data.restaurantDetail.is_closed;
+    is_claimed = data.restaurantDetail.is_claimed;
+    categories = data.restaurantDetail.categories;
+    hours = data.restaurantDetail.hours;
+    photos = data.restaurantDetail.photos;
+  }
 
   const now = new Date();
   const today = now.getDay() - 1 === -1 ? 0 : now.getDay() - 1;
@@ -105,7 +121,7 @@ function DetailBanner({ restaurantDetail }) {
             )}
             <Comment color="white" fontWeight={900}>
               {`${makeTimeString(
-                hours[0].open[today].start,
+                hours[0].open[today].start
               )} - ${makeTimeString(hours[0].open[today].end)}`}
             </Comment>
           </OpenTimeWrapper>
