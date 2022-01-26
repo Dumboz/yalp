@@ -84,6 +84,7 @@ export const FilterList = ({
             onClick={handleClick}
             group={heading}
             children={item[0]}
+            fontSize={14}
           />
         </li>
       ))

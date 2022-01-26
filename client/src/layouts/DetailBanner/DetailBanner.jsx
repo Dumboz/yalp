@@ -12,6 +12,7 @@ import {
   Title,
   OpenTimeWrapper,
   RatingWrapper,
+  DetailBannerWrapper,
 } from './DetailBanner.styled';
 import { useLocation } from 'react-router-dom';
 import { useGetRestaurantQuery } from 'services/businesses';
@@ -50,7 +51,7 @@ function DetailBanner() {
   const [select, setSelect] = useState();
 
   return (
-    <>
+    <DetailBannerWrapper>
       {visible && (
         <PhotoModal
           visible={visible}
@@ -127,7 +128,7 @@ function DetailBanner() {
           </OpenTimeWrapper>
         </DetailWrapper>
       </DetailContainer>
-    </>
+    </DetailBannerWrapper>
   );
 }
 
