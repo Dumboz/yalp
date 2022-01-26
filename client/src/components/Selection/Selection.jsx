@@ -29,6 +29,8 @@ export function Selection({
     const { attributes, radius } = query;
     const option = db[group][children];
 
+    if (!attributes) dispatch(setFeatures('initial'));
+
     attributes &&
       group === 'features' &&
       attributes.includes(option) &&
