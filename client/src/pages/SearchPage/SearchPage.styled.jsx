@@ -13,5 +13,6 @@ export const GEOWrapper = styled.div`
 
 export const FilterWrapper = styled.div`
   width: 30%;
+  margin: 20px;
   position: relative;
 `;
