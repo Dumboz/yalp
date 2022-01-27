@@ -21,10 +21,22 @@ export default function SearchPage() {
   const [GEOArr, setGEOArr] = useState([]);
   const { location } = QueryString.parse(search);
 
+  const keywords = Object.values(QueryString.parse(search)).join(',');
+
   return (
     <>
       <Helmet>
         <title>The Best 10 Restaurants in {location}</title>
+        <meta
+          name="description"
+          content={`The Best 10 Restaurants in ${location}`}
+        />
+        <meta name="robots" content="ALL" />
+        <meta name="keywords" content={`yalp, restaurant, ${location}`} />
+        <meta name="author" content="Dumboz" />
+        <meta name="content-language" content="en" />
+        <meta httpEquiv="content-type" content="text/html; charset=en" />
+        <meta name="keywords" content={keywords} />
       </Helmet>
       <SearchContainer>
         <FilterWrapper>
