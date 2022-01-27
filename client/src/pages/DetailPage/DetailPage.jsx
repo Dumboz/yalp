@@ -23,6 +23,18 @@ export default function DetailPage() {
     <>
       <Helmet>
         <title>{restaurantDetail?.name || 'Detail Page'}</title>
+        <meta name="robots" content="ALL" />
+        <meta
+          name="keywords"
+          content={`yalp, restaurant, ${restaurantDetail?.name}`}
+        />
+        <meta name="author" content="Dumboz" />
+        <meta name="content-language" content="en" />
+        <meta httpEquiv="content-type" content="text/html; charset=en" />
+        <meta
+          name="description"
+          content={restaurantDetail?.name || 'Detail Page'}
+        />
       </Helmet>
       {error && <>error</>}
       <DetailBanner />
