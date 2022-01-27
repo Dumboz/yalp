@@ -9,13 +9,17 @@ import { DetailPageLoadingSpinner, DetailMain } from './DetailPage.styled';
 export function DetailPage() {
   const { pathname } = useLocation();
   const { error, data, isLoading } = useGetRestaurantQuery(pathname);
-  const { restaurantDetail } = data;
 
-  console.log(data);
+  let restaurantDetail;
+
+  if (!isLoading) {
+    restaurantDetail = data.restaurantDetail;
+  }
+
   return (
     <>
       <Helmet>
-        <title>{restaurantDetail.name}</title>
+        <title>{restaurantDetail?.name || 'Detail Page'}</title>
       </Helmet>
       {error && <>error</>}
       {isLoading && (
