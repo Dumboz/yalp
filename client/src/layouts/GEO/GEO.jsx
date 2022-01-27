@@ -33,7 +33,7 @@ export function GEO({ setGEOArr }) {
     loader.load().then((google) => {
       const mapOptions = {
         center: null,
-        zoom: 12,
+        zoom: 13,
       };
 
       let map = new google.maps.Map(ref.current, mapOptions);
