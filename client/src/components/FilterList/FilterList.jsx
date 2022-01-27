@@ -2,11 +2,11 @@ import QueryString from 'qs';
 import db from 'db/filter.json';
 import { useCallback, useRef } from 'react';
 import { oneOf } from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Wrapper, Heading, List } from './FilterList.styled';
+import { setFeatures, setDistance } from 'store/filterSlice';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { Selection, PriceFilterButtonGroup } from 'components';
-import { useDispatch } from 'react-redux';
-import { setFeatures, setDistance } from 'store/filterSlice';
 
 export const FilterList = ({
   categories,
@@ -20,7 +20,7 @@ export const FilterList = ({
   const dispatch = useDispatch();
 
   const handleClick = useCallback(
-    e => {
+    (e) => {
       const isChecked = e.target.querySelector('input').checked;
       const query = QueryString.parse(search.replace(/^\?/, ''));
       const option = e.target.querySelector('span').textContent;
@@ -65,17 +65,17 @@ export const FilterList = ({
           break;
       }
     },
-    [search, setSearchParams],
+    [search, setSearchParams]
   );
 
-  const makePascalCase = str => {
+  const makePascalCase = (str) => {
     return str
       .split(' ')
-      .map(char => (char = char[0].toUpperCase() + char.slice(1)))
+      .map((char) => (char = char[0].toUpperCase() + char.slice(1)))
       .join(' ');
   };
 
-  const setOptions = options => {
+  const setOptions = (options) => {
     return type !== 'price' ? (
       options.map((item, key) => (
         <li key={key} tabIndex={'0'}>

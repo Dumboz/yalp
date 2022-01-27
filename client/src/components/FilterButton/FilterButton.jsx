@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import { Wrapper, Button } from './FilterButton.styled';
 import { Spinner, Icon, FilterModal, CommentList, Comment } from 'components';
 

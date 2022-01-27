@@ -1,4 +1,3 @@
-import { fireEvent } from '@testing-library/react';
 import { Selection } from 'components/Selection/Selection';
 import { useReducer, useCallback, useRef } from 'react';
 import {
