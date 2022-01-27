@@ -21,8 +21,7 @@ const Img = React.memo(styled.img`
 const ImgContainer = React.memo(styled(Link)`
   display: block;
   width: auto;
-  height: 100%;
-  min-height: 425px;
+  height: 425px;
 `);
 
 function CarouselWarpper({ setVisible, setSelect, name, photos }) {
