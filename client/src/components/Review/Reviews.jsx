@@ -1,9 +1,8 @@
-import { ReviewWrapper } from './Reviews.styled';
+import { ReviewsContainer, ReviewWrapper } from './Reviews.styled';
 import { ReviewCard } from 'components/ReviewCard/ReviewCard';
 import { SortButton } from 'components/SortButton/SortButton';
 import { getHexaColor } from 'styles/color';
 import { useCallback, useEffect, useState } from 'react';
-
 import { useGetRestaurantQuery } from 'services/businesses';
 import { useLocation } from 'react-router-dom';
 
@@ -83,7 +82,8 @@ export const Reviews = () => {
   };
 
   return (
-    <>
+    <ReviewsContainer>
+      <h4>Reviews</h4>
       <SortButton showModal={showModal} selectSort={selectSort} />
       {!isLoading &&
         copyOfReviews.map((review) => (
@@ -91,7 +91,6 @@ export const Reviews = () => {
             <ReviewCard review={review}></ReviewCard>
           </ReviewWrapper>
         ))}
-      {/* {JSON.stringify(copyOfReviews.map((review) => review.time_created))} */}
-    </>
+    </ReviewsContainer>
   );
 };
