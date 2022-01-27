@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+# 🍽 Yalp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Yalp 사이트를 분석하여 클론 코딩하는 프로젝트입니다.
 
-## Available Scripts
+## Team Members
 
-In the project directory, you can run:
+| Leader                                      | Member                                | Member                                    |
+| ------------------------------------------- | ------------------------------------- | ----------------------------------------- |
+| 윤석규                                      | 강희                                     | 손원재                                    |
+| [dbstjrrb12](https://github.com/dbstjrrb12) | [kheeyaa](https://github.com/kheeyaa) | [kkdd0757](https://github.com/kkdd0757) | [sonwonjae](https://github.com/sonwonjae) |
 
-### `npm start`
+## 기술 스택
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<img alt="React" src ="https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=React&logoColor=white"/> <img alt="Redux" src ="https://img.shields.io/badge/Redux-764ABC.svg?&style=for-the-badge&logo=Redux&logoColor=white"/> <img alt="Storybook" src ="https://img.shields.io/badge/Storybook-FF4785.svg?&style=for-the-badge&logo=StoryBook&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=black"/> <img alt="Html5" src ="https://img.shields.io/badge/html5-E34F26.svg?&style=for-the-badge&logo=html5&logoColor=black"/> <img alt="styledComponents" src ="https://img.shields.io/badge/styledComponents-DB7093.svg?&style=for-the-badge&logo=styledComponents&logoColor=white"/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### 역할 분배
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| 이름   | 담당기능            |
+| ------ | ------------------- |
+| 윤석규 | 필터 기능, 디테일 리뷰 기능|
+| 강희   | 검색, 페이지네이션, 디테일 캐러셀 기능  |
+| 손원재 | 리뷰, 지도, 식당정보 기능 |
 
-### `npm run build`
+## 프로젝트 목표
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. 컴포넌트 단위 개발 ([분리기준](...))
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   > - 재사용성
+   > - 관심사의 분리
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. 성능 최적화
 
-### `npm run eject`
+   > - code splitting
+   > - tree shaking
+   > - Module bundling
+   > - SEO (Web Vital & react-helmet)
+   > - 코드 최적화
+   > - Source map
+   > - Lazy Loading
+   > - RTK Query
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. 웹 접근성
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   > - 키보드 접근성 준수
+   > - WAI ARIA를 통해 스크린 리더 지원
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. API 사용
+   > - Google Map API
+   > - Yelp Backend API
+   > - Intersection Observer API
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Install
 
-## Learn More
+```
+$ git clone https://github.com/Dumboz/yalp.git
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. terminal of Server
+```
+$ cd server
+$ npm install
+$ # You have to create .env file 
+$ npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `./server/.env`
+```
+PORT=4001
+API_KEY=Bearer {Your Yelp API key}
+URL=https://api.yelp.com/v3/
+BUSINESSES=businesses
+SEARCH=/search
+AUTOCOMPLETE=autocomplete
+```
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. terminal of Client
 
-### Analyzing the Bundle Size
+```
+$ cd client
+$ npm install
+$ # You have to create .env file 
+$ npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `./client/.env`
+```
+REACT_APP_MAP_API_KEY={Your Google Map API key}
+```
