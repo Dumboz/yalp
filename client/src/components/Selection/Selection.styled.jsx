@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import path from 'assets/filterIcon/check.svg';
+// import path from 'assets/filterIcon/check.svg';
 import { getHexaColor } from 'styles/color';
 
 const getRatio = (number, ratio = 0.68) => Math.floor(number * ratio);
@@ -31,7 +31,8 @@ export const Label = styled.label`
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(${path}) no-repeat center center;
+    background: url("data:image/svg+xml,%3Csvg width='14' height='11' viewBox='0 0 14 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.400391 6L2.60039 3.8L5.35039 6.55L11.4004 0.5L13.6004 2.7L5.35039 10.95L0.400391 6Z' fill='white'/%3E%3C/svg%3E%0A")
+      no-repeat center center;
   }
 
   &.active[type='radio']:before {
@@ -57,6 +58,7 @@ export const List = styled.div`
 `;
 
 export const Span = styled.span`
-  font-size: ${({ fontSize }) => fontSize};
+  font-size: ${({ fontSize }) => fontSize}px;
   pointer-events: none;
+  color: ${getHexaColor('gray', 500)};
 `;

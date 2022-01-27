@@ -15,19 +15,12 @@ import {
   ImgWrapper,
   Img,
 } from './RestaurantCard.styled';
+import { getHexaColor } from 'styles/color';
 
 import { useEffect, useRef, useState } from 'react';
-import { useGetRestaurantQuery } from 'services/businesses';
-
-// 본 데이터에서 넘어오는 id를 받아 business id를 요청한 후 photos로 변환 (캐러셀 포기)
-// size에 대한 처리는 조금 더 고민
-// categories는 배열 안 객체의 title로 접근
-// featureList에는 일단 price만 넣는걸로...
-// review는 id/review
-// serviceList는 transactions
-// 운영 시간도 id로 가져와야된다
 
 export function RestaurantCard({
+  index,
   id,
   image_url,
   name,
@@ -37,6 +30,7 @@ export function RestaurantCard({
   price,
   transactions,
   fontSize,
+  GEOArr,
 }) {
   const [review, setReview] = useState('');
   const [OperationState, setOperationState] = useState({
@@ -57,27 +51,32 @@ export function RestaurantCard({
       threshlod: 0,
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (!entry.isIntersecting) return;
 
         fetch(`http://localhost:4001/api/businesses/${id}`)
-          .then((res) => res.json())
+          .then(res => res.json())
           .then(({ restaurantDetail, restaurantReview }) => {
-            // const { is_open_now, open } = restaurantDetail.hours[0];
-            // const { start, end } = open?.find(({ day }) => day === today);
+            if (!restaurantDetail.hours) {
+              restaurantDetail.hours = [
+                {
+                  is_open_now: null,
+                  open: [{ day: today, start: '0000', end: '0000' }],
+                },
+              ];
+            }
+            const { is_open_now, open } = restaurantDetail?.hours[0];
+            const { start, end } = open?.find(({ day }) => day === today);
+
             setReview(restaurantReview?.reviews[0].text);
-            // setOperationState({
-            //   isOpenNow: is_open_now,
-            //   start,
-            //   end,
-            // });
-            // console.log(restaurantDetail.hours[0]);
-            // console.log(restaurantDetail.hours[0].open);
-            // console.log(restaurantDetail.hours[0].is_open_now);
+            setOperationState({
+              isOpenNow: is_open_now,
+              start,
+              end,
+            });
           });
 
-        console.log('hi');
         observer.unobserve(ref.current);
       });
     }, options);
@@ -85,9 +84,46 @@ export function RestaurantCard({
     observer.observe(ref.current);
   }, []);
 
+  const pullUpMarker = marker => () => {
+    if (!marker) return;
+
+    marker.setIcon({
+      ...marker.getIcon(),
+      fillColor: getHexaColor('white', 100),
+      strokeColor: getHexaColor('primary', 500),
+    });
+
+    marker.setLabel({
+      ...marker.getLabel(),
+      color: getHexaColor('primary', 500),
+    });
+
+    const nextZ = marker.increasementZIndex();
+
+    marker.setZIndex(nextZ);
+  };
+
+  const restoreMarker = marker => () => {
+    if (!marker) return;
+
+    marker.setIcon({
+      ...marker.getIcon(),
+      fillColor: getHexaColor('primary', 500),
+      strokeColor: getHexaColor('white', 100),
+    });
+    marker.setLabel({
+      ...marker.getLabel(),
+      color: getHexaColor('white', 100),
+    });
+  };
+
   return (
     <li ref={ref}>
-      <CardLink to={'/' + id}>
+      <CardLink
+        to={'/restaurant/' + id}
+        onMouseEnter={pullUpMarker(GEOArr[index])}
+        onMouseLeave={restoreMarker(GEOArr[index])}
+      >
         <Figure>
           <ImgWrapper>
             <Img src={image_url} alt={name} />
@@ -103,13 +139,13 @@ export function RestaurantCard({
               </CategoriesList>
               {!!featureList.length && (
                 <FeatureList size={fontSize}>
-                  {featureList.map((feature) => {
+                  {featureList.map(feature => {
                     return <Comment key={feature}>{feature}</Comment>;
                   })}
                 </FeatureList>
               )}
             </TagsWrapper>
-            <Operation size={fontSize} />
+            <Operation size={fontSize} {...OperationState} />
             <Comment
               iconType="talk"
               title="most recently review"

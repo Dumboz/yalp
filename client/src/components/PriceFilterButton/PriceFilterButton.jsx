@@ -5,7 +5,7 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 
 export function PriceFilterButton({ isSelect, onClick, children }) {
   const { search } = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const data = db.price;
   const query = QueryString.parse(search.replace(/^\?/, ''));
 
@@ -13,11 +13,16 @@ export function PriceFilterButton({ isSelect, onClick, children }) {
     const newQuery = {
       ...query,
       price: !isSelect
-        ? encodeURI(query?.price + ',' ?? '') + encodeURI(data[children])
-        : encodeURI(query?.price?.replace(`${data[children]},`, '') ?? ''),
+        ? encodeURI(query?.price ? query.price + ',' : '') +
+          encodeURI(data[children])
+        : encodeURI(query?.price?.replace(`${data[children]}`, '') ?? ''),
     };
+
+    newQuery.price = newQuery?.price.replace(/(,\s*$)/, '') ?? '';
+    newQuery.price = newQuery?.price.replace(/(^,*)/, '') ?? '';
+    newQuery.price = newQuery?.price.replace(/,{2}/, ',') ?? '';
     !newQuery.price && delete newQuery.price;
-    console.log(newQuery);
+
     setSearchParams(newQuery);
   };
 
@@ -30,7 +35,8 @@ export function PriceFilterButton({ isSelect, onClick, children }) {
       }}
       type="button"
       role="switch"
-      aria-checked={isSelect}>
+      aria-checked={isSelect}
+    >
       {children}
     </Button>
   );

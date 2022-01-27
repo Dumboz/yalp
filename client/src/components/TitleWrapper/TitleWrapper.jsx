@@ -1,19 +1,44 @@
-import styled from 'styled-components';
-import { setTextAlign } from 'utils/styled/center';
+import React from 'react';
+import { getHexaColor } from 'styles/color';
+import { TitleContainer, Title } from './TitleWrapper.styled';
+import PropTypes from 'prop-types';
 
-const Title = styled.h2`
-  text-align: ${setTextAlign};
-`;
-
-export function TitleWrapper({ title, center, children }) {
+function TitleWrapper({
+  title,
+  center,
+  size,
+  margin,
+  containerMargin,
+  as,
+  color,
+  children,
+}) {
   return (
-    <>
-      <Title center={center}>{title}</Title>
+    <TitleContainer containerMargin={containerMargin} color={color}>
+      <Title as={as} center={center} size={size} margin={margin}>
+        {title}
+      </Title>
       {children}
-    </>
+    </TitleContainer>
   );
 }
 
 TitleWrapper.defaultProps = {
   center: false,
+  size: 20,
+  margin: 0,
+  as: 'h2',
+  color: getHexaColor('gray', 500),
 };
+
+TitleWrapper.propTypes = {
+  center: PropTypes.bool,
+  size: PropTypes.number,
+  margin: PropTypes.number,
+  containerMargin: PropTypes.number,
+  as: PropTypes.string,
+  color: PropTypes.string,
+  children: PropTypes.any,
+};
+
+export default React.memo(TitleWrapper);

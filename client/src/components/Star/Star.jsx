@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getHexaColor } from 'styles/color';
 
-function Star({ starType = 'empty', step = 500, width = 23 }) {
+function Star({ starType, step, width }) {
   return (
     <svg
       width={width}
@@ -36,6 +36,12 @@ function Star({ starType = 'empty', step = 500, width = 23 }) {
     </svg>
   );
 }
+
+Star.defaultProps = {
+  starType: 'empty',
+  step: 500,
+  width: 23,
+};
 
 Star.propTypes = {
   starType: PropTypes.oneOf(['empty', 'full', 'half']).isRequired,

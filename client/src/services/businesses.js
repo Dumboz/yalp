@@ -10,4 +10,15 @@ export const businessesApi = createApi({
   }),
 });
 
+export const restaurantApi = createApi({
+  reducerPath: 'restaurantApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4001' }),
+  endpoints: (builder) => ({
+    getRestaurant: builder.query({
+      query: (id) => `api/businesses/${id.replace('/restaurant/', '')}`,
+    }),
+  }),
+});
+
 export const { useGetBusinessesQuery } = businessesApi;
+export const { useGetRestaurantQuery } = restaurantApi;

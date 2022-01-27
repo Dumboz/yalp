@@ -1,6 +1,5 @@
 import { ArrowButton } from 'components/ArrowButton/ArrowButton';
-import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import {
   Ul,
@@ -9,19 +8,21 @@ import {
   PagenationWrapper,
   Text,
 } from './Pagenation.styled';
+import { useGetBusinessesQuery } from 'services/businesses';
+import { createPageList } from 'utils';
 const queryString = require('query-string');
 
 function Pagenation() {
-  const { isLoading, total } = useSelector(
-    ({ businessesReducer }) => businessesReducer,
-  );
   const { pathname, search } = useLocation();
-  const [_, setSearchParams] = useSearchParams({});
+  const {
+    data: { total },
+  } = useGetBusinessesQuery(search);
+  const [, setSearchParams] = useSearchParams({});
   const query = queryString.parse(search);
   const { offset } = query;
-  const lastPage = Math.ceil(+total / 20);
+  const lastPage = Math.ceil(+total / 10);
   const currentPage = (+offset || 0) + 1;
-  const pageList = [currentPage];
+  const pageList = [...createPageList({ currentPage, lastPage })];
 
   const onClick = useCallback(
     direct => {
@@ -33,16 +34,13 @@ function Pagenation() {
     [offset, query, setSearchParams],
   );
 
-  if (isLoading) return <></>;
+  const leftClick = useCallback(() => {
+    onClick('left');
+  }, [onClick]);
 
-  let i = 1;
-  while (pageList.length < 9) {
-    if (currentPage + i <= lastPage) pageList.push(currentPage + i);
-    if (pageList.length === lastPage) break;
-    if (currentPage - i > 0) pageList.unshift(currentPage - i);
-    if (pageList.length === lastPage) break;
-    i++;
-  }
+  const rightClick = useCallback(() => {
+    onClick('right');
+  }, [onClick]);
 
   return (
     <PagenationWrapper>
@@ -50,7 +48,7 @@ function Pagenation() {
         <ArrowButton
           direct="left"
           disabled={pageList.includes(1)}
-          onClick={() => onClick('left')}
+          onClick={leftClick}
         />
         <Ul>
           {pageList.map(page => {
@@ -66,8 +64,8 @@ function Pagenation() {
         </Ul>
         <ArrowButton
           direct="right"
-          disabled={pageList.includes(lastPage)}
-          onClick={() => onClick('right')}
+          disabled={pageList.includes(lastPage) || lastPage === 0}
+          onClick={rightClick}
         />
       </PagelistWrapper>
       <Text>{`${currentPage} of ${lastPage}`}</Text>
@@ -75,4 +73,4 @@ function Pagenation() {
   );
 }
 
-export default React.memo(Pagenation);
+export default Pagenation;

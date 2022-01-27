@@ -1,42 +1,49 @@
-import { useEffect } from 'react';
+import QueryString from 'qs';
+import { useEffect, useRef } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 import { Map, MapWrapper } from './GEO.styled';
-export function GEO({ features: featuresList }) {
+import { useLocation } from 'react-router-dom';
+import { useGetBusinessesQuery } from 'services/businesses';
+import { setMap } from './setMap';
+
+export function GEO({ setGEOArr }) {
+  let businesses;
+  let markerPositions;
+
+  const ref = useRef();
+  const { search } = useLocation();
+  const { data, isLoading } = useGetBusinessesQuery(search);
+
+  if (!isLoading) {
+    markerPositions = data?.businesses.map(({ coordinates }) => coordinates);
+    businesses = data?.businesses;
+  }
+
   useEffect(() => {
+    let zIndex = 100;
+    let increasementZIndex = () => zIndex++;
+
     const loader = new Loader({
-      apiKey: 'AIzaSyAd3NJab1Ah3f59giU2nvfORfClh3_1xFo',
+      apiKey: process.env.REACT_APP_MAP_API_KEY,
       version: 'weekly',
     });
-
-    let map;
-
-    const mapOptions = {
-      center: {
-        lat: 37.786882,
-        lng: -122.399972,
-      },
-      zoom: 14,
-    };
-
-    loader.load().then((google) => {
-      map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-      const features = featuresList.map(({ latitude, longitude }) => ({
-        position: new google.maps.LatLng(latitude, longitude),
-      }));
-
-      features.forEach((features) => {
-        new google.maps.Marker({
-          position: features.position,
-          map: map,
-        });
-      });
-    });
-  }, []);
+    loader
+      .load()
+      .then(
+        setMap(
+          ref,
+          QueryString.parse(search.replace(/^\?/, ''))?.location,
+          markerPositions,
+          businesses,
+          increasementZIndex,
+          setGEOArr
+        )
+      );
+  }, [businesses]);
 
   return (
     <MapWrapper>
-      <Map id="map" />
+      <Map id="map" ref={ref} />
     </MapWrapper>
   );
 }

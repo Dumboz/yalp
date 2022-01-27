@@ -1,63 +1,64 @@
 import { A11yHidden } from 'components/A11yHidden/A11yHidden';
 import Button from 'components/Button/Button';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { getAutocomplete } from 'api';
 import { Label, Text, Input, Form } from './SearchForm.styled';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { makeQuery } from 'utils';
-import { useSelector } from 'react-redux';
+import { useGetBusinessesQuery } from 'services/businesses';
+
 const queryString = require('query-string');
 
 function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
-  const { pathname, search } = useLocation();
-  const { term: defaltTerm } = queryString.parse(search);
-  const [term, setTerm] = useState(defaltTerm);
+  const { search } = useLocation();
+  const searchObj = queryString.parse(search);
+  const [term, setTerm] = useState(searchObj.term);
   const [location, setLocation] = useState(locationWord);
   const [autoTerms, setAutoTerms] = useState();
   const navigate = useNavigate();
 
-  const { isLoading, total } = useSelector(
-    ({ businessesReducer }) => businessesReducer
-  );
+  useEffect(() => {
+    setTerm(searchObj.term);
+  }, [search]);
 
-  console.log('SearchForm', { isLoading });
+  const { isLoading } = useGetBusinessesQuery(search);
 
   const onChange = useCallback(
-    (e) => {
+    e => {
       setLocation(e.target.value);
     },
-    [setLocation]
+    [setLocation],
   );
 
   const onSubmit = useCallback(
-    (e) => {
+    e => {
       e.preventDefault();
       const formData = new FormData(e.target);
-      const formObj = {};
+      const formObj = { ...searchObj };
 
       for (const [key, value] of formData.entries()) {
         formObj[key] = value;
       }
       formObj.offset = 0;
+      formObj.radius = 800;
+      formObj.limit = 10;
 
-      navigate('/businesses/search?' + makeQuery(formObj));
-      e.preventDefault();
+      navigate('/search?' + makeQuery(formObj));
     },
-    [navigate]
+    [navigate, searchObj],
   );
 
   const onAutocomplete = useCallback(
-    async (e) => {
+    async e => {
+      setTerm(e.target.value);
+
       const response = await getAutocomplete({
         text: e.target.value,
-        latitude: 37.786942,
-        longitude: -122.399643,
       });
 
-      setTerm(e.target.value);
-      setAutoTerms(response.terms.map((term) => term.text));
+      setAutoTerms(response.terms.map(term => term.text));
     },
-    [setAutoTerms]
+    [setAutoTerms, setTerm],
   );
 
   return (
@@ -74,8 +75,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         />
       </Label>
       <datalist autoComplete="off" id="termList">
-        {autoTerms &&
-          autoTerms.map((term) => <option value={term} key={term} />)}
+        {autoTerms && autoTerms.map(term => <option value={term} key={term} />)}
       </datalist>
       <Label width={464}>
         {showLabel ? <Text>Near</Text> : <A11yHidden>Near</A11yHidden>}
@@ -83,7 +83,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
       </Label>
       <Button
         buttonType="highlight"
-        iconType={isLoading ? 'fire' : 'search'}
+        iconType={isLoading ? 'loading' : 'search'}
         flatBorderSide="left"
       />
     </Form>

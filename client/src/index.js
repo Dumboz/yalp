@@ -1,72 +1,77 @@
-import React, { useEffect } from 'react';
+import { StrictMode, lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { App, SearchPage, DetailPage } from 'pages';
 import { GlobalStyle } from 'styles/global.styled';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { StoreProvider } from './store';
 import { InitSVG } from 'components';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateBusinesses } from 'store/businesses';
-import styled from 'styled-components';
-import { useGetBusinessesQuery } from 'services/businesses';
+import { Circles } from 'react-loader-spinner';
+import { getHexaColor } from 'styles/color';
 
-const StyledExam = styled.div`
-  margin-top: 100px;
-  background-color: yellow;
-  width: 100%;
-  min-height: 100px;
-`;
+const App = lazy(() => import('pages/App/App'));
+const SearchPage = lazy(() => import('pages/SearchPage/SearchPage'));
+const DetailPage = lazy(() => import('pages/DetailPage/DetailPage'));
+const PageNotFound = lazy(() => import('pages/PageNotFound/PageNotFound'));
 
-const Exam = () => {
-  const dispatch = useDispatch();
-  const { pathname, search } = useLocation();
-
-  const { data, error, isLoading } = useGetBusinessesQuery(search);
-  if (isLoading) {
-    dispatch(updateBusinesses({ error, isLoading }));
-  } else {
-    dispatch(
-      updateBusinesses({
-        businesses: data.businesses,
-        total: data.total,
-        region: data.region,
-        error,
-        isLoading,
-      })
-    );
-  }
-
-  const { businesses, total, region } = useSelector(
-    ({ businessesReducer }) => businessesReducer
-  );
-
-  return (
-    <StyledExam>
-      <div>{'total' + !isLoading && JSON.stringify(total)}</div>
-      <div>{'region' + !isLoading && JSON.stringify(region)}</div>
-      <div>{JSON.stringify(businesses)}</div>
-    </StyledExam>
-  );
-};
+const defaultQuery =
+  'search?term=restaurant&location=New%20York&offset=0&radius=800&limit=10';
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <>
+  <StrictMode>
     <GlobalStyle />
-    <StoreProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            {/* <Route path="*" element={<Exam />} /> */}
-            <Route path="search" element={<SearchPage />} />
-            <Route path=":id" element={<DetailPage />} />
-          </Route>
-        </Routes>
-        <InitSVG />
-      </BrowserRouter>
-    </StoreProvider>
-    {/* </React.StrictMode> */}
-  </>,
+    <HelmetProvider>
+      <StoreProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense
+                  fallback={<Circles color={getHexaColor('primary', 300)} />}>
+                  <App />
+                </Suspense>
+              }>
+              <Route
+                index
+                element={<Navigate to={defaultQuery} replace={true} />}
+              />
+              <Route
+                path="search"
+                element={
+                  <Suspense
+                    fallback={<Circles color={getHexaColor('primary', 300)} />}>
+                    <SearchPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="restaurant/:id"
+                element={
+                  <Suspense
+                    fallback={<Circles color={getHexaColor('primary', 300)} />}>
+                    <DetailPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="page-not-found"
+                element={
+                  <Suspense
+                    fallback={<Circles color={getHexaColor('primary', 300)} />}>
+                    <PageNotFound />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="*"
+                element={<Navigate to="page-not-found" replace={true} />}
+              />
+            </Route>
+          </Routes>
+          <InitSVG />
+        </BrowserRouter>
+      </StoreProvider>
+    </HelmetProvider>
+  </StrictMode>,
   document.getElementById('root')
 );
