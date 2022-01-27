@@ -88,3 +88,7 @@ $ npm start
 ```
 REACT_APP_MAP_API_KEY={Your Google Map API key}
 ```
+
+## Yalp 기술 위키
+
+[Yalp 기술 위키 주소](https://github.com/Dumboz/yalp/wiki)
