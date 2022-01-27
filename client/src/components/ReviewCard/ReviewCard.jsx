@@ -29,7 +29,11 @@ export const ReviewCard = (review) => {
         </UserImg>
         <UserName>{name}</UserName>
       </UserWrapper>
-      <Rating score={rating} children={dateTranslator(time_created)} />
+      <Rating
+        width={20}
+        score={rating}
+        children={dateTranslator(time_created)}
+      />
       <ReviewText>{text}</ReviewText>
     </>
   );

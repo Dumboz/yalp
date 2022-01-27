@@ -2,18 +2,20 @@ import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
 export const FooterContainer = styled.div`
   background-color: ${getHexaColor('gray', 100)};
-  padding-top: 100px;
+  padding-top: 46px;
 `;
 
 export const FooterWrapper = styled.div`
   margin: 0 auto;
-  max-width: 80%;
+  width: 100%;
+  max-width: 1000px;
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 20px;
+  justify-content: space-between;
 
   & > div:not(:last-child) {
-    width: 280px;
+    min-width: 280px;
   }
 `;
 
