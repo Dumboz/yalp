@@ -22,7 +22,7 @@ function Pagenation() {
   const { offset } = query;
   const lastPage = Math.ceil(+total / 10);
   const currentPage = (+offset || 0) + 1;
-  const pageList = [createPageList({ currentPage, lastPage })];
+  const pageList = [...createPageList({ currentPage, lastPage })];
 
   const onClick = useCallback(
     direct => {
