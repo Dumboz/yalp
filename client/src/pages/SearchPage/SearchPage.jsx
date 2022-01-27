@@ -1,3 +1,4 @@
+import QueryString from 'qs';
 import { useLocation } from 'react-router-dom';
 import { useGetBusinessesQuery } from 'services/businesses';
 import { BusinessesList, GEO, Footer } from 'layouts';
@@ -13,13 +14,19 @@ import { TitleWrapper } from 'components';
 import { useState } from 'react';
 import { Circles } from 'react-loader-spinner';
 import { getHexaColor } from 'styles/color';
+import { Helmet } from 'react-helmet-async';
+
 export function SearchPage() {
   const { search } = useLocation();
   const { error, isLoading } = useGetBusinessesQuery(search);
   const [GEOArr, setGEOArr] = useState([]);
+  const { location } = QueryString.parse(search);
 
   return (
     <>
+      <Helmet>
+        <title>The Best 10 Restaurants in {location}</title>
+      </Helmet>
       <SearchContainer>
         <FilterWrapper>
           <FilterSection />
