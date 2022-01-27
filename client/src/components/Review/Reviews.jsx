@@ -30,6 +30,7 @@ export const Reviews = () => {
 
   const selectSort = (e) => {
     const option = e.target.textContent;
+    const sortButtonSpan = document.querySelector('.sortbutton > span');
 
     switch (option) {
       case 'Newest First':
@@ -42,6 +43,7 @@ export const Reviews = () => {
               : 0
           )
         );
+        sortButtonSpan.textContent = option;
         break;
       case 'Oldest First':
         setCopyOfReviews(
@@ -53,21 +55,23 @@ export const Reviews = () => {
               : 0
           )
         );
+        sortButtonSpan.textContent = option;
         break;
       case 'Highest Rated':
-        setCopyOfReviews(
-          [...copyOfReviews].sort((a, b) =>
-            a.rating > b.rating ? 1 : a.rating < b.rating ? -1 : 0
-          )
-        );
-
-        break;
-      case 'Lowest Rated':
         setCopyOfReviews(
           [...copyOfReviews].sort((a, b) =>
             a.rating > b.rating ? -1 : a.rating < b.rating ? 1 : 0
           )
         );
+        sortButtonSpan.textContent = option;
+        break;
+      case 'Lowest Rated':
+        setCopyOfReviews(
+          [...copyOfReviews].sort((a, b) =>
+            a.rating > b.rating ? 1 : a.rating < b.rating ? -1 : 0
+          )
+        );
+        sortButtonSpan.textContent = option;
         break;
       default:
         break;

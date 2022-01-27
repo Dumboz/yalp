@@ -11,7 +11,6 @@ export const SortButton = ({ showModal, selectSort }) => {
         </span>
       </Button>
       <Modal className={'modal-menu'}>
-        <ModalItem onClick={selectSort}>Yelp Sort</ModalItem>
         <ModalItem onClick={selectSort}>Newest First</ModalItem>
         <ModalItem onClick={selectSort}>Oldest First</ModalItem>
         <ModalItem onClick={selectSort}>Highest Rated</ModalItem>
