@@ -19,14 +19,6 @@ import { getHexaColor } from 'styles/color';
 
 import { useEffect, useRef, useState } from 'react';
 
-// 본 데이터에서 넘어오는 id를 받아 business id를 요청한 후 photos로 변환 (캐러셀 포기)
-// size에 대한 처리는 조금 더 고민
-// categories는 배열 안 객체의 title로 접근
-// featureList에는 일단 price만 넣는걸로...
-// review는 id/review
-// serviceList는 transactions
-// 운영 시간도 id로 가져와야된다
-
 export function RestaurantCard({
   index,
   id,

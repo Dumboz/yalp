@@ -21,7 +21,6 @@ export function PriceFilterButtonGroup() {
 
   const handleClick = (e) => {
     const payload = db.price[e.target.textContent];
-    console.log(payload);
     dispatch(setPrice(payload - 1));
   };
 
@@ -32,7 +31,8 @@ export function PriceFilterButtonGroup() {
           key={key}
           onClick={handleClick}
           isSelect={priceState[key]}
-          aria-checked={priceState[key]}>
+          aria-checked={priceState[key]}
+        >
           {state}
         </PriceFilterButton>
       ))}

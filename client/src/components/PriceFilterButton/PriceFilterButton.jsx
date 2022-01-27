@@ -5,7 +5,7 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 
 export function PriceFilterButton({ isSelect, onClick, children }) {
   const { search } = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const data = db.price;
   const query = QueryString.parse(search.replace(/^\?/, ''));
 
@@ -35,7 +35,8 @@ export function PriceFilterButton({ isSelect, onClick, children }) {
       }}
       type="button"
       role="switch"
-      aria-checked={isSelect}>
+      aria-checked={isSelect}
+    >
       {children}
     </Button>
   );

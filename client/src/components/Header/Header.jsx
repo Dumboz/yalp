@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
 
 const HeaderWrapper = React.memo(styled.div`
-  /* position: relative; */
   width: 100%;
   height: 130px;
   padding: 16px;

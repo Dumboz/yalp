@@ -1,6 +1,5 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { App, SearchPage, DetailPage, PageNotFound } from 'pages';
 import { GlobalStyle } from 'styles/global.styled';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -12,8 +11,7 @@ const defaultQuery =
   'search?term=restaurant&location=New%20York&offset=0&radius=800&limit=10';
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <>
+  <StrictMode>
     <GlobalStyle />
     <HelmetProvider>
       <StoreProvider>
@@ -37,7 +35,6 @@ ReactDOM.render(
         </BrowserRouter>
       </StoreProvider>
     </HelmetProvider>
-    {/* </React.StrictMode> */}
-  </>,
+  </StrictMode>,
   document.getElementById('root')
 );
