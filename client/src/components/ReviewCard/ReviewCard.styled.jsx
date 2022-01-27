@@ -6,14 +6,14 @@ export const UserWrapper = styled.div`
   flex-flow: row;
   align-items: center;
   gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 `;
 
 export const UserImg = styled.a`
   border-radius: 50%;
   overflow: hidden;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 
   & img {
     object-fit: cover;
@@ -24,7 +24,7 @@ export const UserImg = styled.a`
 
 export const UserName = styled.a`
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
   color: ${getHexaColor('gray', 500)};
 `;
 
@@ -32,4 +32,5 @@ export const ReviewText = styled.span`
   display: inline-block;
   color: ${getHexaColor('gray', 500)};
   margin-top: 10px;
+  font-size: 14px;
 `;

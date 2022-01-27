@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { getHexaColor } from 'styles/color';
 
 export const Wrapper = styled.div`
-  position: relative;
-  margin: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 export const Button = styled.button`

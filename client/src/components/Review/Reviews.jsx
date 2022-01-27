@@ -1,9 +1,8 @@
-import { ReviewWrapper } from './Reviews.styled';
+import { ReviewsContainer, ReviewWrapper } from './Reviews.styled';
 import { ReviewCard } from 'components/ReviewCard/ReviewCard';
 import { SortButton } from 'components/SortButton/SortButton';
 import { getHexaColor } from 'styles/color';
-import { useCallback, useEffect, useState } from 'react';
-
+import { useCallback, useState } from 'react';
 import { useGetRestaurantQuery } from 'services/businesses';
 import { useLocation } from 'react-router-dom';
 
@@ -29,8 +28,9 @@ export const Reviews = () => {
     );
   }, []);
 
-  const selectSort = (e) => {
+  const selectSort = useCallback((e) => {
     const option = e.target.textContent;
+    const sortButtonSpan = document.querySelector('.sortbutton > span');
 
     switch (option) {
       case 'Newest First':
@@ -43,6 +43,7 @@ export const Reviews = () => {
               : 0
           )
         );
+        sortButtonSpan.textContent = option;
         break;
       case 'Oldest First':
         setCopyOfReviews(
@@ -54,21 +55,23 @@ export const Reviews = () => {
               : 0
           )
         );
+        sortButtonSpan.textContent = option;
         break;
       case 'Highest Rated':
-        setCopyOfReviews(
-          [...copyOfReviews].sort((a, b) =>
-            a.rating > b.rating ? 1 : a.rating < b.rating ? -1 : 0
-          )
-        );
-
-        break;
-      case 'Lowest Rated':
         setCopyOfReviews(
           [...copyOfReviews].sort((a, b) =>
             a.rating > b.rating ? -1 : a.rating < b.rating ? 1 : 0
           )
         );
+        sortButtonSpan.textContent = option;
+        break;
+      case 'Lowest Rated':
+        setCopyOfReviews(
+          [...copyOfReviews].sort((a, b) =>
+            a.rating > b.rating ? 1 : a.rating < b.rating ? -1 : 0
+          )
+        );
+        sortButtonSpan.textContent = option;
         break;
       default:
         break;
@@ -76,10 +79,11 @@ export const Reviews = () => {
 
     document.querySelector('.sortbutton').classList.remove('pressed');
     e.target.closest('menu').classList.remove('active');
-  };
+  }, []);
 
   return (
-    <>
+    <ReviewsContainer>
+      <h4>Reviews</h4>
       <SortButton showModal={showModal} selectSort={selectSort} />
       {!isLoading &&
         copyOfReviews.map((review) => (
@@ -87,7 +91,6 @@ export const Reviews = () => {
             <ReviewCard review={review}></ReviewCard>
           </ReviewWrapper>
         ))}
-      {/* {JSON.stringify(copyOfReviews.map((review) => review.time_created))} */}
-    </>
+    </ReviewsContainer>
   );
 };

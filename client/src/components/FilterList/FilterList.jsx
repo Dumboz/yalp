@@ -1,6 +1,6 @@
 import QueryString from 'qs';
 import db from 'db/filter.json';
-import { useLayoutEffect, useRef } from 'react';
+import { useCallback, useLayoutEffect, useRef } from 'react';
 import { oneOf } from 'prop-types';
 import { Wrapper, Heading, List } from './FilterList.styled';
 import { useSearchParams, useLocation } from 'react-router-dom';
@@ -15,14 +15,11 @@ export const FilterList = ({
   options = [],
 }) => {
   const listRef = useRef(null);
-  const filterState = useSelector((state) => state.filter);
-
   const { search } = useLocation();
   const [_, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
-  const handleClick = (e) => {
-    const type = e.target.querySelector('input').type;
+  const handleClick = useCallback((e) => {
     const isChecked = e.target.querySelector('input').checked;
     const query = QueryString.parse(search.replace(/^\?/, ''));
     const option = e.target.querySelector('span').textContent;
@@ -65,7 +62,7 @@ export const FilterList = ({
       default:
         break;
     }
-  };
+  }, []);
 
   const makePascalCase = (str) => {
     return str
@@ -101,6 +98,11 @@ export const FilterList = ({
       <List ref={listRef}>{setOptions(options)}</List>
     </Wrapper>
   );
+};
+
+FilterList.defalutProps = {
+  type: 'checkbox',
+  options: [],
 };
 
 FilterList.propTypes = {

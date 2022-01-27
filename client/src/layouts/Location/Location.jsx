@@ -27,7 +27,7 @@ export function Location() {
       center: `${latitude},${longitude}`,
       zoom: 15,
       language: 'en',
-      size: '315x150',
+      size: '420x200',
       markers: `scale:1|icon:${yelpIcon}|label:G|${latitude},${longitude}`,
       key: api_key,
     });

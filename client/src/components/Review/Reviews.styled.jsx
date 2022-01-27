@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-
-export const ReviewSection = styled.div``;
-
+import { LocationContainer } from 'layouts/Location/Location.styled';
 export const ReviewWrapper = styled.div`
-  margin: 20px auto;
-  width: 80%;
+  margin-bottom: 24px;
+`;
+export const ReviewsContainer = styled(LocationContainer)`
+  flex-direction: column;
+  position: relative;
 `;
