@@ -30,7 +30,7 @@ export function GEO({ setGEOArr }) {
       apiKey: 'AIzaSyAd3NJab1Ah3f59giU2nvfORfClh3_1xFo',
       version: 'weekly',
     });
-    loader.load().then((google) => {
+    loader.load().then(google => {
       const mapOptions = {
         center: null,
         zoom: 13,
@@ -46,7 +46,7 @@ export function GEO({ setGEOArr }) {
           map.setCenter(results[0].geometry.location);
         } else {
           alert(
-            'Geocode was not successful for the following reason: ' + status
+            'Geocode was not successful for the following reason: ' + status,
           );
         }
       });
@@ -126,8 +126,6 @@ export function GEO({ setGEOArr }) {
 
       setGEOArr(arr);
     });
-
-    console.log('this is businesses Map Marker');
   }, [businesses]);
 
   return (
