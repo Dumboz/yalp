@@ -1,4 +1,3 @@
-import { fireEvent } from '@testing-library/react';
 import { Selection } from 'components/Selection/Selection';
 import { useReducer, useCallback, useRef } from 'react';
 import {
@@ -31,7 +30,7 @@ export const FilterModal = ({ className, changeChildren }) => {
 
   const handleChange = (target) => {
     const { checked, id } = target.firstElementChild;
-    const idx = Number(id.split(' ')[1]);
+    const idx = Number(id.split('-')[1]);
 
     checked
       ? dispatch({ type: 'UN_CHECK', id: idx })

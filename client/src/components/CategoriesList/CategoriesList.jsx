@@ -1,12 +1,11 @@
 import { CategoriesItem, CategoriesUl } from './CategoriesList.styled';
 import { makeArray } from 'utils';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import QueryString from 'qs';
 
 export function CategoriesList({ size, children }) {
-  const params = useParams();
   const { search } = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const Categories = makeArray(children);
 
   const filterCategory = (e) => {

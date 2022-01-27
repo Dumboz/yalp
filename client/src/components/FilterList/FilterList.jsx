@@ -1,8 +1,10 @@
 import QueryString from 'qs';
 import db from 'db/filter.json';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { oneOf } from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Wrapper, Heading, List } from './FilterList.styled';
+import { setFeatures, setDistance } from 'store/filterSlice';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { Selection, PriceFilterButtonGroup } from 'components';
 
@@ -14,46 +16,57 @@ export const FilterList = ({
 }) => {
   const listRef = useRef(null);
   const { search } = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
 
-  const handleClick = (e) => {
-    const type = e.target.querySelector('input').type;
-    const isChecked = e.target.querySelector('input').checked;
+  const handleClick = useCallback(
+    (e) => {
+      const isChecked = e.target.querySelector('input').checked;
+      const query = QueryString.parse(search.replace(/^\?/, ''));
+      const option = e.target.querySelector('span').textContent;
+      const data = db[categories];
 
-    if (type === 'radio') {
-      [...listRef.current.children].forEach((item) => {
-        const input = item.querySelector('input');
-        const label = item.querySelector('label');
-        label.classList.toggle('active', input.checked);
-      });
-    }
+      switch (categories) {
+        case 'features':
+          // query 요청
+          const newQuery = {
+            ...query,
+            offset: 0,
+            attributes: isChecked
+              ? encodeURI(query?.attributes ? query?.attributes + ',' : '') +
+                encodeURI(data[option])
+              : encodeURI(query?.attributes?.replace(`${data[option]}`, '')),
+          };
 
-    const term = e.target.querySelector('span').textContent;
-    const data = db[categories];
-    const query = QueryString.parse(search.replace(/^\?/, ''));
+          newQuery.attributes =
+            newQuery?.attributes.replace(/(,\s*$)/, '') ?? '';
+          newQuery.attributes = newQuery?.attributes.replace(/(^,*)/, '') ?? '';
+          newQuery.attributes = newQuery?.attributes.replace(/,{2}/, ',') ?? '';
+          !newQuery.attributes && delete newQuery.attributes;
 
-    switch (categories) {
-      case 'features':
-        const newQuery = {
-          ...query,
-          attributes: isChecked
-            ? encodeURI(query?.attributes ? query?.attributes : '') +
-              encodeURI(data[term] + ',')
-            : encodeURI(query?.attributes?.replace(`${data[term]},`, '')),
-        };
-        !newQuery.attributes && delete newQuery.attributes;
-        setSearchParams(newQuery);
-        break;
-      case 'distance':
-        setSearchParams({
-          ...query,
-          radius: encodeURI(Number(data[term])),
-        });
-        break;
-      default:
-        break;
-    }
-  };
+          setSearchParams(newQuery);
+
+          // store state 요청
+          dispatch(setFeatures(data[option]));
+
+          break;
+        case 'distance':
+          // query 요청
+          setSearchParams({
+            ...query,
+            offset: 0,
+            radius: encodeURI(Number(data[option])),
+          });
+
+          // store state 요청
+          dispatch(setDistance(data[option]));
+          break;
+        default:
+          break;
+      }
+    },
+    [search, setSearchParams]
+  );
 
   const makePascalCase = (str) => {
     return str
@@ -67,10 +80,12 @@ export const FilterList = ({
       options.map((item, key) => (
         <li key={key} tabIndex={'0'}>
           <Selection
+            keyProp={key}
             type={type}
             onClick={handleClick}
             group={heading}
             children={item[0]}
+            fontSize={14}
           />
         </li>
       ))
@@ -87,6 +102,11 @@ export const FilterList = ({
       <List ref={listRef}>{setOptions(options)}</List>
     </Wrapper>
   );
+};
+
+FilterList.defalutProps = {
+  type: 'checkbox',
+  options: [],
 };
 
 FilterList.propTypes = {

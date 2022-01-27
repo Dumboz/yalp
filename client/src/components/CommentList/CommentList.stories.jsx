@@ -5,9 +5,14 @@ import { InitSVG } from 'components/InitSVG/InitSVG';
 export default {
   title: 'CommentList',
   component: CommentList,
+  argTypes: {
+    color: {
+      control: 'color',
+    },
+  },
 };
 
-const Template = (args) => (
+const Template = args => (
   <>
     <CommentList {...args} />
     <InitSVG />

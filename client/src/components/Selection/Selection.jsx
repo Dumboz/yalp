@@ -1,7 +1,11 @@
+import db from 'db/filter.json';
+import QueryString from 'qs';
 import PropTypes from 'prop-types';
-import { useState, useCallback, useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { setFeatures, setDistance } from 'store/filterSlice';
 import { Input, Label as StyledLabel, List, Span } from './Selection.styled';
-import { A11yHidden } from 'components';
 
 export function Selection({
   keyProp,
@@ -9,19 +13,49 @@ export function Selection({
   group,
   children,
   checked,
+  onClick,
   fontSize = 16,
   boxSize = 22,
-  onClick,
-  content,
 }) {
-  const id = group + ' ' + keyProp;
+  const id = group + '-' + keyProp;
+  const filterState = useSelector((state) => state.filter);
+
+  const { search } = useLocation();
+  const query = QueryString.parse(search.replace(/^\?/, ''));
+  const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    const { attributes, radius } = query;
+    const option = db[group][children];
+
+    if (!attributes) dispatch(setFeatures('initial'));
+
+    attributes &&
+      group === 'features' &&
+      attributes.includes(option) &&
+      dispatch(setFeatures(option));
+
+    radius &&
+      group === 'distance' &&
+      radius.includes(option) &&
+      dispatch(setDistance(option));
+  }, []);
+
+  useEffect(() => {
+    const inputElement = document.getElementById(`${id}`);
+    const labelElement = document.querySelector(`#${id} + label`);
+    const option = db[group][children];
+
+    inputElement.checked = filterState[group][option];
+    labelElement.classList.toggle('active', inputElement.checked);
+  });
 
   const handleCheck = (e) => {
-    const isChecked = e.target.firstElementChild.checked;
-    e.target.firstElementChild.checked = isChecked ? false : true;
+    const inputElement = e.target.querySelector('input');
+    const labelElement = e.target.querySelector('label');
 
-    const label = e.target.children[1];
-    label.classList.toggle('active');
+    inputElement.checked = inputElement.checked ? false : true;
+    labelElement.classList.toggle('active');
   };
 
   return (
@@ -30,7 +64,8 @@ export function Selection({
         handleCheck(e);
         onClick && onClick(e);
       }}
-      aria-label={content}>
+      aria-label={children}
+    >
       <Input id={id} type={type} name={group} aria-checked={checked} />
       <StyledLabel
         type={type}
@@ -38,7 +73,6 @@ export function Selection({
         checked={checked}
         boxSize={boxSize}
         aria-labelledby={'contents'}
-        // className={checked ? 'active' : 'deactive'}
       />
       <Span id="contents" tabIndex="-1" fontSize={fontSize}>
         {children}

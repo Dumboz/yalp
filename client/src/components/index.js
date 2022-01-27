@@ -17,5 +17,7 @@ export * from './FilterModal/FilterModal';
 export * from './FilterList/FilterList';
 export * from './FilterSection/FilterSection';
 export * from './Selection/Selection';
-export * from './TitleWrapper/TitleWrapper';
+export { default as TitleWrapper } from './TitleWrapper/TitleWrapper';
 export { default as Header } from './Header/Header';
+export { default as Modal } from './Modal/Modal';
+export { default as ScrollToTop } from './ScrollToTop/ScrollToTop';

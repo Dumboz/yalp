@@ -1,20 +1,22 @@
 import styled from 'styled-components';
 import { oneOf } from 'prop-types';
 import { getSize } from 'utils';
+import React from 'react';
 
-const SVG = styled.svg`
+const SVG = React.memo(styled.svg`
   width: ${getSize}px;
   height: ${getSize}px;
   flex: none;
-`;
+`);
 
-export function Icon({ type, size, color }) {
+export const Icon = React.memo(({ type, size, color }) => {
   return (
     <SVG size={size}>
       <use href={`#${type}`} fill={color} />
     </SVG>
   );
-}
+});
+
 Icon.defaultProps = {
   type: 'fire',
   size: 16,
@@ -40,5 +42,8 @@ Icon.propTypes = {
     'talk',
     'dropdown',
     'done',
+    'loading',
+    'close',
+    'claimed',
   ]),
 };

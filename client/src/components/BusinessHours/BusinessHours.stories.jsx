@@ -9,7 +9,7 @@ const Template = (args) => <BusinessHours {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  openTimeList: [
+  open: [
     {
       is_overnight: false,
       start: '1000',

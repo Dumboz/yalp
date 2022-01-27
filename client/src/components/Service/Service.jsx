@@ -1,6 +1,5 @@
 import { Icon } from 'components/Icon/Icon';
 import { ServiceWrapper } from './Service.styled';
-import { string } from 'prop-types';
 
 export function Service({ isServe, size, children }) {
   const iconType = isServe ? 'done' : 'none';
@@ -16,8 +15,4 @@ export function Service({ isServe, size, children }) {
 Service.defaultProps = {
   isServe: true,
   size: 16,
-};
-
-Service.propTypes = {
-  // children: string,
 };
