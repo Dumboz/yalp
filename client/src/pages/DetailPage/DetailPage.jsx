@@ -6,7 +6,7 @@ import { Circles } from 'react-loader-spinner';
 import { getHexaColor } from 'styles/color';
 import { Helmet } from 'react-helmet-async';
 import { DetailPageLoadingSpinner, DetailMain } from './DetailPage.styled';
-export function DetailPage() {
+export default function DetailPage() {
   const { pathname } = useLocation();
   const { error, data, isLoading } = useGetRestaurantQuery(pathname);
 

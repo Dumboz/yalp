@@ -15,7 +15,7 @@ import { Circles } from 'react-loader-spinner';
 import { getHexaColor } from 'styles/color';
 import { Helmet } from 'react-helmet-async';
 
-export function SearchPage() {
+export default function SearchPage() {
   const { search } = useLocation();
   const { error, isLoading } = useGetBusinessesQuery(search);
   const [GEOArr, setGEOArr] = useState([]);
