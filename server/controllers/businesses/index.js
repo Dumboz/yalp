@@ -10,7 +10,7 @@ const sendSearchResult = async (req, res) => {
 
   try {
     const restaurantList = await fetchURL(
-      URL + BUSINESSES + SEARCH + (QUERY && '?' + QUERY)
+      URL + BUSINESSES + SEARCH + (QUERY && '?' + QUERY),
     );
 
     res.send(restaurantList);
@@ -22,11 +22,9 @@ const sendSearchResult = async (req, res) => {
 
 const sendPathResult = async (req, res) => {
   const { path } = req;
-  console.log(path);
 
   const restaurantDetail = await fetchURL(URL + BUSINESSES + path);
   const restaurantReview = await fetchURL(URL + BUSINESSES + path + '/reviews');
-  console.log({ restaurantDetail, restaurantReview });
 
   res.send({ restaurantDetail, restaurantReview });
 };
