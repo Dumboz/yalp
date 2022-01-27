@@ -1,12 +1,12 @@
 import QueryString from 'qs';
 import db from 'db/filter.json';
-import { useCallback, useLayoutEffect, useRef } from 'react';
 import { oneOf } from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useCallback, useRef } from 'react';
 import { Wrapper, Heading, List } from './FilterList.styled';
+import { setFeatures, setDistance } from 'store/filterSlice';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { Selection, PriceFilterButtonGroup } from 'components';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFeatures, setDistance } from 'store/filterSlice';
 
 export const FilterList = ({
   categories,
