@@ -1,6 +1,6 @@
 import { A11yHidden } from 'components/A11yHidden/A11yHidden';
 import Button from 'components/Button/Button';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { getAutocomplete } from 'api';
 import { Label, Text, Input, Form } from './SearchForm.styled';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -17,17 +17,21 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
   const [autoTerms, setAutoTerms] = useState();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setTerm(searchObj.term);
+  }, [search]);
+
   const { isLoading } = useGetBusinessesQuery(search);
 
   const onChange = useCallback(
-    (e) => {
+    e => {
       setLocation(e.target.value);
     },
-    [setLocation]
+    [setLocation],
   );
 
   const onSubmit = useCallback(
-    (e) => {
+    e => {
       e.preventDefault();
       const formData = new FormData(e.target);
       const formObj = { ...searchObj };
@@ -41,20 +45,20 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
 
       navigate('/search?' + makeQuery(formObj));
     },
-    [navigate, searchObj]
+    [navigate, searchObj],
   );
 
   const onAutocomplete = useCallback(
-    async (e) => {
+    async e => {
       setTerm(e.target.value);
 
       const response = await getAutocomplete({
         text: e.target.value,
       });
 
-      setAutoTerms(response.terms.map((term) => term.text));
+      setAutoTerms(response.terms.map(term => term.text));
     },
-    [setAutoTerms, setTerm]
+    [setAutoTerms, setTerm],
   );
 
   return (
@@ -71,8 +75,7 @@ function SearchForm({ showLabel, hasShadow, searchWord, locationWord }) {
         />
       </Label>
       <datalist autoComplete="off" id="termList">
-        {autoTerms &&
-          autoTerms.map((term) => <option value={term} key={term} />)}
+        {autoTerms && autoTerms.map(term => <option value={term} key={term} />)}
       </datalist>
       <Label width={464}>
         {showLabel ? <Text>Near</Text> : <A11yHidden>Near</A11yHidden>}
