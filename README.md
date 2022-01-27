@@ -42,8 +42,8 @@ Yalp 사이트를 분석하여 클론 코딩하는 프로젝트입니다.
    > - SEO (Web Vital & react-helmet)
    > - 코드 최적화
    > - Source map
-   > - Lazy Loading (Infinite Scroll)
-   > - SWR (stale-while-revalidate)
+   > - Lazy Loading
+   > - RTK Query
 
 3. 웹 접근성
 
