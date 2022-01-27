@@ -2,13 +2,13 @@ import { ReviewsContainer, ReviewWrapper } from './Reviews.styled';
 import { ReviewCard } from 'components/ReviewCard/ReviewCard';
 import { SortButton } from 'components/SortButton/SortButton';
 import { getHexaColor } from 'styles/color';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useGetRestaurantQuery } from 'services/businesses';
 import { useLocation } from 'react-router-dom';
 
 export const Reviews = () => {
   const { pathname: id } = useLocation();
-  const { data, error, isLoading } = useGetRestaurantQuery(id);
+  const { data, isLoading } = useGetRestaurantQuery(id);
   const [copyOfReviews, setCopyOfReviews] = useState([
     ...data.restaurantReview.reviews,
   ]);

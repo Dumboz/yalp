@@ -16,7 +16,7 @@ function Pagenation() {
   const {
     data: { total },
   } = useGetBusinessesQuery(search);
-  const [_, setSearchParams] = useSearchParams({});
+  const [, setSearchParams] = useSearchParams({});
   const query = queryString.parse(search);
   const { offset } = query;
   const lastPage = Math.ceil(+total / 10);

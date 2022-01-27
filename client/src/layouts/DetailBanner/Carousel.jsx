@@ -26,10 +26,13 @@ const ImgContainer = styled(Link)`
 `;
 
 function CarouselWarpper({ setVisible, setSelect, name, photos }) {
-  const onClick = useCallback((e, id) => {
-    setVisible(true);
-    setSelect(id);
-  });
+  const onClick = useCallback(
+    (e, id) => {
+      setVisible(true);
+      setSelect(id);
+    },
+    [setSelect, setVisible]
+  );
 
   return (
     <CarouselContainer>
@@ -47,7 +50,7 @@ function CarouselWarpper({ setVisible, setSelect, name, photos }) {
         autoFocus={true}
       >
         {photos.map((photo, id) => (
-          <ImgContainer to={'#'} key={id} onClick={e => onClick(e, id)}>
+          <ImgContainer to={'#'} key={id} onClick={(e) => onClick(e, id)}>
             <Img src={photo} alt={`${name}${id}`} height={425} />
           </ImgContainer>
         ))}

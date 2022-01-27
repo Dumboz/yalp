@@ -1,11 +1,11 @@
 import QueryString from 'qs';
 import db from 'db/filter.json';
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { oneOf } from 'prop-types';
 import { Wrapper, Heading, List } from './FilterList.styled';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { Selection, PriceFilterButtonGroup } from 'components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setFeatures, setDistance } from 'store/filterSlice';
 
 export const FilterList = ({
@@ -15,14 +15,12 @@ export const FilterList = ({
   options = [],
 }) => {
   const listRef = useRef(null);
-  const filterState = useSelector((state) => state.filter);
 
   const { search } = useLocation();
   const [_, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
-    const type = e.target.querySelector('input').type;
     const isChecked = e.target.querySelector('input').checked;
     const query = QueryString.parse(search.replace(/^\?/, ''));
     const option = e.target.querySelector('span').textContent;
