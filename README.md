@@ -11,12 +11,7 @@ Yalp 사이트를 분석하여 클론 코딩하는 프로젝트입니다.
 
 ## 기술 스택
 
-<img alt="React" src ="https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=React&logoColor=white"/>
-<img alt="Redux" src ="https://img.shields.io/badge/Redux-764ABC.svg?&style=for-the-badge&logo=Redux&logoColor=white"/>
-<img alt="Storybook" src ="https://img.shields.io/badge/Storybook-FF4785.svg?&style=for-the-badge&logo=StoryBook&logoColor=white"/>
-<img alt="JavaScript" src ="https://img.shields.io/badge/javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=black"/>
-<img alt="Html5" src ="https://img.shields.io/badge/html5-E34F26.svg?&style=for-the-badge&logo=html5&logoColor=black"/>
-<img alt="styledComponents" src ="https://img.shields.io/badge/styledComponents-DB7093.svg?&style=for-the-badge&logo=styledComponents&logoColor=white"/>
+<img alt="React" src ="https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=React&logoColor=white"/> <img alt="Redux" src ="https://img.shields.io/badge/Redux-764ABC.svg?&style=for-the-badge&logo=Redux&logoColor=white"/> <img alt="Storybook" src ="https://img.shields.io/badge/Storybook-FF4785.svg?&style=for-the-badge&logo=StoryBook&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=black"/> <img alt="Html5" src ="https://img.shields.io/badge/html5-E34F26.svg?&style=for-the-badge&logo=html5&logoColor=black"/> <img alt="styledComponents" src ="https://img.shields.io/badge/styledComponents-DB7093.svg?&style=for-the-badge&logo=styledComponents&logoColor=white"/>
 
 
 ### 역할 분배
@@ -42,8 +37,8 @@ Yalp 사이트를 분석하여 클론 코딩하는 프로젝트입니다.
    > - SEO (Web Vital & react-helmet)
    > - 코드 최적화
    > - Source map
-   > - Lazy Loading (Infinite Scroll)
-   > - SWR (stale-while-revalidate)
+   > - Lazy Loading
+   > - RTK Query
 
 3. 웹 접근성
 
