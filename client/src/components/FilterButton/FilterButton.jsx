@@ -4,7 +4,7 @@ import { Spinner, Icon, FilterModal, CommentList, Comment } from 'components';
 
 const FONT_RATIO = 0.5;
 
-const isInArray = ({ title, content }, array) => {
+const isInArray = ({ title }, array) => {
   return array.filter((item) => item.title === title).length > 0;
 };
 
@@ -27,7 +27,8 @@ export const FilterButton = ({ children, height = 22 }) => {
       className={'button'}
       onClick={handleClick}
       height={height}
-      fontSize={fontSize}>
+      fontSize={fontSize}
+    >
       {children}
       <Spinner className={'spinner'} height={height - 10} />
     </Button>
@@ -40,6 +41,7 @@ FilterButton.DropDown = function FilterDropDown({ children, height = 22 }) {
     { title: '', content: children },
   ]);
 
+  // 이거 querySelector 다 ref로 수정
   const handleClick = (e) => {
     const modal = document.querySelector('.modal');
     const button = document.querySelector('.button');
@@ -62,7 +64,6 @@ FilterButton.DropDown = function FilterDropDown({ children, height = 22 }) {
 
     if (isInArray({ title, content }, selectionList)) {
       List = List.filter((item) => item.title !== title);
-      console.log(List);
     } else {
       List.push({ title, content });
     }
@@ -81,7 +82,8 @@ FilterButton.DropDown = function FilterDropDown({ children, height = 22 }) {
         className={'button'}
         onClick={handleClick}
         height={height}
-        fontSize={fontSize}>
+        fontSize={fontSize}
+      >
         <CommentList>
           {selectionList.map((item) => (
             <Comment key={item.title} title={item.title}>

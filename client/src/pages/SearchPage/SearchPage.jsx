@@ -8,9 +8,8 @@ import {
   FilterWrapper,
   LoadingSpinner,
 } from './SearchPage.styled';
-import { FilterSection } from 'components';
+import { FilterSection, TitleWrapper } from 'components';
 import Pagenation from 'components/Pagenation/Pagenation';
-import { TitleWrapper } from 'components';
 import { useState } from 'react';
 import { Circles } from 'react-loader-spinner';
 import { getHexaColor } from 'styles/color';

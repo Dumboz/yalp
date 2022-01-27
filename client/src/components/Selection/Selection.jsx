@@ -2,9 +2,8 @@ import db from 'db/filter.json';
 import QueryString from 'qs';
 import PropTypes from 'prop-types';
 import { useEffect, useLayoutEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { setFeatures, setDistance } from 'store/filterSlice';
 import { Input, Label as StyledLabel, List, Span } from './Selection.styled';
 
@@ -65,7 +64,8 @@ export function Selection({
         handleCheck(e);
         onClick && onClick(e);
       }}
-      aria-label={children}>
+      aria-label={children}
+    >
       <Input id={id} type={type} name={group} aria-checked={checked} />
       <StyledLabel
         type={type}

@@ -1,7 +1,5 @@
 import { StrictMode, lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-// import { App, SearchPage, DetailPage, PageNotFound } from 'pages';
 import { GlobalStyle } from 'styles/global.styled';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
