@@ -5,6 +5,7 @@ import { Reviews } from 'components/Review/Reviews';
 import { Circles } from 'react-loader-spinner';
 import { getHexaColor } from 'styles/color';
 import { DetailPageLoadingSpinner } from './DetailPage.styled';
+
 export function DetailPage() {
   const { pathname } = useLocation();
   const { error, isLoading } = useGetRestaurantQuery(pathname);
