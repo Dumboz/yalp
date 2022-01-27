@@ -10,11 +10,14 @@ export function DetailPage() {
   const { pathname } = useLocation();
   const { error, data, isLoading } = useGetRestaurantQuery(pathname);
 
-  let restaurantDetail;
+  if (isLoading)
+    return (
+      <DetailPageLoadingSpinner>
+        <Circles color={getHexaColor('primary', 300)} />
+      </DetailPageLoadingSpinner>
+    );
 
-  if (!isLoading) {
-    restaurantDetail = data.restaurantDetail;
-  }
+  const restaurantDetail = data.restaurantDetail;
 
   return (
     <>
@@ -22,21 +25,12 @@ export function DetailPage() {
         <title>{restaurantDetail?.name || 'Detail Page'}</title>
       </Helmet>
       {error && <>error</>}
-      {isLoading && (
-        <DetailPageLoadingSpinner>
-          <Circles color={getHexaColor('primary', 300)} />
-        </DetailPageLoadingSpinner>
-      )}
-      {!isLoading && (
-        <>
-          <DetailBanner />
-          <DetailMain>
-            <Location />
-            <Reviews />
-          </DetailMain>
-          <Footer />
-        </>
-      )}
+      <DetailBanner />
+      <DetailMain>
+        <Location />
+        <Reviews />
+      </DetailMain>
+      <Footer />
     </>
   );
 }

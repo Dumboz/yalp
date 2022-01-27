@@ -5,12 +5,12 @@ import { Comment } from '../Comment/Comment';
 import { Icon } from '../Icon/Icon';
 
 function Button({
-  buttonType = 'default',
-  flatBorderSide = 'none',
-  as = 'button',
+  buttonType,
+  flatBorderSide,
+  as,
   href,
   iconType,
-  size = 16,
+  size,
   children,
 }) {
   const contents = children ? (iconType ? 'textIcon' : 'text') : 'icon';
@@ -41,6 +41,13 @@ function Button({
     </ButtonItem>
   );
 }
+
+Button.defaultProps = {
+  buttonType: 'default',
+  flatBorderSide: 'none',
+  as: 'button',
+  size: 16,
+};
 
 Button.propTypes = {
   buttonType: PropTypes.oneOf(['default', 'outline', 'highlight']),
