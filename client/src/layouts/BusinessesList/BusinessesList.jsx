@@ -2,6 +2,13 @@ import { useLocation } from 'react-router-dom';
 import { useGetBusinessesQuery } from 'services/businesses';
 import { RestaurantCard } from 'components';
 import styled from 'styled-components';
+import { getHexaColor } from 'styles/color';
+import React from 'react';
+
+const Message = React.memo(styled.div`
+  margin-top: 60px;
+  color: ${getHexaColor('gray', 400)};
+`);
 
 export function BusinessesList({ GEOArr }) {
   const { search } = useLocation();
@@ -15,14 +22,18 @@ export function BusinessesList({ GEOArr }) {
 
   return (
     <BusinessesUl>
-      {businesses.map((restaurant, index) => (
-        <RestaurantCard
-          index={index}
-          key={restaurant.id}
-          {...restaurant}
-          GEOArr={GEOArr}
-        />
-      ))}
+      {businesses.length ? (
+        businesses.map((restaurant, index) => (
+          <RestaurantCard
+            index={index}
+            key={restaurant.id}
+            {...restaurant}
+            GEOArr={GEOArr}
+          />
+        ))
+      ) : (
+        <Message>Oops... No results were found for your search.</Message>
+      )}
     </BusinessesUl>
   );
 }

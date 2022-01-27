@@ -51,12 +51,12 @@ export function RestaurantCard({
       threshlod: 0,
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (!entry.isIntersecting) return;
 
         fetch(`http://localhost:4001/api/businesses/${id}`)
-          .then((res) => res.json())
+          .then(res => res.json())
           .then(({ restaurantDetail, restaurantReview }) => {
             if (!restaurantDetail.hours) {
               restaurantDetail.hours = [
@@ -84,7 +84,7 @@ export function RestaurantCard({
     observer.observe(ref.current);
   }, []);
 
-  const pullUpMarker = (marker) => () => {
+  const pullUpMarker = marker => () => {
     if (!marker) return;
 
     marker.setIcon({
@@ -103,7 +103,7 @@ export function RestaurantCard({
     marker.setZIndex(nextZ);
   };
 
-  const restoreMarker = (marker) => () => {
+  const restoreMarker = marker => () => {
     if (!marker) return;
 
     marker.setIcon({
@@ -139,7 +139,7 @@ export function RestaurantCard({
               </CategoriesList>
               {!!featureList.length && (
                 <FeatureList size={fontSize}>
-                  {featureList.map((feature) => {
+                  {featureList.map(feature => {
                     return <Comment key={feature}>{feature}</Comment>;
                   })}
                 </FeatureList>

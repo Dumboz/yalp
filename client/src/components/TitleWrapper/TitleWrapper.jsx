@@ -1,14 +1,16 @@
+import React from 'react';
 import { getHexaColor } from 'styles/color';
 import { TitleContainer, Title } from './TitleWrapper.styled';
+import PropTypes from 'prop-types';
 
-export function TitleWrapper({
+function TitleWrapper({
   title,
   center,
-  size = 20,
-  margin = 0,
+  size,
+  margin,
   containerMargin,
-  as = 'h2',
-  color = getHexaColor('gray', 500),
+  as,
+  color,
   children,
 }) {
   return (
@@ -23,4 +25,20 @@ export function TitleWrapper({
 
 TitleWrapper.defaultProps = {
   center: false,
+  size: 20,
+  margin: 0,
+  as: 'h2',
+  color: getHexaColor('gray', 500),
 };
+
+TitleWrapper.propTypes = {
+  center: PropTypes.bool,
+  size: PropTypes.number,
+  margin: PropTypes.number,
+  containerMargin: PropTypes.number,
+  as: PropTypes.string,
+  color: PropTypes.string,
+  children: PropTypes.any,
+};
+
+export default React.memo(TitleWrapper);
