@@ -1,7 +1,8 @@
+import React from 'react';
 import styled from 'styled-components';
 import { getSize, setRatioSize, getColor } from 'utils';
 
-export const Description = styled.div`
+export const Description = React.memo(styled.div`
   display: flex;
   align-items: top;
   color: ${({ color }) => color};
@@ -21,4 +22,4 @@ export const Description = styled.div`
     line-height: 1.4;
     color: ${getColor};
   }
-`;
+`);

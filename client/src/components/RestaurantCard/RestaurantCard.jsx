@@ -18,7 +18,6 @@ import {
 import { getHexaColor } from 'styles/color';
 
 import { useEffect, useRef, useState } from 'react';
-import { useGetRestaurantQuery } from 'services/businesses';
 
 // 본 데이터에서 넘어오는 id를 받아 business id를 요청한 후 photos로 변환 (캐러셀 포기)
 // size에 대한 처리는 조금 더 고민
@@ -60,12 +59,12 @@ export function RestaurantCard({
       threshlod: 0,
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (!entry.isIntersecting) return;
 
         fetch(`http://localhost:4001/api/businesses/${id}`)
-          .then((res) => res.json())
+          .then(res => res.json())
           .then(({ restaurantDetail, restaurantReview }) => {
             if (!restaurantDetail.hours) {
               restaurantDetail.hours = [
@@ -93,7 +92,7 @@ export function RestaurantCard({
     observer.observe(ref.current);
   }, []);
 
-  const pullUpMarker = (marker) => () => {
+  const pullUpMarker = marker => () => {
     if (!marker) return;
 
     marker.setIcon({
@@ -112,7 +111,7 @@ export function RestaurantCard({
     marker.setZIndex(nextZ);
   };
 
-  const restoreMarker = (marker) => () => {
+  const restoreMarker = marker => () => {
     if (!marker) return;
 
     marker.setIcon({
@@ -148,7 +147,7 @@ export function RestaurantCard({
               </CategoriesList>
               {!!featureList.length && (
                 <FeatureList size={fontSize}>
-                  {featureList.map((feature) => {
+                  {featureList.map(feature => {
                     return <Comment key={feature}>{feature}</Comment>;
                   })}
                 </FeatureList>

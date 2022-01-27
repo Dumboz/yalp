@@ -4,26 +4,25 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom';
 
-const CarouselContainer = styled.div`
+const CarouselContainer = React.memo(styled.div`
   width: 100%;
   height: 425px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
-`;
+`);
 
-const Img = styled.img`
+const Img = React.memo(styled.img`
   object-fit: cover;
   filter: brightness(70%);
-`;
+`);
 
-const ImgContainer = styled(Link)`
+const ImgContainer = React.memo(styled(Link)`
   display: block;
   width: auto;
-  height: 100%;
-  max-height: 425px;
-`;
+  height: 425px;
+`);
 
 function CarouselWarpper({ setVisible, setSelect, name, photos }) {
   const onClick = useCallback((e, id) => {
