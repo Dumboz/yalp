@@ -60,7 +60,7 @@ export const ImgWrapper = styled.div`
   padding: 2.5%;
 `;
 export const Img = styled.div`
-  background-color: red;
+  background-color: ${getHexaColor('gray', 100)};
   border-radius: 6px;
   width: 100%;
   height: 0;
