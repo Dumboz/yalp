@@ -35,8 +35,6 @@ Yalp 사이트를 분석하여 클론 코딩하는 프로젝트입니다.
    > - tree shaking
    > - Module bundling
    > - SEO (Web Vital & react-helmet)
-   > - 코드 최적화
-   > - Source map
    > - Lazy Loading
    > - RTK Query
 
