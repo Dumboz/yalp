@@ -1,12 +1,13 @@
 import { useLocation } from 'react-router-dom';
 import { useGetRestaurantQuery } from 'services/businesses';
-import { Location, Footer, DetailBanner } from 'layouts';
-import { Reviews } from 'components/Review/Reviews';
+import { Footer, DetailBanner, Location, Reviews } from 'components';
 import { Circles } from 'react-loader-spinner';
 import { getHexaColor } from 'styles/color';
 import { Helmet } from 'react-helmet-async';
 import { DetailPageLoadingSpinner, DetailMain } from './DetailPage.styled';
-export default function DetailPage() {
+import { memo } from 'react';
+
+function DetailPage() {
   const { pathname } = useLocation();
   const { error, data, isLoading } = useGetRestaurantQuery(pathname);
 
@@ -46,3 +47,5 @@ export default function DetailPage() {
     </>
   );
 }
+
+export default memo(DetailPage);

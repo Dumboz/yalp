@@ -76,5 +76,6 @@
     "@storybook/react": "^6.4.10",
     "babel-plugin-styled-components": "^2.0.2",
     "webpack": "^5.65.0"
-  }
+  },
+  "proxy": "http://localhost:4001/"
 }
