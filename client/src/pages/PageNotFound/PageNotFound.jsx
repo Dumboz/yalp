@@ -1,5 +1,4 @@
-import { Comment } from 'components';
-import { Logo } from 'components/Logo/Logo';
+import { Logo, Comment } from 'components';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { getHexaColor } from 'styles/color';
@@ -17,7 +16,8 @@ function PageNotFound() {
             as="h2"
             size={50}
             color={getHexaColor('primary', 500)}
-            fontWeight={900}>
+            fontWeight={900}
+          >
             404 Page Not Found
           </Comment>
           <Comment color={getHexaColor('gray', 400)}>
